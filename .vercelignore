@@ -1,0 +1,27 @@
+# Media & Design assets
+design.jpg
+*.psd
+*.ai
+
+# Agent, Tooling & Knowledge Base
+.agents
+.claude
+.gemini
+graphify-out
+.husky
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Dependencies & Build artifacts
+node_modules
+.astro
+dist
+.turbo
+coverage
+
+# Git
+.git
+.github

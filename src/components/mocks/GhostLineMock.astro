@@ -1,0 +1,145 @@
+---
+/**
+ * GhostLineMock — four projection models over one price history.
+ *
+ * Switching model changes the forward path, which is the whole argument of the
+ * section: four different sets of mathematics are free to disagree.
+ */
+import TerminalFrame from '@/components/ui/TerminalFrame.astro';
+import TabSwitcher from '@/components/ui/TabSwitcher.astro';
+import { ghostLineMock } from '@/content/landing';
+
+const HISTORY =
+  'M0,92 L20,88 L40,95 L60,80 L80,84 L100,72 L120,76 L140,64 L160,68 L180,58 L200,54';
+
+/** Forward paths, all anchored on the last close at (200, 54). */
+const projectionPaths: Record<string, string> = {
+  ols: 'M200,54 L310,34',
+  vwlr: 'M200,54 L310,25',
+  vwepr: 'M200,54 Q258,38 310,41',
+  fcst: 'M200,54 L310,45',
+};
+
+const tabs = ghostLineMock.modes.map((mode) => ({
+  id: mode.id,
+  label: mode.label,
+}));
+---
+
+<TerminalFrame
+  label={ghostLineMock.frameLabel}
+  status={ghostLineMock.status}
+  statusVariant="violet"
+>
+  <TabSwitcher group="ghostline" tabs={tabs} class="self-start" />
+
+  <!-- Chart: shared history, one forward path per model -->
+  <div
+    class="bg-surface-card border border-hairline/50 rounded-panel p-3 overflow-hidden"
+  >
+    <svg
+      viewBox="0 0 320 120"
+      class="w-full h-auto"
+      role="img"
+      aria-label="Price history with a dashed forward projection"
+    >
+      <!-- Gridlines -->
+      {
+        [24, 48, 72, 96].map((y) => (
+          <line
+            x1="0"
+            y1={y}
+            x2="320"
+            y2={y}
+            stroke="currentColor"
+            stroke-width="0.5"
+            class="text-hairline"
+          />
+        ))
+      }
+
+      <!-- Boundary between measured history and projection -->
+      <line
+        x1="200"
+        y1="4"
+        x2="200"
+        y2="116"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-dasharray="2 3"
+        class="text-muted-soft"></line>
+
+      <!-- Measured history -->
+      <path
+        d={HISTORY}
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-brand-accent"></path>
+
+      <!-- Projections -->
+      {
+        ghostLineMock.modes.map((mode, index) => (
+          <path
+            data-tab-panel="ghostline"
+            data-tab={mode.id}
+            class:list={['text-projection', index !== 0 && 'hidden']}
+            d={projectionPaths[mode.id]}
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-dasharray="5 4"
+            stroke-linecap="round"
+          />
+        ))
+      }
+
+      <!-- Anchor on the last close -->
+      <circle cx="200" cy="54" r="3" fill="currentColor" class="text-ink"
+      ></circle>
+    </svg>
+  </div>
+
+  <!-- Model readouts -->
+  {
+    ghostLineMock.modes.map((mode, index) => (
+      <div
+        data-tab-panel="ghostline"
+        data-tab={mode.id}
+        class:list={[
+          'bg-surface-card border border-hairline/50 p-4 rounded-panel flex flex-col gap-3',
+          index !== 0 && 'hidden',
+        ]}
+      >
+        <div class="flex items-start justify-between gap-3 flex-wrap">
+          <span class="text-xs font-mono font-bold text-badge-violet">
+            {mode.label}
+          </span>
+          <span class="text-[10px] font-mono text-muted-soft">
+            window {mode.window}
+          </span>
+        </div>
+        <p class="text-xs text-muted leading-relaxed">{mode.math}</p>
+        <dl class="flex flex-col gap-0">
+          {mode.rows.map((row) => (
+            <div class="flex items-baseline justify-between gap-3 text-xs py-1.5 border-b border-hairline/30 last:border-b-0">
+              <dt class="text-muted-soft">{row.label}</dt>
+              <dd class="font-mono font-semibold text-ink text-right">
+                {row.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    ))
+  }
+
+  <div
+    class="flex flex-col gap-1.5 border-t border-hairline/40 pt-3 text-[10px] text-muted-soft leading-relaxed"
+  >
+    <p>{ghostLineMock.projectionNote}</p>
+    <p>{ghostLineMock.confidenceNote}</p>
+  </div>
+</TerminalFrame>

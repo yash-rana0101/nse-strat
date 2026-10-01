@@ -1,0 +1,117 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { demoStages } from '@/content/landing/copilotDemo';
+import { graphTools, toolLibrary } from '@/content/landing/copilotTools';
+import CopilotToolLibrary from './CopilotToolLibrary.astro';
+---
+
+<div class="demo-engine">
+  <div class="engine-heading">
+    <span class="demo-eyebrow">BEHIND THE ANSWER</span><span
+      class="engine-readonly"
+      ><Icon name="layers" size={14} /> {toolLibrary.length} TYPED TOOLS</span
+    >
+  </div>
+  <h3 class="engine-title">A conversation with the market.</h3>
+  <p class="engine-description">The model reasons. The tools measure.</p>
+  <div
+    class="graph"
+    role="img"
+    aria-label="Workflow: the backend sends instructions and stock context to the language model. The agent selects from 18 typed tools. Multi-timeframe trend, consensus report and market regime are shown here; 15 more are in the expandable library. Backend measurements return to the model, which produces the answer."
+  >
+    <svg
+      class="graph-wires"
+      viewBox="0 0 660 340"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        class="wire wire-context"
+        d="M585 170 V22 Q585 12 575 12 H75 Q65 12 65 22 V135"></path>
+      <path class="wire wire-agent" d="M120 170 H190"></path>
+      <path
+        class="wire wire-tools"
+        d="M300 170 C330 170 325 64 360 64 M300 170 H360 M300 170 C330 170 325 276 360 276"
+      ></path>
+      <path
+        class="wire wire-data"
+        d="M500 64 C545 64 530 170 550 170 M500 170 H550 M500 276 C545 276 530 170 550 170"
+      ></path>
+      <path class="wire wire-return" d="M550 190 V320 H245 V207"></path>
+      <path class="wire wire-reason" d="M190 190 H120"></path>
+    </svg>
+    <svg
+      class="graph-wires graph-wires-compact"
+      viewBox="0 0 300 440"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path class="wire wire-context" d="M258 244 V12 H63 V34"></path>
+      <path class="wire wire-agent" d="M126 72 H174"></path>
+      <path
+        class="wire wire-tools"
+        d="M237 122 V138 H204 V166 Q204 186 186 186 M237 122 V138 H204 V254 Q204 274 186 274 M237 122 V138 H204 V342 Q204 362 186 362"
+      ></path>
+      <path
+        class="wire wire-data"
+        d="M186 186 Q216 186 216 280 M186 274 H216 M186 362 Q216 362 216 292"
+      ></path>
+      <path class="wire wire-return" d="M258 328 V423 H290 V100 H300"></path>
+      <path class="wire wire-reason" d="M174 96 H126"></path>
+    </svg>
+    <span class="graph-context-label">SYSTEM PROMPT + STOCK CONTEXT</span>
+    <div class="graph-node node-model" data-node="model">
+      <span class="node-symbol"><Icon name="sparkles" size={22} /></span><strong
+        >Language model</strong
+      ><small>Reasons & responds</small>
+    </div>
+    <div class="graph-node node-agent" data-node="agent">
+      <span class="node-symbol"><Icon name="cpu" size={22} /></span><strong
+        >Strat agent</strong
+      ><small>Orchestrates the loop</small>
+    </div>
+    {
+      graphTools.map((tool) => (
+        <div
+          class:list={['graph-node node-tool', tool.className]}
+          data-node="tools"
+        >
+          <>
+            <Icon name={tool.icon} size={20} />
+            <div>
+              <>
+                <strong>{tool.label}</strong>
+                <small>{tool.detail}</small>
+              </>
+            </div>
+          </>
+        </div>
+      ))
+    }
+    <div class="graph-node node-backend" data-node="backend">
+      <span class="node-symbol"><Icon name="bar-chart" size={22} /></span
+      ><strong>Backend</strong><small>Market data</small>
+    </div>
+    <span class="graph-return-label">COMPUTED DATA BACK TO THE AGENT</span>
+  </div>
+  <CopilotToolLibrary />
+  <div class="engine-status">
+    <span class="status-orb" aria-hidden="true"></span>
+    <div>
+      <strong data-stage-title>Ready when you are.</strong><p data-stage-detail>
+        Choose Find my trade or Verify my trade to begin.
+      </p>
+    </div>
+    <span class="stage-count" data-stage-count>00 / 06</span>
+  </div>
+  <ol class="stage-list" aria-label="Workflow progress">
+    {
+      demoStages.map((stage, i) => (
+        <li data-stage-item={stage.id}>
+          <span>{String(i + 1).padStart(2, '0')}</span>
+          {stage.short}
+        </li>
+      ))
+    }
+  </ol>
+</div>

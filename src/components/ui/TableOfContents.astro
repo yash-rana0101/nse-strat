@@ -1,0 +1,53 @@
+---
+/**
+ * TableOfContents — Sticky sidebar table of contents.
+ */
+
+interface TocItem {
+  text: string;
+  slug: string;
+  depth: number;
+}
+
+interface Props {
+  headings: TocItem[];
+  class?: string;
+}
+
+const { headings, class: className } = Astro.props;
+
+// Only show h2 and h3 headings
+const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+{
+  filteredHeadings.length > 0 && (
+    <nav
+      class:list={['hidden lg:block', className]}
+      aria-label="Table of contents"
+    >
+      <div class="sticky top-24 space-y-1">
+        <p class="type-caption text-muted-soft uppercase tracking-wider mb-3">
+          On this page
+        </p>
+        <ul class="list-none space-y-0.5 border-l border-hairline" role="list">
+          {filteredHeadings.map((heading) => (
+            <li>
+              <a
+                href={`#${heading.slug}`}
+                class:list={[
+                  'block py-1 text-sm no-underline transition-colors duration-200 hover:text-ink border-l-2 -ml-px',
+                  heading.depth === 2
+                    ? 'pl-4 text-muted font-medium border-transparent hover:border-brand-accent'
+                    : 'pl-7 text-muted-soft border-transparent hover:border-muted',
+                ]}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  )
+}

@@ -1,0 +1,178 @@
+---
+import Badge from '../ui/Badge.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<div
+  id="cookie-consent-banner"
+  class="fixed bottom-6 right-6 left-6 md:left-auto md:max-w-md z-[9999] bg-surface-card/90 backdrop-blur-xl border border-hairline/80 p-6 rounded-2xl shadow-2xl transition-all duration-500 ease-out transform translate-y-24 opacity-0 pointer-events-none"
+  role="dialog"
+  aria-labelledby="cookie-title"
+  aria-describedby="cookie-desc"
+>
+  <div class="flex flex-col gap-4">
+    <!-- Header -->
+    <div class="flex items-center gap-3">
+      <div
+        class="w-8 h-8 rounded-lg bg-badge-emerald/10 border border-badge-emerald/20 text-badge-emerald flex items-center justify-center"
+      >
+        <Icon name="sparkles" size={16} />
+      </div>
+      <h3 id="cookie-title" class="type-title-sm text-ink font-bold">
+        Cookie Preferences
+      </h3>
+    </div>
+
+    <!-- Description -->
+    <p id="cookie-desc" class="type-body-sm text-muted leading-relaxed">
+      We use cookies to analyze site traffic, optimize terminal diagnostics, and
+      target marketing campaigns to support organic growth. Customize your
+      options below.
+    </p>
+
+    <!-- Custom Preferences Panel (Accordion or expandable) -->
+    <div
+      id="consent-preferences"
+      class="flex flex-col gap-3 border-t border-b border-hairline/50 py-3 mt-1"
+    >
+      <!-- Functional (Always Active) -->
+      <div class="flex items-center justify-between">
+        <div class="flex flex-col">
+          <span class="type-body-sm text-ink font-medium"
+            >Functional Cookies</span
+          >
+          <span class="text-[10px] text-muted-soft"
+            >Required for terminal state management and themes.</span
+          >
+        </div>
+        <Badge variant="emerald" class="text-[10px]">Required</Badge>
+      </div>
+
+      <!-- Analytics Cookies -->
+      <div class="flex items-center justify-between mt-2">
+        <div class="flex flex-col">
+          <span class="type-body-sm text-ink font-medium"
+            >Analytics Cookies</span
+          >
+          <span class="text-[10px] text-muted-soft"
+            >Tracks session performance, layout clicks, and errors.</span
+          >
+        </div>
+        <label
+          class="relative inline-flex items-center cursor-pointer select-none"
+        >
+          <input
+            type="checkbox"
+            id="consent-analytics"
+            class="sr-only peer"
+            checked
+          />
+          <div
+            class="w-9 h-5 bg-muted rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"
+          >
+          </div>
+        </label>
+      </div>
+
+      <!-- Marketing Cookies -->
+      <div class="flex items-center justify-between mt-2">
+        <div class="flex flex-col">
+          <span class="type-body-sm text-ink font-medium">Marketing Pixels</span
+          >
+          <span class="text-[10px] text-muted-soft"
+            >Used for conversion attribution and retargeting ads.</span
+          >
+        </div>
+        <label
+          class="relative inline-flex items-center cursor-pointer select-none"
+        >
+          <input
+            type="checkbox"
+            id="consent-marketing"
+            class="sr-only peer"
+            checked
+          />
+          <div
+            class="w-9 h-5 bg-muted rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"
+          >
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3 mt-2">
+      <Button
+        variant="secondary"
+        id="btn-accept-custom"
+        class="flex-1 !py-1.5 text-xs font-semibold !rounded-full"
+        >Save Options</Button
+      >
+      <Button
+        variant="primary"
+        id="btn-accept-all"
+        class="flex-1 !py-1.5 text-xs font-semibold !rounded-full"
+        >Accept All</Button
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-consent-banner');
+  const acceptAllBtn = document.getElementById('btn-accept-all');
+  const acceptCustomBtn = document.getElementById('btn-accept-custom');
+  const analyticsCheck = document.getElementById(
+    'consent-analytics'
+  ) as HTMLInputElement;
+  const marketingCheck = document.getElementById(
+    'consent-marketing'
+  ) as HTMLInputElement;
+
+  if (
+    banner &&
+    acceptAllBtn &&
+    acceptCustomBtn &&
+    analyticsCheck &&
+    marketingCheck
+  ) {
+    const rawConsent = localStorage.getItem('strat_cookie_consent');
+
+    // If no consent has been logged, display the slide-in banner
+    if (!rawConsent) {
+      setTimeout(() => {
+        banner.classList.remove(
+          'translate-y-24',
+          'opacity-0',
+          'pointer-events-none'
+        );
+      }, 1000);
+    }
+
+    function saveConsent(analytics: boolean, marketing: boolean) {
+      const preferences = { analytics, marketing };
+      localStorage.setItem('strat_cookie_consent', JSON.stringify(preferences));
+
+      // Dispatch preferences update globally to TrackingProvider
+      window.dispatchEvent(
+        new CustomEvent('strat-consent-updated', { detail: preferences })
+      );
+
+      // Slide out and hide banner
+      banner?.classList.add(
+        'translate-y-24',
+        'opacity-0',
+        'pointer-events-none'
+      );
+    }
+
+    acceptAllBtn.addEventListener('click', () => {
+      saveConsent(true, true);
+    });
+
+    acceptCustomBtn.addEventListener('click', () => {
+      saveConsent(analyticsCheck.checked, marketingCheck.checked);
+    });
+  }
+</script>

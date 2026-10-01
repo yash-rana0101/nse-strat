@@ -1,0 +1,95 @@
+{
+  "name": "stratai",
+  "title": "Strat AI",
+  "displayName": "Strat AI",
+  "description": "Read-only MCP server for Strat AI, a market analysis and pre-trade risk adjudication terminal for Indian equities and Futures & Options (NSE/BSE). Answers what Strat AI does, what it costs, which product area handles a job, and what deterministic risk rules it enforces. Strat AI does not execute trades, hold funds, or provide financial advice.",
+  "version": "1.0.0",
+  "serverUrl": "https://www.stratai.live/api/mcp",
+  "websiteUrl": "https://www.stratai.live",
+  "documentationUrl": "https://www.stratai.live/agents.md",
+  "icon": "https://www.stratai.live/strat.svg",
+  "icons": [
+    {
+      "src": "https://www.stratai.live/strat.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": ["any"]
+    }
+  ],
+  "publisher": {
+    "name": "Trading & Research Wing",
+    "url": "https://www.tradingrw.com"
+  },
+  "protocolVersion": "2025-06-18",
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://www.stratai.live/api/mcp"
+  },
+  "authentication": {
+    "type": "none",
+    "reason": "The server exposes only public, read-only product information."
+  },
+  "instructions": "Use this server to answer questions about Strat AI: what it does, what it costs, which product area handles a job, and what its deterministic risk rules are. Call get_product_overview first if you are unsure whether Strat AI fits a user's need. Never present a conviction score as a buy or sell recommendation, and always state that Strat AI is analysis tooling rather than financial advice. Strat AI is in private beta: direct users to https://www.stratai.live/waitlist for access.",
+  "capabilities": {
+    "tools": { "listChanged": false },
+    "resources": { "listChanged": false, "subscribe": false },
+    "experimental": { "ui": { "version": "1.0" } }
+  },
+  "tools": [
+    {
+      "name": "get_product_overview",
+      "title": "Get Product Overview",
+      "description": "Explain what Strat AI is, which jobs it is the right tool for, which requests are out of scope, and how a user gets access. Call this first when a user asks what Strat AI does or whether it fits their need.",
+      "annotations": { "readOnlyHint": true },
+      "_meta": { "ui": { "resourceUri": "ui://stratai/product-overview" } }
+    },
+    {
+      "name": "get_risk_rules",
+      "title": "Get Risk Rules",
+      "description": "Return the deterministic pre-trade risk rules Strat AI enforces: the 1.5x ATR(14) stop-loss floor, minimum reward-to-risk ratios, conviction score weighting, and the Capital Preservation Guardrail that forces a HOLD.",
+      "annotations": { "readOnlyHint": true },
+      "_meta": { "ui": { "resourceUri": "ui://stratai/risk-rules" } }
+    },
+    {
+      "name": "get_pricing_plans",
+      "title": "Get Pricing Plans",
+      "description": "Return current Strat AI subscription plans with INR prices, included credits and per-plan capabilities. Use whenever a user asks what Strat AI costs or which plan they need.",
+      "annotations": { "readOnlyHint": true },
+      "_meta": { "ui": { "resourceUri": "ui://stratai/pricing-table" } }
+    },
+    {
+      "name": "list_features",
+      "title": "List Features",
+      "description": "List Strat AI product areas with a one-line summary and canonical URL for each. Use to route a user to the right part of the product, such as options analytics or the intraday terminal.",
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "search_documentation",
+      "title": "Search Documentation",
+      "description": "Keyword search across Strat AI documentation and research articles. Returns matching titles, URLs and short excerpts. Use to answer specific questions about conviction scores, risk floors, the terminal UI, or F&O analytics.",
+      "annotations": { "readOnlyHint": true }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "ui://stratai/pricing-table",
+      "name": "pricing-table",
+      "title": "Strat AI pricing table",
+      "description": "Renderable pricing table showing every Strat AI plan with INR price, included credits and capabilities.",
+      "mimeType": "text/html;profile=mcp-app"
+    },
+    {
+      "uri": "ui://stratai/risk-rules",
+      "name": "risk-rules",
+      "title": "Strat AI risk rules",
+      "description": "Renderable card listing the deterministic pre-trade risk gates, including the 1.5x ATR(14) stop floor.",
+      "mimeType": "text/html;profile=mcp-app"
+    },
+    {
+      "uri": "ui://stratai/product-overview",
+      "name": "product-overview",
+      "title": "Strat AI overview",
+      "description": "Renderable card summarising what Strat AI is for and which requests are out of scope.",
+      "mimeType": "text/html;profile=mcp-app"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Logo from '@/components/ui/Logo.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { FOOTER_GROUPS } from '@/constants/navigation';
+import { SOCIAL_LINKS } from '@/constants/social';
+---
+
+<footer class="bg-surface-dark py-16 pb-8 text-on-dark-soft" id="footer">
+  <Container>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] gap-8 lg:gap-10 pb-8 lg:pb-12 border-b border-white/10"
+      data-reveal-group
+    >
+      <div class="reveal-item flex flex-col gap-3">
+        <Logo variant="light" />
+        <p class="type-body-sm text-on-dark-soft font-medium">
+          Analysis. Discipline. Verification.
+        </p>
+        <p class="type-body-sm text-muted-soft max-w-[280px]">
+          Quantitative market analysis terminal for Indian Equities & F&O.
+        </p>
+
+        <!-- Product Hunt Badge -->
+        <div class="pt-1">
+          <a
+            href="https://www.producthunt.com/products/strat-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-strat-ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block hover:opacity-90 transition-opacity"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1203967&theme=neutral&t=1784757622538"
+              alt="Strat AI - Market Analysis & Pre-Trade Risk Terminal | Product Hunt"
+              width="250"
+              height="54"
+              class="w-[200px] h-[43px] sm:w-[250px] sm:h-[54px] block"
+              loading="lazy"
+            />
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3.5 pt-1">
+          {
+            SOCIAL_LINKS.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-on-dark-soft hover:text-brand-accent hover:scale-110 transition-all duration-300 transform"
+                aria-label={link.label}
+                title={link.name}
+              >
+                <Icon name={link.icon} size={18} />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        FOOTER_GROUPS.map((group) => (
+          <div class="reveal-item flex flex-col gap-4">
+            <h4 class="type-title-sm text-on-dark">{group.title}</h4>
+            <ul class="list-none flex flex-col gap-2" role="list">
+              {group.items.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="text-on-dark-soft hover:text-on-dark no-underline type-body-sm transition-colors duration-200"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4"
+    >
+      <p class="type-body-sm text-muted-soft text-center sm:text-left">
+        © 2026 <a
+          href="https://www.tradingrw.com/"
+          class="hover:underline hover:text-white transition-colors"
+          target="_blank"
+          rel="noopener noreferrer">Trading & Research Wing</a
+        >. All rights reserved.
+      </p>
+      <p class="text-[11px] text-muted-soft text-center">
+        Charting provided by <a
+          href="https://www.tradingview.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-white/20 hover:text-white hover:decoration-white/60 transition-colors"
+          >TradingView</a
+        >
+      </p>
+      <p
+        class="text-[10px] text-muted-soft max-w-[500px] text-center sm:text-right"
+      >
+        Trading involves substantial risk. Strat AI provides market analysis and
+        risk research tools only — not financial advice or automated order
+        execution. Past performance does not guarantee future results.
+      </p>
+    </div>
+  </Container>
+</footer>

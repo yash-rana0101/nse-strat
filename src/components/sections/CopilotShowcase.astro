@@ -1,0 +1,44 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Workflow from '@/components/mocks/workflow/Workflow';
+import type { DeepDive } from '@/types/landing';
+
+interface Props {
+  dive: DeepDive;
+}
+const { dive } = Astro.props;
+---
+
+<section
+  id={dive.id}
+  class="section-y bg-canvas"
+  aria-labelledby="copilot-heading"
+>
+  <Container size="wide">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="font-mono text-xs font-bold text-muted-soft"
+        >{dive.index}</span
+      >
+      <Badge variant="emerald">{dive.badge}</Badge>
+    </div>
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-5 lg:gap-20 items-end mb-10">
+      <h2
+        id="copilot-heading"
+        class="type-display-lg text-ink leading-[1.12] tracking-tight max-w-[650px]"
+      >
+        Your question.<br />A whole market behind the answer.
+      </h2>
+      <p class="type-body-md text-muted leading-relaxed max-w-[560px]">
+        Not just a chat window. Watch the agent turn stock context into tool
+        calls, read backend measurements, and build a trade plan. Then ask a
+        follow-up and watch the loop run again.
+      </p>
+    </div>
+    <Workflow client:visible />
+    <p class="text-xs text-muted-soft leading-relaxed mt-5 max-w-[940px]">
+      {dive.footnote} This is a simplified demonstration; real runs can also return
+      HOLD or unavailable data.
+    </p>
+  </Container>
+</section>

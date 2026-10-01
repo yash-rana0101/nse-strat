@@ -1,0 +1,73 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { sampleTrade } from '@/content/landing/copilotDemo';
+import { demoTools } from '@/content/landing/copilotTools';
+import CopilotToolRows from './CopilotToolRows.astro';
+---
+
+<article class="sample-trade" aria-label="Illustrative trade plan">
+  <div class="plan-heading">
+    <span
+      ><Icon name="sparkles" size={14} /><span data-plan-heading
+        >SAMPLE TRADE PLAN</span
+      ></span
+    ><span class="plan-pill">ILLUSTRATIVE</span>
+  </div>
+  <div class="plan-direction">
+    <div>
+      <span class="demo-eyebrow">DIRECTIONAL SETUP</span><h4>
+        SELL <span>/ SHORT</span>
+      </h4>
+    </div><div class="plan-conviction">
+      <span class="conviction-ring">66</span><span
+        >CONVICTION<strong>MODERATE</strong></span
+      >
+    </div>
+  </div>
+  <div class="plan-payoff">
+    <span>EXECUTION LADDER <small>Short payoff</small></span><span
+      >R:R <b>1 : {sampleTrade.rewardRisk}</b></span
+    >
+  </div>
+  <div class="payoff-bar" aria-hidden="true"><span></span><span></span></div>
+  <dl class="plan-levels">
+    <div>
+      <dt>STOP LOSS</dt><dd class="stop">
+        ₹{sampleTrade.stop.toFixed(2)}
+      </dd><small>−₹1.10 risk</small>
+    </div><div>
+      <dt>ENTRY (SELL)</dt><dd>₹{sampleTrade.entry.toFixed(2)}</dd><small
+        >Planned level</small
+      >
+    </div><div>
+      <dt>TAKE PROFIT</dt><dd class="target">
+        ₹{sampleTrade.target.toFixed(2)}
+      </dd><small>+₹1.45 target</small>
+    </div>
+  </dl>
+  <div class="verification-note" data-verification hidden>
+    <Icon name="shield-check" size={16} /><div>
+      <strong>SAMPLE CHECKS PASSED</strong><p>
+        Stop 1.10 ≥ 1.035 (1.5× ATR). R:R 1:1.32 clears the intraday 1:1.3
+        floor. A pass is not a guarantee.
+      </p>
+    </div>
+  </div>
+  <div class="plan-risk">
+    <span><Icon name="alert-triangle" size={14} /> RISK & INVALIDATION</span><p>
+      Bearish 1H / 4H / 1D alignment in this snapshot. The stop sits above the
+      ₹291.31 low-volume node. A move through ₹291.55 invalidates the sample
+      setup.
+    </p>
+  </div>
+</article>
+<details class="tool-telemetry">
+  <summary
+    ><Icon name="check" size={16} /><span>Analysis pipeline telemetry</span
+    ><span class="telemetry-count">{demoTools.length} sample calls</span><Icon
+      name="chevron-down"
+      size={14}
+    /></summary
+  >
+  <div class="telemetry-results"><CopilotToolRows completed /></div>
+</details>

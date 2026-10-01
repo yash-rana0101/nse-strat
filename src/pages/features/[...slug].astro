@@ -1,0 +1,192 @@
+---
+/**
+ * Dynamic Feature Renderer — Powered by Backend Database REST API.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { fetchFeatures, fetchFeatureByKey } from '@/services/content';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const features = await fetchFeatures();
+  return features.map((feature) => ({
+    params: { slug: feature.key },
+    props: { feature },
+  }));
+}
+
+const { slug } = Astro.params;
+const initialFeature = Astro.props.feature;
+
+const feature = initialFeature || (slug ? await fetchFeatureByKey(slug) : null);
+
+if (!feature) {
+  return Astro.redirect('/404');
+}
+
+const meta = feature.metadata || {};
+const htmlContent = await marked.parse(feature.content || '');
+
+const data = {
+  title: feature.title,
+  description: feature.description,
+  badge: meta.badge || 'Stock Intelligence',
+  badgeVariant: meta.badgeVariant || 'emerald',
+  subtitleBadge: meta.subtitleBadge || feature.subtitle || '15-Step Evaluation',
+  headline: meta.headline || feature.title,
+  introText: meta.introText || feature.description,
+  mockupTitle: meta.mockupTitle || 'Diagnostic Scanner',
+  mockupDesc: meta.mockupDesc || 'Live indicator overlay and signal map',
+  mockupIcon: meta.mockupIcon || feature.icon || 'zap',
+  keyHighlights: meta.keyHighlights || [],
+  specsBadge: meta.specsBadge || 'Capabilities',
+  specsHeadline: meta.specsHeadline || 'Rigorous quantitative evaluation',
+  specItems: meta.specItems || [],
+};
+
+const featureSchema = {
+  '@type': 'WebApplication',
+  name: data.title,
+  description: data.description,
+  applicationCategory: 'FinancialApplication, BusinessApplication',
+  operatingSystem: 'Windows, macOS, Linux, Web',
+};
+---
+
+<PageLayout
+  title={data.title}
+  description={data.description}
+  badge={data.badge}
+  badgeVariant={data.badgeVariant as any}
+  breadcrumbs={[
+    { label: 'Features', href: '/#features' },
+    { label: data.title, href: `/features/${feature.key}` },
+  ]}
+  jsonLd={featureSchema}
+>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-canvas transition-colors duration-300">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex flex-col gap-6" data-reveal-group>
+          <Badge variant={data.badgeVariant as any} class="w-fit"
+            >{data.subtitleBadge}</Badge
+          >
+          <h1
+            class="type-display-md text-ink leading-tight font-display font-extrabold"
+          >
+            {data.headline}
+          </h1>
+          <p class="type-body-md text-muted leading-relaxed">
+            {data.introText}
+          </p>
+
+          <ul class="list-none flex flex-col gap-3.5">
+            {
+              data.keyHighlights?.map(
+                (item: { icon: string; text: string }) => (
+                  <li class="flex items-center gap-3 text-body">
+                    <span class="w-5 h-5 rounded-full bg-badge-emerald/10 border border-badge-emerald/20 flex items-center justify-center text-badge-emerald shrink-0">
+                      <Icon name={item.icon} size={12} />
+                    </span>
+                    <span>{item.text}</span>
+                  </li>
+                )
+              )
+            }
+          </ul>
+
+          <div class="mt-4 flex gap-4">
+            <Button
+              variant="primary"
+              href="/waitlist"
+              class="!rounded-full px-6 py-2 text-xs font-semibold"
+              >Join Waitlist</Button
+            >
+            <Button
+              variant="secondary"
+              href="/pricing"
+              class="!rounded-full px-6 py-2 text-xs font-semibold"
+              >Explore Plans</Button
+            >
+          </div>
+        </div>
+
+        <!-- Interactive Mockup Card -->
+        <div
+          class="relative rounded-2xl overflow-hidden border border-hairline/80 shadow-[0_20px_50px_rgba(16,185,129,0.06)] bg-surface-card p-4 aspect-video flex items-center justify-center"
+        >
+          <div
+            class="absolute inset-0 opacity-[0.03] dark:opacity-[0.12] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_20%,transparent_80%)]"
+            style="background-image: linear-gradient(var(--color-hairline) 1px, transparent 1px), linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px); background-size: 32px 32px;"
+          >
+          </div>
+          <div class="z-10 text-center">
+            <div
+              class="w-12 h-12 rounded-xl bg-badge-emerald/10 border border-badge-emerald/20 text-badge-emerald flex items-center justify-center mx-auto mb-4"
+            >
+              <Icon name={data.mockupIcon || 'zap'} size={24} />
+            </div>
+            <span class="type-title-sm text-ink block font-bold"
+              >{data.mockupTitle}</span
+            >
+            <span class="type-body-sm text-muted mt-1 block"
+              >{data.mockupDesc}</span
+            >
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Technical Specs & Pipeline Section -->
+  <section
+    class="py-16 bg-surface-soft/10 border-t border-hairline transition-colors duration-300"
+  >
+    <Container>
+      <div class="max-w-[700px] mx-auto text-center mb-16">
+        <Badge variant={data.badgeVariant as any} class="mb-4"
+          >{data.specsBadge}</Badge
+        >
+        <h2 class="type-display-sm text-ink font-bold">{data.specsHeadline}</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {
+          data.specItems?.map(
+            (item: {
+              icon: string;
+              title: string;
+              desc: string;
+              variant?: string;
+            }) => (
+              <div class="p-8 rounded-xl bg-surface-card border border-hairline hover:border-brand-accent/30 transition-all duration-300">
+                <div class="w-8 h-8 rounded-lg bg-badge-emerald/10 text-badge-emerald flex items-center justify-center mb-5">
+                  <Icon name={item.icon} size={16} />
+                </div>
+                <h3 class="type-title-sm text-ink mb-3 font-semibold">
+                  {item.title}
+                </h3>
+                <p class="type-body-sm text-muted leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            )
+          )
+        }
+      </div>
+
+      <!-- Render Markdown Body -->
+      {
+        htmlContent && (
+          <div class="prose dark:prose-invert max-w-[800px] mx-auto bg-surface-card border border-hairline rounded-2xl p-8 md:p-12">
+            <div set:html={htmlContent} />
+          </div>
+        )
+      }
+    </Container>
+  </section>
+</PageLayout>

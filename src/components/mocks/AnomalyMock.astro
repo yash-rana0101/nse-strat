@@ -1,0 +1,83 @@
+---
+/**
+ * AnomalyMock — a triggered surveillance insight.
+ *
+ * Shows the price-move trigger, the generated commentary, and the thresholds
+ * that govern it. No sector-volume claim: the catalogue documents only the two
+ * percent absolute move.
+ */
+import TerminalFrame from '@/components/ui/TerminalFrame.astro';
+import { anomalyMock } from '@/content/landing';
+---
+
+<TerminalFrame
+  label={anomalyMock.frameLabel}
+  status={anomalyMock.status}
+  statusVariant="pink"
+>
+  <!-- Trigger -->
+  <div
+    class="border border-warning/40 bg-warning/5 rounded-panel p-4 flex flex-col gap-3"
+  >
+    <div class="flex items-center justify-between gap-3 flex-wrap">
+      <div class="flex items-baseline gap-2.5 min-w-0">
+        <span class="text-sm font-mono font-bold text-ink truncate">
+          {anomalyMock.symbol}
+        </span>
+        <span class="text-lg font-mono font-bold text-success">
+          {anomalyMock.move}
+        </span>
+      </div>
+      <span
+        class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded border border-warning/40 text-warning shrink-0"
+      >
+        {anomalyMock.severity}
+      </span>
+    </div>
+    <span class="text-[10px] font-mono text-muted-soft">
+      {anomalyMock.window}
+    </span>
+  </div>
+
+  <!-- Generated commentary -->
+  <div
+    class="bg-surface-card border border-hairline/50 p-4 rounded-panel flex flex-col gap-2.5"
+  >
+    <h4 class="text-sm font-semibold text-ink leading-snug">
+      {anomalyMock.headline}
+    </h4>
+    <p class="text-xs text-muted leading-relaxed">
+      {anomalyMock.commentary}
+    </p>
+    <div class="flex items-center gap-2 pt-1">
+      <span
+        class="text-[10px] font-mono uppercase tracking-widest text-muted-soft"
+      >
+        Sentiment
+      </span>
+      <span class="text-xs font-mono font-bold text-badge-emerald">
+        {anomalyMock.sentiment}
+      </span>
+    </div>
+  </div>
+
+  <!-- Thresholds -->
+  <dl class="flex flex-col gap-0">
+    {
+      anomalyMock.rows.map((row) => (
+        <div class="flex items-baseline justify-between gap-3 text-xs py-2 border-b border-hairline/30 last:border-b-0">
+          <dt class="text-muted-soft">{row.label}</dt>
+          <dd class="font-mono font-semibold text-ink text-right">
+            {row.value}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <p
+    class="text-[10px] text-muted-soft leading-relaxed border-t border-hairline/40 pt-3"
+  >
+    {anomalyMock.footnote}
+  </p>
+</TerminalFrame>

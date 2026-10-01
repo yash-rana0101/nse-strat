@@ -1,0 +1,44 @@
+---
+interface Props {
+  variant?: 'default' | 'light';
+  class?: string;
+  asSpan?: boolean;
+}
+const { variant = 'default', class: className, asSpan = false } = Astro.props;
+const forceWhite = variant === 'light';
+---
+
+{
+  asSpan ? (
+    <span class:list={['inline-flex items-center gap-2', className]}>
+      <img
+        src="/strat.svg"
+        alt="Strat Ai"
+        class="h-[22px] md:h-[24px] w-auto object-contain shrink-0"
+      />
+      <span class="text-sm font-semibold text-ink tracking-tight">
+        Strat Ai
+      </span>
+    </span>
+  ) : (
+    <a
+      href="/"
+      class:list={['inline-flex items-center gap-2 no-underline', className]}
+      aria-label="Strat Ai — AI Trading Intelligence"
+    >
+      <img
+        src="/strat.svg"
+        alt="Strat Ai"
+        class="h-[22px] md:h-[24px] w-auto object-contain shrink-0"
+      />
+      <span
+        class:list={[
+          'text-sm font-semibold tracking-tight',
+          forceWhite ? 'text-on-dark' : 'text-ink',
+        ]}
+      >
+        Strat Ai
+      </span>
+    </a>
+  )
+}

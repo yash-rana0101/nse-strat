@@ -1,0 +1,76 @@
+@media (max-width: 1023px) {
+  .copilot-demo .demo-terminal {
+    display: contents;
+  }
+  .copilot-demo .terminal-title {
+    order: 1;
+  }
+  .copilot-demo .terminal-actions {
+    order: 2;
+  }
+  .copilot-demo .terminal-context {
+    order: 3;
+  }
+  .copilot-demo .demo-engine {
+    order: 4;
+    border-block: 1px solid var(--color-hairline);
+  }
+  .copilot-demo .terminal-body {
+    order: 5;
+    margin-top: 20px;
+  }
+  .copilot-demo .terminal-footer {
+    order: 6;
+  }
+  .copilot-demo .graph {
+    margin-block: 20px;
+  }
+  .copilot-demo .engine-description {
+    display: none;
+  }
+  .copilot-demo .stage-list {
+    margin-top: 16px;
+  }
+  .copilot-demo .engine-status {
+    min-height: 85px;
+  }
+}
+@media (max-width: 540px) {
+  .copilot-demo .terminal-title {
+    margin: 20px 16px 16px;
+    font-size: 10px;
+  }
+  .copilot-demo .terminal-actions {
+    padding: 0 16px;
+  }
+  .copilot-demo .terminal-context {
+    margin-left: 16px;
+    margin-right: 16px;
+    font-size: 10px;
+  }
+  .copilot-demo .terminal-body {
+    padding: 0 16px 16px;
+    height: 390px;
+  }
+  .copilot-demo .terminal-footer {
+    padding: 16px;
+  }
+  .copilot-demo .demo-action {
+    font-size: 12px;
+  }
+  .copilot-demo .sample-trade {
+    padding: 12px;
+  }
+  .copilot-demo .plan-levels dd {
+    font-size: 15px;
+  }
+  .copilot-demo .plan-levels > div + div {
+    padding-left: 8px;
+  }
+  .copilot-demo .plan-payoff small {
+    display: none;
+  }
+  .copilot-demo .plan-direction h4 {
+    font-size: 22px;
+  }
+}

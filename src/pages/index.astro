@@ -1,0 +1,133 @@
+---
+/**
+ * Homepage — Strat AI landing page.
+ *
+ * Thin orchestration layer. All copy lives in `src/content/landing/`.
+ *
+ * Narrative order: hero, then the four headline features high-to-low, then the
+ * engine that makes them possible, then the platform grid, then where it fits
+ * in a session, then constraints and refusals, then commercial surfaces.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import FeatureDeepDive from '@/components/sections/FeatureDeepDive.astro';
+import CopilotShowcase from '@/components/sections/CopilotShowcase.astro';
+import HowItWorks from '@/components/sections/HowItWorks.astro';
+import Features from '@/components/sections/Features.astro';
+import Workflows from '@/components/sections/Workflows.astro';
+import Stats from '@/components/sections/Stats.astro';
+import Security from '@/components/sections/Security.astro';
+import CryptoTeaser from '@/components/sections/CryptoTeaser.astro';
+import Pricing from '@/components/sections/Pricing.astro';
+import Blog from '@/components/sections/Blog.astro';
+import FAQ from '@/components/sections/FAQ.astro';
+import CTA from '@/components/sections/CTA.astro';
+import Partners from '@/components/sections/Partners.astro';
+import { deepDives, faq } from '@/content/landing';
+
+/**
+ * featureList is corrected against FEATURE_CATALOGUE.md: eight projection
+ * engines rather than an OLS-only claim, and the conviction score described as
+ * a relative ranking rather than a guardrail that forces a HOLD.
+ */
+const productSchema = {
+  '@type': 'SoftwareApplication',
+  name: 'Strat AI',
+  applicationCategory: 'FinancialApplication',
+  operatingSystem: 'Windows, macOS, Linux, Web',
+  description:
+    'Strat AI: Market analysis and pre-trade risk adjudication terminal for NSE and NFO.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'INR',
+    description:
+      'Credit-based subscription packages for running quantitative model calculations.',
+  },
+  featureList: [
+    'Conversational market analysis over 18 typed quantitative tools',
+    'VERIFY pre-trade risk audit (1.5× ATR(14) stop floor)',
+    'Ghost Line projections (OLS, VWLR, VWEPR, regime-conditioned forecast)',
+    'Anomaly surveillance on 10-minute candles',
+    'Chart pattern engine (26 labels across 5 categories)',
+    'F&O options chain analytics (Greeks, max pain, OI walls)',
+    'Order flow imbalance and footprint volume profiles',
+    'Read-only broker integration with no order-placement path',
+  ],
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'Traders, Quant Analysts, Risk Managers',
+  },
+};
+
+const serviceSchema = {
+  '@type': 'Service',
+  name: 'Strat AI pre-trade risk adjudication',
+  serviceType: 'Market analysis and pre-trade risk adjudication',
+  description:
+    'Evaluates Indian equity and F&O trade setups, audits them against a deterministic 1.5× ATR(14) stop-loss floor and minimum reward-to-risk thresholds, and decodes live options order flow. Analysis and risk tooling only: no order execution, no custody, no financial advice.',
+  provider: { '@id': 'https://www.stratai.live/#organization' },
+  areaServed: { '@type': 'Country', name: 'India' },
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'Traders, Quant Analysts, Risk Managers',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Strat AI credit plans',
+    url: 'https://www.stratai.live/pricing',
+  },
+  termsOfService: 'https://www.stratai.live/terms',
+};
+
+/** Generated from the rendered FAQ so the two can never drift apart. */
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Strat AI — Market Analysis & Pre-Trade Risk Terminal for NSE & NFO"
+  description="Ask the market in plain language and get answers computed by 18 typed quantitative tools. Pre-trade risk audits against a deterministic 1.5× ATR stop floor, four projection models, and anomaly surveillance for Indian equities and F&O."
+  jsonLd={[productSchema, serviceSchema, faqSchema]}
+  markdownHref="/index.md"
+>
+  <Hero />
+
+  <!-- Tier 1 — the four headline features, high level to low level -->
+  {
+    deepDives.map((dive) =>
+      dive.id === 'copilot' ? (
+        <CopilotShowcase dive={dive} />
+      ) : (
+        <FeatureDeepDive dive={dive} />
+      )
+    )
+  }
+
+  <!-- Tier 2 — the engine underneath, then the measurement layer -->
+  <HowItWorks />
+  <Features />
+
+  <!-- Tier 3 — where it fits in a session -->
+  <Workflows />
+
+  <!-- Tier 4 — constraints, refusals, and what is not shipped yet -->
+  <Stats />
+  <Security />
+  <CryptoTeaser />
+
+  <Pricing />
+  <Blog />
+  <FAQ />
+  <CTA />
+  <Partners />
+</BaseLayout>

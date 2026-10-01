@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant?: 'feature' | 'surface' | 'dark' | 'outline';
+  padding?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { variant = 'feature', padding = 'lg', class: className } = Astro.props;
+const baseClass = 'rounded-lg transition-colors duration-300';
+const paddingClasses = { sm: 'p-4', md: 'p-6', lg: 'p-8' };
+const variantClasses = {
+  feature: 'bg-surface-card',
+  surface: 'bg-surface-soft',
+  dark: 'bg-surface-dark text-on-dark',
+  outline: 'bg-transparent border border-hairline',
+};
+---
+
+<div
+  class:list={[
+    baseClass,
+    paddingClasses[padding],
+    variantClasses[variant],
+    className,
+  ]}
+>
+  <slot />
+</div>

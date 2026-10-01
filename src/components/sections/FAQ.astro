@@ -1,0 +1,62 @@
+---
+/**
+ * FAQ — accordion using native <details> elements (zero JS).
+ *
+ * Copy lives in `src/content/landing/faq.ts` so the JSON-LD FAQPage schema in
+ * index.astro can be generated from the same source rather than duplicating it.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { faq } from '@/content/landing';
+
+const { intro, items } = faq;
+---
+
+<section
+  class="section-y bg-canvas transition-colors duration-300"
+  id={intro.id}
+  aria-labelledby="faq-heading"
+>
+  <Container>
+    <div class="max-w-[800px] mx-auto text-center mb-12" data-reveal-group>
+      <div data-reveal-item>
+        <Badge variant="emerald" class="mb-4">{intro.badge}</Badge>
+      </div>
+      <h2
+        id="faq-heading"
+        class="type-display-lg leading-[1.1] tracking-tight text-ink"
+        data-reveal-item
+      >
+        {intro.heading}
+      </h2>
+    </div>
+
+    <div
+      class="max-w-[800px] mx-auto flex flex-col divide-y divide-hairline border-y border-hairline"
+      data-reveal-group
+    >
+      {
+        items.map((item) => (
+          <details class="reveal-item group">
+            <summary class="flex items-center justify-between cursor-pointer py-5 px-2 list-none [&::-webkit-details-marker]:hidden">
+              <span class="type-title-sm text-ink pr-4">{item.q}</span>
+              <span class="w-6 h-6 flex items-center justify-center shrink-0 text-muted group-open:rotate-45 transition-transform duration-300">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M7 1v12M1 7h12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+            </summary>
+            <div class="pb-5 px-2 pr-4 sm:pr-12">
+              <p class="type-body-md text-muted leading-relaxed">{item.a}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </Container>
+</section>

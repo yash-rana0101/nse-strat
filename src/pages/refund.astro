@@ -1,0 +1,35 @@
+---
+/**
+ * Refund Policy — Refund and cancellation terms.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { fetchPolicyBySlug } from '@/services/content';
+import { marked } from 'marked';
+
+const policy = await fetchPolicyBySlug('refund');
+const htmlContent = policy ? await marked.parse(policy.content) : '';
+---
+
+<PageLayout
+  title={policy?.title || 'Refund & Cancellation Policy'}
+  description="Detailed 7-day refund policy, billing cancellation terms, and step-by-step refund processing timelines for Strat Ai subscription plans."
+  badge="Legal"
+  badgeVariant="default"
+  breadcrumbs={[{ label: 'Refund Policy', href: '/refund' }]}
+>
+  <section class="py-16 md:py-20 bg-canvas transition-colors duration-300">
+    <Container size="narrow">
+      <Prose>
+        {
+          htmlContent ? (
+            <div set:html={htmlContent} />
+          ) : (
+            <p class="text-muted-soft type-body-sm">Loading refund policy...</p>
+          )
+        }
+      </Prose>
+    </Container>
+  </section>
+</PageLayout>

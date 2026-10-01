@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string;
+  size?: 'default' | 'narrow' | 'wide';
+}
+const { class: className, size = 'default' } = Astro.props;
+const sizeMap = { narrow: '800px', default: '1200px', wide: '1400px' };
+---
+
+<div
+  class:list={['w-full mx-auto px-4 md:px-6', className]}
+  style={`max-width: ${sizeMap[size]}`}
+>
+  <slot />
+</div>

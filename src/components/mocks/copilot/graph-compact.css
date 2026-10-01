@@ -1,0 +1,92 @@
+@media (max-width: 1199px) and (min-width: 1024px), (max-width: 600px) {
+  .copilot-demo .demo-engine {
+    padding: 24px 18px;
+  }
+  .copilot-demo .graph {
+    height: 440px;
+    margin: 22px 0;
+  }
+  .copilot-demo .graph-wires {
+    display: none;
+  }
+  .copilot-demo .graph-wires-compact {
+    display: block;
+  }
+  .copilot-demo .graph-node {
+    gap: 5px;
+    padding: 8px;
+  }
+  .copilot-demo .graph-node strong {
+    font-size: 14px;
+  }
+  .copilot-demo .graph-node small {
+    font-size: 11px;
+  }
+  .copilot-demo .node-model,
+  .copilot-demo .node-agent {
+    width: 42%;
+    top: 34px;
+    height: 88px;
+  }
+  .copilot-demo .node-agent {
+    left: 58%;
+  }
+  .copilot-demo .node-tool {
+    left: 0;
+    width: 62%;
+    height: 72px;
+    gap: 10px;
+    padding: 12px;
+  }
+  .copilot-demo .tool-trend {
+    top: 150px;
+  }
+  .copilot-demo .tool-structure {
+    top: 238px;
+  }
+  .copilot-demo .tool-risk {
+    top: 326px;
+  }
+  .copilot-demo .node-backend {
+    left: 72%;
+    width: 28%;
+    top: 244px;
+    height: 84px;
+  }
+  .copilot-demo .node-backend small {
+    display: none;
+  }
+  .copilot-demo .graph-context-label {
+    top: 0;
+    left: 0;
+    font-size: 9px;
+  }
+  .copilot-demo .graph-return-label {
+    left: 0;
+    bottom: 0;
+    font-size: 9px;
+  }
+  .copilot-demo .engine-title {
+    font-size: 22px;
+  }
+  .copilot-demo .engine-heading {
+    flex-wrap: wrap;
+  }
+  .copilot-demo .engine-status {
+    padding: 14px 12px;
+    gap: 8px;
+  }
+  .copilot-demo .stage-count {
+    font-size: 10px;
+  }
+  .copilot-demo .stage-list li {
+    font-size: 11px;
+    gap: 5px;
+  }
+}
+@media (max-width: 360px) {
+  .copilot-demo .node-model small,
+  .copilot-demo .node-agent small {
+    display: none;
+  }
+}

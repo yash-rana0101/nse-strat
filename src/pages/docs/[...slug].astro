@@ -1,0 +1,106 @@
+---
+/**
+ * Docs Post Page — Dynamic route for individual documentation pages fetched from backend database API.
+ */
+
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Prose from '@/components/ui/Prose.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { fetchDocs, fetchDocBySlug } from '@/services/content';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const docs = await fetchDocs();
+  return docs.map((doc) => ({
+    params: { slug: doc.slug },
+    props: { doc },
+  }));
+}
+
+const { slug } = Astro.params;
+const initialDoc = Astro.props.doc;
+
+const doc = initialDoc || (slug ? await fetchDocBySlug(slug) : null);
+
+if (!doc) {
+  return Astro.redirect('/404');
+}
+
+const htmlContent = await marked.parse(doc.content || '');
+
+const sectionVariants: Record<
+  string,
+  'emerald' | 'violet' | 'orange' | 'default'
+> = {
+  'Getting Started': 'emerald',
+  'Core Concepts': 'violet',
+  'Risk & Strategy': 'orange',
+  'Integration Resources': 'orange',
+};
+
+const badgeVariant = sectionVariants[doc.category] || 'default';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: doc.title,
+  description: doc.summary,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Trading & Research Wing',
+  },
+};
+---
+
+<PageLayout
+  title={doc.title}
+  description={doc.summary}
+  breadcrumbs={[
+    { label: 'Documentation', href: '/docs' },
+    { label: doc.title },
+  ]}
+  showHero={false}
+  jsonLd={articleSchema}
+>
+  <!-- Article Header -->
+  <section class="pt-20 lg:pt-24 pb-0 bg-canvas transition-colors duration-300">
+    <Container size="wide" class="!px-0">
+      <div
+        class="border-y border-hairline bg-surface-soft/5 p-8 md:p-12 lg:p-16"
+      >
+        <div class="max-w-[800px]">
+          <div class="flex items-center gap-3 mb-6">
+            <Badge variant={badgeVariant}>{doc.category}</Badge>
+            {
+              doc.metadata?.badge && (
+                <Badge variant="default">{doc.metadata.badge}</Badge>
+              )
+            }
+          </div>
+
+          <h1
+            class="type-display-lg tracking-tight leading-[1.1] text-ink mb-4"
+          >
+            {doc.title}
+          </h1>
+
+          <p class="type-body-md text-muted leading-relaxed">
+            {doc.summary}
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Article Body -->
+  <section class="py-12 md:py-16 bg-canvas transition-colors duration-300">
+    <Container>
+      <div class="max-w-[800px]">
+        <Prose>
+          <div set:html={htmlContent} />
+        </Prose>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

@@ -1,0 +1,33 @@
+---
+import CopilotGraph from './copilot/CopilotGraph.astro';
+import CopilotTerminal from './copilot/CopilotTerminal.astro';
+import './copilot/demo.css';
+---
+
+<strat-copilot-demo class="copilot-demo" data-phase="idle">
+  <div class="demo-topline">
+    <span><i aria-hidden="true"></i> THE CO-PILOT, EXPLAINED</span>
+    <span
+      >INTERACTIVE DEMO <span class="demo-separator">/</span> NO LIVE DATA</span
+    >
+  </div>
+  <div class="demo-workspace">
+    <CopilotGraph />
+    <CopilotTerminal />
+  </div>
+  <div class="demo-bottomline">
+    <span>Real workflow. Illustrative numbers.</span>
+    <span>Fixed simulation · Not investment advice · No order execution</span>
+  </div>
+  <noscript
+    ><p class="p-5 text-sm text-muted">
+      Enable JavaScript to run this interactive sample. The product sends your
+      request to an agent, calls quantitative tools, and returns a structured
+      readout.
+    </p></noscript
+  >
+</strat-copilot-demo>
+
+<script>
+  import './copilot/demo';
+</script>

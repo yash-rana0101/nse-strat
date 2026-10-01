@@ -1,0 +1,150 @@
+---
+import Meta from './Meta.astro';
+import Canonical from './Canonical.astro';
+import StructuredData from './StructuredData.astro';
+import OrganizationSchema from './OrganizationSchema.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  /**
+   * Path to this page's markdown twin, e.g. `/index.md`. Only set it where the
+   * twin genuinely serves markdown — advertising an alternate that returns HTML
+   * is worse for agents than advertising none.
+   */
+  markdownHref?: string;
+}
+
+const {
+  title,
+  description = 'Strat Ai — market analysis and pre-trade risk tooling for serious Indian F&O traders. Multi-agent LLM reasoning over typed quantitative tools, deterministic risk floors, zero-custody privacy.',
+  canonical,
+  ogImage = '/hero/hero-dark.png',
+  ogType = 'website',
+  jsonLd,
+  noindex = false,
+  markdownHref,
+} = Astro.props;
+
+const siteUrl =
+  Astro.site?.toString().replace(/\/$/, '') || 'https://www.stratai.live';
+const canonicalUrl =
+  canonical ||
+  (Astro.url.pathname === '/' || Astro.url.pathname === ''
+    ? `${siteUrl}/`
+    : new URL(Astro.url.pathname, siteUrl).toString().replace(/\/$/, ''));
+const fullOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${siteUrl}${ogImage}`;
+
+const orgId = `${siteUrl}/#organization`;
+const webSiteId = `${siteUrl}/#website`;
+const webPageId = `${canonicalUrl}#webpage`;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': webSiteId,
+  name: 'Strat Ai',
+  url: siteUrl,
+  publisher: { '@id': orgId },
+};
+
+const webpageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': webPageId,
+  url: canonicalUrl,
+  name: title,
+  description: description,
+  isPartOf: { '@id': webSiteId },
+  about: { '@id': orgId },
+  inLanguage: 'en-IN',
+  primaryImageOfPage: {
+    '@id': `${siteUrl}/#hero-image`,
+  },
+};
+
+const heroImageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageObject',
+  '@id': `${siteUrl}/#hero-image`,
+  url: `${siteUrl}/hero/hero-dark.png`,
+  width: 1920,
+  height: 988,
+  caption: 'Strat Ai Terminal Dashboard Preview',
+  contentUrl: `${siteUrl}/hero/hero-dark.png`,
+  representativeOfPage: true,
+};
+
+// Map and enrich custom schema lists
+const customEntities = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
+
+const enrichedCustomEntities = customEntities.map((entity) => {
+  const updated = { ...entity };
+  if (
+    [
+      'SoftwareApplication',
+      'WebApplication',
+      'Product',
+      'Article',
+      'TechArticle',
+      'BlogPosting',
+      'FAQPage',
+    ].includes(updated['@type'] as string)
+  ) {
+    updated['mainEntityOfPage'] = { '@id': webPageId };
+  }
+  return updated;
+});
+---
+
+<Meta
+  title={title}
+  description={description}
+  ogImage={fullOgImage}
+  ogType={ogType}
+  canonicalUrl={canonicalUrl}
+  noindex={noindex}
+/>
+
+<Canonical url={canonicalUrl} />
+
+<!-- Agent discovery: resource catalog and machine-readable representations -->
+<link rel="ard" href={`${siteUrl}/.well-known/ard.json`} />
+<link
+  rel="alternate"
+  type="text/plain"
+  title="LLM navigation index"
+  href={`${siteUrl}/llms.txt`}
+/>
+{
+  markdownHref && (
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title={`${title} (markdown)`}
+      href={`${siteUrl}${markdownHref}`}
+    />
+  )
+}
+
+<!-- Core WebPage & WebSite Schemas -->
+<StructuredData data={webpageSchema} />
+<StructuredData data={websiteSchema} />
+<StructuredData data={heroImageSchema} />
+
+<!-- Root Organization Schema -->
+<OrganizationSchema siteUrl={siteUrl} />
+
+<!-- Custom Enriched Schema Entities (FAQPage, Product, Article, SoftwareApplication) -->
+{enrichedCustomEntities.map((entity) => <StructuredData data={entity} />)}

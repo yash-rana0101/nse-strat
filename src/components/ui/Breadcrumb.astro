@@ -1,0 +1,74 @@
+---
+/**
+ * Breadcrumb — Accessible breadcrumb navigation with Schema.org JSON-LD.
+ */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+const { items, class: className } = Astro.props;
+const siteUrl =
+  Astro.site?.toString().replace(/\/$/, '') || 'https://www.stratai.live';
+const resolveAbsoluteUrl = (href?: string) => {
+  if (!href) return Astro.url.toString();
+  if (href.startsWith('http')) return href;
+  return `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`;
+};
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: resolveAbsoluteUrl('/'),
+    },
+    ...items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: item.label,
+      item: resolveAbsoluteUrl(item.href),
+    })),
+  ],
+};
+---
+
+<nav
+  aria-label="Breadcrumb"
+  class:list={['flex items-center gap-2 type-body-sm text-muted', className]}
+>
+  <ol class="flex items-center gap-1.5 list-none" role="list">
+    <li>
+      <a
+        href="/"
+        class="text-muted-soft hover:text-ink no-underline transition-colors duration-200"
+        >Home</a
+      >
+    </li>
+    {
+      items.map((item, i) => (
+        <li class="flex items-center gap-1.5">
+          <span class="text-muted-soft select-none" aria-hidden="true">
+            /
+          </span>
+          {item.href && i < items.length - 1 ? (
+            <a
+              href={item.href}
+              class="text-muted-soft hover:text-ink no-underline transition-colors duration-200"
+            >
+              {item.label}
+            </a>
+          ) : (
+            <span class="text-ink font-medium">{item.label}</span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

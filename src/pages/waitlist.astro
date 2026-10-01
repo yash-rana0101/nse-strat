@@ -1,0 +1,30 @@
+---
+/**
+ * Waitlist Page — Simple, clean layout wrapping the WaitlistForm.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import WaitlistForm from '@/components/sections/WaitlistForm.astro';
+
+const waitlistSchema = {
+  '@type': 'WebPage',
+  name: 'Register for Strat AI Private Beta',
+  description:
+    'Register for the Strat AI private beta to evaluate the market analysis and pre-trade risk terminal.',
+};
+---
+
+<PageLayout
+  title="Private Beta Registration — Strat AI"
+  description="Register for early private beta access to the Strat AI market analysis and risk terminal."
+  badge="Private Beta"
+  badgeVariant="emerald"
+  breadcrumbs={[{ label: 'Beta Registration', href: '/waitlist' }]}
+  jsonLd={waitlistSchema}
+>
+  <section class="py-16 md:py-24 bg-canvas transition-colors duration-300">
+    <Container>
+      <WaitlistForm />
+    </Container>
+  </section>
+</PageLayout>

@@ -1,0 +1,122 @@
+.copilot-demo .tool-library {
+  margin: 0 0 22px;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  background: var(--color-canvas);
+}
+.copilot-demo .tool-library summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 15px;
+  cursor: pointer;
+  list-style: none;
+}
+.copilot-demo .tool-library summary::-webkit-details-marker,
+.copilot-demo .tool-telemetry summary::-webkit-details-marker {
+  display: none;
+}
+.copilot-demo .library-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--demo-highlight);
+  font-weight: 600;
+  font-size: 14px;
+}
+.copilot-demo .library-more svg {
+  transition: transform 0.2s;
+}
+.copilot-demo .tool-library[open] .library-more svg {
+  transform: rotate(180deg);
+}
+.copilot-demo .library-total {
+  font: 11px var(--font-code);
+  color: var(--color-body);
+}
+.copilot-demo .library-note {
+  color: var(--color-body);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 15px 14px;
+}
+.copilot-demo .library-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  gap: 8px;
+  margin: 0 12px 14px;
+}
+.copilot-demo .library-list li {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--color-hairline);
+  border-radius: 8px;
+  background: var(--color-surface-card);
+}
+.copilot-demo .library-number {
+  font: 10px var(--font-code);
+  color: var(--demo-highlight);
+  margin-top: 3px;
+}
+.copilot-demo .library-list li > div {
+  min-width: 0;
+}
+.copilot-demo .library-list strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.copilot-demo .library-list code {
+  display: block;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+  color: var(--color-body);
+  margin-top: 4px;
+}
+.copilot-demo .library-list small {
+  display: block;
+  color: var(--demo-highlight);
+  font-size: 10px;
+  margin-top: 6px;
+}
+.copilot-demo .tool-telemetry {
+  margin-top: 12px;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  background: var(--color-surface-soft);
+}
+.copilot-demo .tool-telemetry summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+}
+.copilot-demo .tool-telemetry summary > svg {
+  color: var(--demo-highlight);
+}
+.copilot-demo .telemetry-count {
+  margin-left: auto;
+  font: 10px var(--font-code);
+  color: var(--demo-highlight);
+  white-space: nowrap;
+}
+.copilot-demo .telemetry-results {
+  padding: 0 10px 4px;
+}
+@media (max-width: 600px) {
+  .copilot-demo .library-list {
+    grid-template-columns: 1fr;
+  }
+  .copilot-demo .tool-library summary {
+    flex-wrap: wrap;
+  }
+  .copilot-demo .tool-telemetry summary {
+    flex-wrap: wrap;
+  }
+}

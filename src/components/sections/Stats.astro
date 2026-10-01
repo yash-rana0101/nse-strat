@@ -1,0 +1,111 @@
+---
+/**
+ * Stats — engineered constraints.
+ *
+ * Renders `src/content/landing/constraints.ts`. Every figure here is a design
+ * parameter. The previous version of this section led with a 60 FPS render
+ * claim that FEATURE_CATALOGUE section 17 records as a load-test target rather
+ * than a guarantee; it is gone, along with the latency and history-depth
+ * claims that had no measurement behind them.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { constraints } from '@/content/landing';
+
+const { intro, stats, callout, disclaimer } = constraints;
+---
+
+<section
+  class="section-y bg-canvas transition-colors duration-300"
+  id={intro.id}
+  aria-labelledby="constraints-heading"
+>
+  <Container>
+    <div class="max-w-[800px] mx-auto text-center mb-12" data-reveal-group>
+      <div data-reveal-item>
+        <Badge variant="emerald" class="mb-4">{intro.badge}</Badge>
+      </div>
+      <h2
+        id="constraints-heading"
+        class="type-display-lg leading-[1.1] tracking-tight text-ink"
+        data-reveal-item
+      >
+        {intro.heading}
+      </h2>
+    </div>
+  </Container>
+
+  <Container size="wide" class="!px-0">
+    <div class="border-y border-hairline overflow-hidden bg-surface-soft/5">
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 divide-x divide-hairline"
+        data-reveal-group
+      >
+        {
+          stats.map((stat) => (
+            <div class="reveal-item p-6 sm:p-8 md:p-10 text-center flex flex-col gap-2">
+              <span class="text-3xl sm:text-4xl md:text-5xl font-bold text-ink font-display tracking-tight">
+                {stat.value}
+              </span>
+              <span class="type-title-sm text-ink">{stat.title}</span>
+              <span class="text-xs text-muted leading-relaxed">
+                {stat.detail}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Glass-box transparency callout -->
+      <div
+        class="border-t border-hairline p-6 sm:p-8 md:p-12"
+        data-reveal-group
+      >
+        <div class="max-w-[800px] mx-auto text-center md:text-left">
+          <div
+            class="flex items-center gap-2 mb-4 justify-center md:justify-start"
+            data-reveal-item
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-badge-emerald"></span>
+            <span
+              class="text-[10px] font-mono font-bold tracking-widest uppercase text-badge-emerald"
+              >{callout.label}</span
+            >
+          </div>
+          <blockquote
+            class="type-display-sm text-ink leading-relaxed mb-6"
+            data-reveal-item
+          >
+            {callout.quote}
+          </blockquote>
+          <div
+            class="flex items-center gap-3 justify-center md:justify-start"
+            data-reveal-item
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-badge-emerald/20 text-badge-emerald flex items-center justify-center font-bold font-mono text-sm shrink-0"
+            >
+              {callout.initials}
+            </div>
+            <div>
+              <span class="block text-sm font-semibold text-ink"
+                >{callout.attribution}</span
+              >
+              <span class="block text-xs text-muted"
+                >{callout.attributionDetail}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+
+  <Container>
+    <p
+      class="text-xs text-muted-soft text-center mt-8 max-w-[700px] mx-auto leading-relaxed"
+    >
+      {disclaimer}
+    </p>
+  </Container>
+</section>

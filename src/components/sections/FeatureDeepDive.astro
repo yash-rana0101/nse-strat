@@ -1,0 +1,123 @@
+---
+/**
+ * FeatureDeepDive — one alternating text/mock section, driven entirely by a
+ * DeepDive content object.
+ *
+ * All four headline features render through this component, so the deep-dive
+ * rhythm is defined once. `dive.mediaSide` alternates the mock left and right
+ * at desktop widths; below `lg` everything collapses to a single column with
+ * the copy first.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import ChatMock from '@/components/mocks/ChatMock.astro';
+import VerifyMock from '@/components/mocks/VerifyMock.astro';
+import GhostLineMock from '@/components/mocks/GhostLineMock.astro';
+import AnomalyMock from '@/components/mocks/AnomalyMock.astro';
+import type { DeepDive } from '@/types/landing';
+
+interface Props {
+  dive: DeepDive;
+}
+
+const { dive } = Astro.props;
+
+const mocks = {
+  chat: ChatMock,
+  verify: VerifyMock,
+  ghostline: GhostLineMock,
+  anomaly: AnomalyMock,
+};
+
+const Mock = mocks[dive.mock];
+const mockFirst = dive.mediaSide === 'left';
+const headingId = `${dive.id}-heading`;
+---
+
+<section
+  class="section-y bg-canvas transition-colors duration-300"
+  id={dive.id}
+  aria-labelledby={headingId}
+>
+  <Container size="wide" class="!px-0">
+    <div
+      class="border-y border-hairline overflow-hidden bg-surface-soft/5 grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-hairline"
+    >
+      <!-- Copy -->
+      <div
+        class:list={[
+          'flex flex-col items-start gap-5 p-6 sm:p-8 md:p-12 lg:p-14 justify-center',
+          mockFirst ? 'lg:order-2' : 'lg:order-1',
+        ]}
+        data-reveal-group
+      >
+        <div class="flex items-center gap-3 flex-wrap" data-reveal-item>
+          <span class="font-mono text-xs font-bold text-muted-soft">
+            {dive.index}
+          </span>
+          <Badge variant="emerald">{dive.badge}</Badge>
+        </div>
+
+        <div class="flex flex-col gap-3" data-reveal-item>
+          <span
+            class="font-mono text-[10px] uppercase tracking-[0.2em] text-badge-emerald"
+          >
+            {dive.eyebrow}
+          </span>
+          <h2
+            id={headingId}
+            class="type-display-md leading-[1.15] tracking-tight text-ink"
+          >
+            {dive.heading}
+          </h2>
+        </div>
+
+        <p class="type-body-md text-muted leading-relaxed" data-reveal-item>
+          {dive.body}
+        </p>
+
+        <dl class="flex flex-col gap-4 mt-1">
+          {
+            dive.bullets.map((bullet) => (
+              <div class="flex gap-3.5" data-reveal-item>
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-badge-emerald shrink-0 mt-2"
+                  aria-hidden="true"
+                />
+                <div class="flex flex-col gap-1 min-w-0">
+                  <dt class="type-title-sm text-ink font-semibold">
+                    {bullet.title}
+                  </dt>
+                  <dd class="type-body-sm text-muted leading-relaxed">
+                    {bullet.body}
+                  </dd>
+                </div>
+              </div>
+            ))
+          }
+        </dl>
+
+        {
+          dive.footnote && (
+            <p
+              class="text-xs text-muted-soft leading-relaxed border-t border-hairline/60 pt-4 mt-1"
+              data-reveal-item
+            >
+              {dive.footnote}
+            </p>
+          )
+        }
+      </div>
+
+      <!-- Mock -->
+      <div
+        class:list={[
+          'p-5 sm:p-8 md:p-12 flex items-center justify-center bg-surface-soft/10 reveal reveal-scale-up',
+          mockFirst ? 'lg:order-1' : 'lg:order-2',
+        ]}
+      >
+        <Mock />
+      </div>
+    </div>
+  </Container>
+</section>

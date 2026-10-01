@@ -1,0 +1,34 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { fetchPolicyBySlug } from '@/services/content';
+import { marked } from 'marked';
+
+const policy = await fetchPolicyBySlug('privacy');
+const htmlContent = policy ? await marked.parse(policy.content) : '';
+---
+
+<PageLayout
+  title={policy?.title || 'Privacy Policy & Data Governance'}
+  description="Learn how Trading & Research Wing collects, uses, and protects your personal information and trading credentials on stratai.live."
+  badge="Legal"
+  badgeVariant="default"
+  breadcrumbs={[{ label: 'Privacy Policy', href: '/privacy' }]}
+>
+  <section class="py-16 md:py-20 bg-canvas transition-colors duration-300">
+    <Container size="narrow">
+      <Prose>
+        {
+          htmlContent ? (
+            <div set:html={htmlContent} />
+          ) : (
+            <p class="text-muted-soft type-body-sm">
+              Loading privacy policy...
+            </p>
+          )
+        }
+      </Prose>
+    </Container>
+  </section>
+</PageLayout>

@@ -1,0 +1,47 @@
+---
+import StructuredData from './StructuredData.astro';
+
+interface Props {
+  name?: string;
+  description?: string;
+  price?: string;
+  currency?: string;
+  webPageId?: string;
+  siteUrl?: string;
+}
+
+const {
+  name = 'Strat Ai',
+  description = 'Institutional Quantitative Trading Terminal for Indian Equities and Derivatives markets, featuring multi-variable consensus and stateful agent debates.',
+  price = '0.00',
+  currency = 'INR',
+  webPageId,
+  siteUrl = 'https://www.stratai.live',
+} = Astro.props;
+
+const softwareSchema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': ['SoftwareApplication', 'WebApplication'],
+  '@id': `${siteUrl}/#software`,
+  name: name,
+  description: description,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Windows, macOS, Linux, Web',
+  browserRequirements: 'Requires HTML5 compatible browser',
+  publisher: {
+    '@id': `${siteUrl}/#organization`,
+  },
+  offers: {
+    '@type': 'Offer',
+    price: price,
+    priceCurrency: currency,
+    category: 'Subscription',
+  },
+};
+
+if (webPageId) {
+  softwareSchema['mainEntityOfPage'] = { '@id': webPageId };
+}
+---
+
+<StructuredData data={softwareSchema} />

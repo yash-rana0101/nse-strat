@@ -1,0 +1,32 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  href?: string;
+  class?: string;
+}
+const { icon, title, description, href, class: className } = Astro.props;
+const Component = href ? 'a' : 'div';
+---
+
+<Component
+  href={href}
+  class:list={[
+    'bg-surface-card rounded-lg p-8 flex flex-col gap-3 transition-all duration-200 hover:-translate-y-0.5 h-full no-underline group',
+    className,
+  ]}
+>
+  <div
+    class="w-12 h-12 flex items-center justify-center bg-surface-soft rounded-md text-ink mb-2 shrink-0 group-hover:scale-105 transition-transform"
+  >
+    <Icon name={icon} size={24} />
+  </div>
+  <h3
+    class="type-title-md text-ink group-hover:text-brand-accent transition-colors"
+  >
+    {title}
+  </h3>
+  <p class="type-body-md text-muted">{description}</p>
+</Component>

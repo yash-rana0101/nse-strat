@@ -1,0 +1,9 @@
+dist/
+.astro/
+node_modules/
+.vercel/
+.agents/
+graphify-out/
+.claude/
+package-lock.json
+*.tsbuildinfo

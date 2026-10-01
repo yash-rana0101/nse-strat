@@ -1,0 +1,121 @@
+.copilot-demo .trace-request {
+  font-size: 14px;
+  line-height: 1.5;
+  background: var(--color-surface-soft);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.copilot-demo .tool-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 7px;
+  border: 1px solid var(--demo-border);
+  border-radius: 9px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  background: var(--color-surface-soft);
+}
+.copilot-demo .tool-row[data-state='calling'] {
+  border-color: var(--demo-highlight);
+  background: color-mix(
+    in srgb,
+    var(--demo-highlight) 12%,
+    var(--color-surface-card)
+  );
+  animation: tool-pop 0.4s ease-out both;
+}
+.copilot-demo .tool-feed .tool-row[data-state='done'] {
+  animation: tool-pop 0.4s ease-out both;
+}
+.copilot-demo .tool-copy {
+  min-width: 0;
+}
+.copilot-demo .tool-icon {
+  color: var(--demo-highlight);
+}
+.copilot-demo .tool-row strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-ink);
+}
+.copilot-demo .tool-row code {
+  display: block;
+  font-size: 11px;
+  color: var(--color-body);
+  overflow-wrap: anywhere;
+  margin-top: 3px;
+}
+.copilot-demo .tool-row p {
+  display: none;
+  color: var(--color-body);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.copilot-demo .tool-row[data-state='done'] p {
+  display: block;
+}
+.copilot-demo .tool-state {
+  margin-left: auto;
+  color: var(--demo-highlight);
+}
+.copilot-demo .trace-note {
+  color: var(--color-muted);
+  font-size: 11px;
+  padding: 6px 0;
+}
+.copilot-demo .tool-progress {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 12px 0;
+  background: var(--color-surface-card);
+  color: var(--color-body);
+  font: 10px var(--font-code);
+}
+.copilot-demo .tool-progress > span:last-child {
+  color: var(--demo-highlight);
+}
+@keyframes tool-pop {
+  50% {
+    transform: translateY(-3px) scale(1.015);
+  }
+}
+.copilot-demo .qa-exchange {
+  padding-top: 14px;
+}
+.copilot-demo .qa-user {
+  margin-left: 30px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-hairline);
+  border-radius: 9px 9px 2px 9px;
+  background: var(--color-canvas);
+  font-size: 12px;
+}
+.copilot-demo .qa-answer {
+  padding: 12px;
+  margin-top: 8px;
+  border-left: 2px solid var(--color-brand-accent);
+  color: var(--color-body);
+  background: var(--color-surface-soft);
+  border-radius: 0 8px 8px 0;
+  font-size: 12px;
+  line-height: 1.8;
+  animation: demo-arrive 0.3s ease-out;
+}
+.copilot-demo .qa-answer[data-pending] {
+  color: var(--color-muted);
+}
+@keyframes demo-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

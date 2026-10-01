@@ -1,0 +1,95 @@
+---
+// src/components/ui/ThankYouModal.astro
+import Icon from '@/components/ui/Icon.astro';
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+---
+
+<div
+  id="thank-you-modal"
+  class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4"
+>
+  <div
+    id="thank-you-modal-content"
+    class="bg-surface-card border border-brand-accent/30 rounded-2xl p-8 max-w-md w-full relative shadow-[0_20px_50px_rgba(16,185,129,0.12)] text-center transform scale-95 transition-transform duration-300"
+  >
+    <!-- Close icon -->
+    <button
+      type="button"
+      id="close-thank-you-modal-icon"
+      class="absolute top-4 right-4 text-muted hover:text-ink cursor-pointer transition-colors"
+      aria-label="Close modal"
+    >
+      <Icon name="x" size={20} />
+    </button>
+
+    <div class="flex flex-col items-center gap-6">
+      <!-- Checked Circle badge -->
+      <div
+        class="w-16 h-16 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent rounded-full flex items-center justify-center checkmark-circle-animated"
+      >
+        <Icon name="shield-check" size={32} />
+      </div>
+
+      <div>
+        <Badge variant="emerald" class="mb-2">Congratulations!</Badge>
+        <h3 class="type-title-lg font-bold text-ink">Thank You for Joining!</h3>
+        <p class="type-body-sm text-muted mt-2">
+          You've successfully secured early access to Strat Ai. We registered
+          your account: <span
+            id="modal-user-email"
+            class="font-semibold text-ink"></span>.
+        </p>
+      </div>
+
+      <div
+        class="w-full bg-surface-soft border border-hairline rounded-xl p-4 flex flex-col items-center gap-2"
+      >
+        <span
+          class="text-[10px] font-bold text-muted-soft uppercase tracking-wider"
+          >Your Position in Queue</span
+        >
+        <span
+          class="text-3xl font-display font-extrabold text-brand-accent"
+          id="modal-queue-spot">#1,842</span
+        >
+      </div>
+
+      <Button
+        variant="primary"
+        size="md"
+        id="close-thank-you-modal-btn"
+        class="w-full justify-center !rounded-full mt-2"
+      >
+        Awesome, let's go!
+      </Button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initModalEvents() {
+    const modal = document.getElementById('thank-you-modal');
+    const modalContent = document.getElementById('thank-you-modal-content');
+    const closeIcon = document.getElementById('close-thank-you-modal-icon');
+    const closeBtn = document.getElementById('close-thank-you-modal-btn');
+
+    if (!modal || !modalContent) return;
+
+    function closeModal() {
+      if (modal && modalContent) {
+        modal.classList.add('opacity-0');
+        modalContent.classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    if (closeIcon) closeIcon.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  }
+
+  initModalEvents();
+  document.addEventListener('astro:after-swap', initModalEvents);
+</script>

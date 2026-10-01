@@ -1,0 +1,34 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { fetchPolicyBySlug } from '@/services/content';
+import { marked } from 'marked';
+
+const policy = await fetchPolicyBySlug('disclaimer');
+const htmlContent = policy ? await marked.parse(policy.content) : '';
+---
+
+<PageLayout
+  title={policy?.title || 'Disclaimer & Risk Disclosure'}
+  description="Review important regulatory disclosures, financial risk warnings, SEBI notices, and non-advisory terms governing your use of Strat Ai."
+  badge="Legal"
+  badgeVariant="default"
+  breadcrumbs={[{ label: 'Disclaimer', href: '/disclaimer' }]}
+>
+  <section class="py-16 md:py-20 bg-canvas transition-colors duration-300">
+    <Container size="narrow">
+      <Prose>
+        {
+          htmlContent ? (
+            <div set:html={htmlContent} />
+          ) : (
+            <p class="text-muted-soft type-body-sm">
+              Loading disclaimer policy...
+            </p>
+          )
+        }
+      </Prose>
+    </Container>
+  </section>
+</PageLayout>

@@ -1,0 +1,469 @@
+---
+/**
+ * AI Disclosure Page — Public disclosure of AI usage, models, and limitations.
+ * Directly implements the transparency standards of AI_DISCLOSURE.md & AI_MODEL_GOVERNANCE.md.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Card from '@/components/ui/Card.astro';
+import Icon from '@/components/ui/Icon.astro';
+
+const aiDisclosureSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline:
+    'How Strat AI Uses AI — Public Transparency & Model Governance Disclosure',
+  description:
+    'Plain-language public disclosure explaining what large language models do in Strat AI, structural limits, input data boundaries, router infrastructure, and known limitations.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Trading & Research Wing',
+  },
+};
+---
+
+<PageLayout
+  title="How Strat AI Uses AI — Public AI Transparency & Governance Disclosure"
+  description="Learn exactly what AI models do in Strat AI, structural limits, models and routers used, input data boundaries, and known limitations."
+  badge="AI Governance"
+  badgeVariant="emerald"
+  breadcrumbs={[{ label: 'AI Disclosure', href: '/ai-disclosure' }]}
+  jsonLd={aiDisclosureSchema}
+>
+  <!-- Hero Section -->
+  <section
+    class="py-16 md:py-24 bg-canvas transition-colors duration-300 relative overflow-hidden"
+  >
+    <div class="absolute inset-0 pointer-events-none opacity-40">
+      <div
+        class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.15)_0%,transparent_70%)] blur-[120px]"
+      >
+      </div>
+    </div>
+
+    <Container class="relative z-10">
+      <div
+        class="max-w-[850px] mx-auto text-center flex flex-col items-center gap-5"
+      >
+        <Badge variant="emerald" class="px-4 py-1 text-xs"
+          >Public Transparency Standard</Badge
+        >
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold tracking-tight text-ink leading-[1.08]"
+        >
+          How Strat AI Uses Artificial Intelligence
+        </h1>
+        <p
+          class="type-body-md text-body text-base md:text-lg max-w-[750px] mx-auto leading-relaxed font-normal"
+        >
+          We use large language models to help analyze market trade setups.
+          Since this capability is easily misunderstood, here is exactly what
+          the AI does, what it is given, where its boundaries lie, and where it
+          fails.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 1. What the AI Does -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-t border-hairline transition-colors duration-300"
+  >
+    <Container size="narrow">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center gap-2">
+          <Badge variant="emerald">Section 01</Badge>
+          <span class="text-xs font-mono text-muted uppercase tracking-wider"
+            >Research Pipeline</span
+          >
+        </div>
+        <h2 class="type-display-sm text-ink font-display font-bold">
+          1. What the AI does
+        </h2>
+        <p class="type-body-md text-muted leading-relaxed">
+          The AI evaluates one instrument at a time and argues about whether a
+          trade setup is worth taking. Concretely, when you run an analysis the
+          model:
+        </p>
+
+        <div class="grid grid-cols-1 gap-4 mt-2">
+          {
+            [
+              {
+                step: '01',
+                title: 'Fetches Market Data',
+                desc: 'Calls quantitative tools to retrieve real market data: candles, deterministic indicators, volume profile, option chain metrics, order-flow proxies, and recent news.',
+              },
+              {
+                step: '02',
+                title: 'Identifies Data Gaps',
+                desc: 'Reads the returned values and notes where data is missing or incomplete, explicitly reporting unavailable feeds.',
+              },
+              {
+                step: '03',
+                title: 'Reasons in the Open',
+                desc: 'Every tool call, argument passed, and numeric value returned is streamed live to your screen as it happens.',
+              },
+              {
+                step: '04',
+                title: 'Proposes Setup or Declines',
+                desc: 'Either proposes a bracket (direction, entry, stop loss, take profit, holding period) or declines to recommend.',
+              },
+              {
+                step: '05',
+                title: 'Adversarial Self-Critique',
+                desc: 'A separate Bear Agent pass attacks the proposal. Objections are included directly in the final output rather than discarded.',
+              },
+            ].map((item) => (
+              <div class="p-5 rounded-xl bg-surface-card border border-hairline flex items-start gap-4">
+                <span class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-brand-accent/15 text-brand-accent shrink-0 mt-0.5">
+                  {item.step}
+                </span>
+                <div>
+                  <h3 class="type-title-sm text-ink font-semibold">
+                    {item.title}
+                  </h3>
+                  <p class="type-body-sm text-muted mt-1 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <p
+          class="type-body-sm text-ink font-medium mt-2 p-4 rounded-xl bg-surface-soft border border-hairline/60"
+        >
+          <strong>Key Distinction:</strong> The output you receive is <em
+            >research</em
+          > — an opinion about an instrument with reasoning attached — not an execution
+          command or personal advice.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. What the AI is NOT Allowed to Do -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-t border-hairline transition-colors duration-300"
+  >
+    <Container size="narrow">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center gap-2">
+          <Badge variant="violet">Section 02</Badge>
+          <span class="text-xs font-mono text-muted uppercase tracking-wider"
+            >Structural Limits</span
+          >
+        </div>
+        <h2 class="type-display-sm text-ink font-display font-bold">
+          2. What the AI is not allowed to do
+        </h2>
+        <p class="type-body-md text-muted leading-relaxed">
+          These are hard structural constraints enforced by code, not soft
+          policies:
+        </p>
+
+        <div class="grid grid-cols-1 gap-6 mt-2">
+          <Card variant="feature" padding="md" class="flex flex-col gap-3">
+            <h3
+              class="type-title-sm text-ink font-bold flex items-center gap-2"
+            >
+              <Icon name="shield-check" size={18} class="text-badge-emerald" /> It
+              cannot place, modify, or cancel an order
+            </h3>
+            <p class="type-body-sm text-muted leading-relaxed">
+              No capability to reach a broker order system exists anywhere in
+              the product. The internal broker interface is strictly read-only
+              and contains no order methods. Paper trading runs entirely in
+              local memory and never communicates with an external broker.
+            </p>
+          </Card>
+
+          <Card variant="feature" padding="md" class="flex flex-col gap-3">
+            <h3
+              class="type-title-sm text-ink font-bold flex items-center gap-2"
+            >
+              <Icon name="zap" size={18} class="text-badge-violet" /> It cannot give
+              you personal financial advice
+            </h3>
+            <p class="type-body-sm text-muted leading-relaxed">
+              Strat AI does not tailor recommendations to your capital, income,
+              net worth, portfolio, or position size. If asked a personalized
+              question ("how much of my capital should I put in this?"), a
+              deterministic pre-LLM validator automatically declines and
+              redirects to impersonal analysis of the instrument.
+            </p>
+          </Card>
+
+          <Card variant="feature" padding="md" class="flex flex-col gap-3">
+            <h3
+              class="type-title-sm text-ink font-bold flex items-center gap-2"
+            >
+              <Icon name="layers" size={18} class="text-badge-orange" /> It cannot
+              override hard risk validation rules
+            </h3>
+            <p class="type-body-sm text-muted leading-relaxed">
+              A proposed trade whose stop loss is closer than 1.5× the
+              instrument's 14-period ATR, or whose reward-to-risk ratio falls
+              below the profile floor (1:1.3 intraday / 1:2 swing), is
+              automatically rejected by a deterministic validator regardless of
+              the model's confidence.
+            </p>
+          </Card>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. What it is Given as Input -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-t border-hairline transition-colors duration-300"
+  >
+    <Container size="narrow">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center gap-2">
+          <Badge variant="orange">Section 03</Badge>
+          <span class="text-xs font-mono text-muted uppercase tracking-wider"
+            >Data Boundaries</span
+          >
+        </div>
+        <h2 class="type-display-sm text-ink font-display font-bold">
+          3. What the AI is given as input
+        </h2>
+
+        <div
+          class="border border-hairline rounded-xl overflow-hidden mt-2 bg-surface-card"
+        >
+          <table class="w-full text-left text-xs">
+            <thead class="bg-surface-soft border-b border-hairline">
+              <tr>
+                <th class="p-3.5 font-semibold text-ink">Input Data</th>
+                <th class="p-3.5 font-semibold text-ink">Source & Processing</th
+                >
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline text-muted">
+              <tr>
+                <td class="p-3.5 font-medium text-ink"
+                  >Price & Volume History</td
+                >
+                <td class="p-3.5"
+                  >Zerodha Kite Connect (NSE/NFO), stored in local time-series
+                  database.</td
+                >
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink">Live Ticks</td>
+                <td class="p-3.5"
+                  >Zerodha Kite Connect binary WebSocket stream.</td
+                >
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink">Computed Indicators</td>
+                <td class="p-3.5"
+                  >Deterministic pure functions (RSI, MACD, EMA, ATR, ADX, VWAP,
+                  Volume Profile). Not AI-generated.</td
+                >
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink">Options Chain Data</td>
+                <td class="p-3.5"
+                  >Open interest, implied volatility, PCR, Max Pain, and strike
+                  buildup metrics.</td
+                >
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink">Recent News Headlines</td
+                >
+                <td class="p-3.5"
+                  >Third-party financial news feeds classified for market
+                  sentiment.</td
+                >
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="p-5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300 leading-relaxed"
+        >
+          <strong>What it is NEVER given:</strong> Anything about you. Not your capital,
+          your holdings, your other positions, your income, your age, your risk tolerance,
+          or your personal trading history. That information is never sent to model
+          endpoints.
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 4. Model Inventory & Routers -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-t border-hairline transition-colors duration-300"
+  >
+    <Container size="narrow">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center gap-2">
+          <Badge variant="pink">Section 04</Badge>
+          <span class="text-xs font-mono text-muted uppercase tracking-wider"
+            >Model Governance</span
+          >
+        </div>
+        <h2 class="type-display-sm text-ink font-display font-bold">
+          4. Which models we use
+        </h2>
+        <p class="type-body-md text-muted leading-relaxed">
+          Models are configurable per deployment. The default models and routing
+          endpoints are:
+        </p>
+
+        <div
+          class="border border-hairline rounded-xl overflow-hidden mt-2 bg-surface-card"
+        >
+          <table class="w-full text-left text-xs">
+            <thead class="bg-surface-soft border-b border-hairline">
+              <tr>
+                <th class="p-3.5 font-semibold text-ink">Role</th>
+                <th class="p-3.5 font-semibold text-ink">Default Model</th>
+                <th class="p-3.5 font-semibold text-ink">Router Endpoint</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline text-muted">
+              <tr>
+                <td class="p-3.5 font-medium text-ink"
+                  >Main Research Loop (FIND)</td
+                >
+                <td class="p-3.5 font-mono text-xs text-ink">openai/gpt-4o</td>
+                <td class="p-3.5">OpenRouter</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink"
+                  >DEBATE Roles (Bull / Bear / Judge)</td
+                >
+                <td class="p-3.5 font-mono text-xs text-ink"
+                  >openai/gpt-4o / gemini-2.5-flash</td
+                >
+                <td class="p-3.5">OpenRouter</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink"
+                  >Market Anomaly Commentary</td
+                >
+                <td class="p-3.5 font-mono text-xs text-ink"
+                  >deepseek-ai/DeepSeek-V3-0324</td
+                >
+                <td class="p-3.5">freemodel.dev</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-medium text-ink"
+                  >News Sentiment Scoring</td
+                >
+                <td class="p-3.5 font-mono text-xs text-ink"
+                  >deepseek-ai/DeepSeek-V3-0324</td
+                >
+                <td class="p-3.5">freemodel.dev</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="type-body-xs text-muted leading-relaxed">
+          <strong>Router Disclosure:</strong> Both OpenRouter and freemodel.dev are
+          OpenAI-compatible <em>routers</em> rather than the original labs running
+          the models. They forward requests to inference hosts. We do not train these
+          base models; our proprietary intellectual property is in the quantitative
+          tooling, prompt composition, deterministic risk verification, and guardrail
+          engines.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 5. Known Limitations -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-t border-hairline transition-colors duration-300"
+  >
+    <Container size="narrow">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center gap-2">
+          <Badge variant="emerald">Section 05</Badge>
+          <span class="text-xs font-mono text-muted uppercase tracking-wider"
+            >Limitations</span
+          >
+        </div>
+        <h2 class="type-display-sm text-ink font-display font-bold">
+          5. Limitations & Probabilistic Nature
+        </h2>
+        <p class="type-body-md text-muted leading-relaxed">
+          Language model reasoning is probabilistic. It is not a prediction of
+          the future, and it carries no performance guarantees:
+        </p>
+
+        <ul class="list-none space-y-3 text-xs text-muted leading-relaxed">
+          <li
+            class="p-4 rounded-xl bg-surface-card border border-hairline flex items-start gap-3"
+          >
+            <span class="text-brand-accent font-bold mt-0.5">•</span>
+            <span
+              ><strong>Confident errors:</strong> Language models can sound articulate
+              while drawing incorrect conclusions. Confidence in writing carries zero
+              correlation with accuracy.</span
+            >
+          </li>
+          <li
+            class="p-4 rounded-xl bg-surface-card border border-hairline flex items-start gap-3"
+          >
+            <span class="text-brand-accent font-bold mt-0.5">•</span>
+            <span
+              ><strong>Scope bounded to provided data:</strong> The model only evaluates
+              market indicators and headlines passed to it. It has no visibility into
+              upcoming corporate actions or unannounced policy shifts.</span
+            >
+          </li>
+          <li
+            class="p-4 rounded-xl bg-surface-card border border-hairline flex items-start gap-3"
+          >
+            <span class="text-brand-accent font-bold mt-0.5">•</span>
+            <span
+              ><strong>Past patterns do not guarantee outcomes:</strong> Market regimes
+              shift. Historical setups do not guarantee future price action.</span
+            >
+          </li>
+          <li
+            class="p-4 rounded-xl bg-surface-card border border-hairline flex items-start gap-3"
+          >
+            <span class="text-brand-accent font-bold mt-0.5">•</span>
+            <span
+              ><strong>Missing data is reported, not guessed:</strong> If open interest
+              or news feeds are offline, the system marks them unavailable rather
+              than substituting synthetic numbers.</span
+            >
+          </li>
+        </ul>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 6. Non-Advisory Disclaimer -->
+  <section
+    class="py-16 bg-surface-soft/10 border-t border-hairline transition-colors duration-300"
+  >
+    <Container size="narrow">
+      <div
+        class="p-6 rounded-2xl bg-surface-card border border-hairline flex flex-col gap-3 text-center"
+      >
+        <h3 class="type-title-md text-ink font-bold">
+          Regulatory & Risk Notice
+        </h3>
+        <p class="type-body-xs text-muted leading-relaxed">
+          Strat AI is a quantitative market research and decision support
+          terminal. It does not execute trades, manage funds, or offer
+          personalized investment advice. Trading in securities, futures, and
+          options involves substantial risk of loss, including loss exceeding
+          initial capital. Past performance is not indicative of future returns.
+        </p>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

@@ -1,0 +1,186 @@
+---
+import Logo from '@/components/ui/Logo.astro';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import ThemeToggle from '@/components/navigation/ThemeToggle.astro';
+import { NAV_ITEMS } from '@/constants/navigation';
+
+const pathname = Astro.url.pathname;
+const isHomepage = pathname === '/' || pathname === '';
+const logoHref = isHomepage ? '#hero' : '/';
+---
+
+<div
+  id="dynamic-island-wrapper"
+  class="fixed top-0 left-0 right-0 z-50 w-full pointer-events-none flex justify-center transition-all duration-500 ease-out px-4 sm:px-8 pt-4 md:pt-3"
+>
+  <div
+    id="dynamic-island"
+    class="pointer-events-auto w-full max-w-7xl !bg-transparent !border-none !border-transparent !shadow-none !backdrop-blur-none !rounded-none transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] md:overflow-visible overflow-hidden max-h-[56px] md:max-h-none animate-island-entry is-at-top"
+  >
+    <div
+      class="h-[54px] flex items-center justify-between pl-2 pr-2 md:pl-4 md:pr-2 transition-all duration-300"
+    >
+      <!-- Brand -->
+      <a
+        href={logoHref}
+        class="flex items-center gap-3 no-underline text-ink font-semibold text-sm hover:opacity-80 transition-opacity animate-nav-item"
+        style="animation-delay: 0.2s;"
+        aria-label="Strat Ai"
+      >
+        <Logo asSpan />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center" aria-label="Desktop navigation">
+        <ul
+          id="desktop-nav-pill"
+          class="desktop-nav-pill flex items-center gap-1 list-none !bg-transparent p-1 !border-none !border-transparent rounded-full transition-all duration-300"
+          role="list"
+        >
+          {
+            NAV_ITEMS.map((item, index) => {
+              const delayTime = `${0.3 + index * 0.08}s`;
+              return (
+                <li
+                  class="relative group animate-nav-item"
+                  style={`animation-delay: ${delayTime};`}
+                >
+                  <a
+                    href={item.href}
+                    class="island-nav-link flex items-center gap-1 px-3.5 py-1.5 no-underline text-xs font-medium rounded-full transition-all duration-200 text-muted hover:text-ink"
+                  >
+                    {item.label}
+                    {item.dropdownItems && (
+                      <Icon
+                        name="chevron-down"
+                        size={10}
+                        class="text-muted-soft group-hover:text-ink group-hover:rotate-180 transition-transform duration-300 mt-0.5"
+                      />
+                    )}
+                  </a>
+                  {item.dropdownItems && (
+                    <div class="absolute top-[80%] left-1/2 -translate-x-1/2 pt-[18px] w-[320px] opacity-0 pointer-events-none translate-y-2 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 transition-all duration-300 z-50">
+                      <div class="bg-canvas/95 backdrop-blur-xl border border-hairline rounded-2xl shadow-2xl p-3 flex flex-col gap-1">
+                        {item.dropdownItems.map((subItem) => (
+                          <a
+                            href={subItem.href}
+                            class="flex flex-col text-left p-2.5 rounded-xl hover:bg-surface-soft/60 transition-colors duration-200 no-underline group/item"
+                          >
+                            <span class="text-ink font-semibold text-[13px] group-hover/item:text-brand-accent transition-colors duration-200">
+                              {subItem.label}
+                            </span>
+                            <span class="text-muted text-[11px] leading-normal mt-0.5 font-normal">
+                              {subItem.desc}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+
+      <!-- Right Side -->
+      <div
+        class="flex items-center gap-2 animate-nav-item"
+        style={`animation-delay: ${0.3 + NAV_ITEMS.length * 0.08}s;`}
+      >
+        <div class="hidden md:block">
+          <ThemeToggle
+            class="!border-none !bg-transparent !w-8 !h-8 hover:!bg-surface-soft"
+          />
+        </div>
+        <span class="hidden md:block w-[1px] h-4 bg-hairline"></span>
+        <Button
+          variant="primary"
+          href="/waitlist"
+          class="island-cta !hidden md:!inline-flex !h-[38px] !py-0 !px-4 !rounded-full !text-xs items-center !gap-1.5 font-semibold"
+        >
+          <Icon name="sparkles" size={13} />
+          <span class="hidden sm:inline">Join Waitlist</span>
+          <span class="sm:hidden">Join</span>
+        </Button>
+        <button
+          class="md:hidden flex items-center justify-center w-[38px] h-[38px] border-none bg-transparent text-ink cursor-pointer rounded-full hover:bg-surface-soft transition-colors"
+          id="island-mobile-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          type="button"
+        >
+          <span class="mobile-menu-icon flex items-center justify-center"
+            ><Icon name="menu" size={18} /></span
+          >
+          <span class="mobile-close-icon hidden"
+            ><Icon name="x" size={18} /></span
+          >
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Expanded Menu -->
+    <div
+      id="island-expanded"
+      class="max-h-0 opacity-0 transition-all duration-400 ease-in-out border-t border-transparent overflow-y-auto"
+      aria-hidden="true"
+    >
+      <div class="p-6 flex flex-col gap-5">
+        <nav aria-label="Mobile navigation">
+          <div class="flex flex-col gap-5">
+            {
+              NAV_ITEMS.map((item) => (
+                <div class="flex flex-col gap-1.5">
+                  <span class="text-xs font-bold text-ink/70 dark:text-muted-soft uppercase tracking-wider px-3">
+                    {item.label}
+                  </span>
+                  <ul class="list-none flex flex-col gap-0.5" role="list">
+                    {item.dropdownItems ? (
+                      item.dropdownItems.map((subItem) => (
+                        <li>
+                          <a
+                            href={subItem.href}
+                            class="mobile-nav-link flex flex-col px-3 py-2.5 no-underline rounded-xl transition-colors duration-200 group/mobile-item hover:bg-brand-accent/10"
+                          >
+                            <span class="text-sm font-semibold text-ink group-hover/mobile-item:text-brand-accent transition-colors duration-200">
+                              {subItem.label}
+                            </span>
+                            <span class="text-[12px] text-body font-normal mt-0.5 group-hover/mobile-item:text-ink transition-colors duration-200">
+                              {subItem.desc}
+                            </span>
+                          </a>
+                        </li>
+                      ))
+                    ) : (
+                      <li>
+                        <a
+                          href={item.href}
+                          class="mobile-nav-link block px-3 py-2.5 no-underline text-sm font-semibold text-ink hover:text-brand-accent rounded-xl transition-colors duration-200 hover:bg-brand-accent/10"
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </nav>
+        <div
+          class="pt-4 border-t border-hairline-soft flex items-center justify-between text-ink font-medium text-sm"
+        >
+          <span>Appearance</span>
+          <ThemeToggle
+            class="!border-none !bg-transparent !w-8 !h-8 hover:!bg-brand-accent/10"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./dynamic-island.ts"></script>

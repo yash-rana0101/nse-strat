@@ -1,0 +1,82 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Read the SVG at build time
+const svgPath = path.resolve('public/404.svg');
+const svgContent = fs.readFileSync(svgPath, 'utf-8');
+---
+
+<div
+  class="error-illustration-wrapper w-full max-w-[500px] mx-auto select-none opacity-90 hover:opacity-100 transition-opacity duration-300"
+>
+  <Fragment set:html={svgContent} />
+</div>
+
+<style is:global>
+  /* 1. Hide the background blobbish simple group */
+  #freepik--background-simple--inject-73 {
+    display: none !important;
+  }
+
+  /* 2. Theme Adaptation styles for Dark mode (Default) */
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill: rgb(38, 50, 56)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill:rgb(38,50,56)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [fill='rgb(38, 50, 56)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers [fill='#263238'] {
+    fill: var(--color-ink) !important;
+    transition: fill 0.3s ease;
+  }
+
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='stroke: rgb(38, 50, 56)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='stroke:rgb(38,50,56)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [stroke='rgb(38, 50, 56)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [stroke='#263238'] {
+    stroke: var(--color-ink) !important;
+    transition: stroke 0.3s ease;
+  }
+
+  /* Fill inner bodies and spaces with canvas bg for proper contrast */
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill: rgb(255, 255, 255)'],
+  #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill:rgb(255,255,255)'] {
+    fill: var(--color-canvas) !important;
+    transition: fill 0.3s ease;
+  }
+
+  /* Theme Adaptation styles for Light Mode */
+  html[data-theme='light']
+    #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill: rgb(38, 50, 56)'],
+  html[data-theme='light']
+    #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill:rgb(38,50,56)'] {
+    fill: #263238 !important;
+  }
+
+  html[data-theme='light']
+    #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='stroke: rgb(38, 50, 56)'],
+  html[data-theme='light']
+    #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='stroke:rgb(38,50,56)'] {
+    stroke: #263238 !important;
+  }
+
+  html[data-theme='light']
+    #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill: rgb(255, 255, 255)'],
+  html[data-theme='light']
+    #freepik_stories-404-error-with-people-holding-the-numbers
+    [style*='fill:rgb(255,255,255)'] {
+    fill: #ffffff !important;
+  }
+</style>

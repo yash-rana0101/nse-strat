@@ -1,0 +1,75 @@
+---
+/**
+ * BlogCard — Reusable blog post card for listing pages.
+ */
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  slug: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  date,
+  category,
+  slug,
+  class: className,
+} = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const categoryVariants: Record<string, string> = {
+  'AI & Machine Learning': 'bg-badge-violet/15 text-badge-violet',
+  'Market Research': 'bg-badge-orange/15 text-badge-orange',
+  'Product Updates': 'bg-badge-pink/15 text-badge-pink',
+  'Trading Insights': 'bg-badge-emerald/15 text-badge-emerald',
+  Engineering: 'bg-brand-accent/15 text-brand-accent',
+};
+
+const badgeClass = categoryVariants[category] || 'bg-surface-card text-muted';
+---
+
+<a
+  href={`/blog/${slug}`}
+  class:list={[
+    'group flex flex-col gap-4 p-6 md:p-8 no-underline hover:bg-surface-soft/10 transition-colors duration-300 h-full',
+    className,
+  ]}
+>
+  <div class="flex items-center gap-3">
+    <span
+      class:list={[
+        'inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium whitespace-nowrap',
+        badgeClass,
+      ]}
+    >
+      {category}
+    </span>
+    <span class="type-body-sm text-muted-soft">{formattedDate}</span>
+  </div>
+
+  <h3
+    class="type-title-lg text-ink group-hover:text-brand-accent transition-colors duration-200 leading-tight"
+  >
+    {title}
+  </h3>
+
+  <p class="type-body-sm text-muted leading-relaxed line-clamp-3">
+    {description}
+  </p>
+
+  <span
+    class="type-body-sm text-muted-soft font-medium group-hover:text-ink transition-colors duration-200 mt-auto"
+  >
+    Read more →
+  </span>
+</a>

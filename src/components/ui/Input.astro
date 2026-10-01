@@ -1,0 +1,40 @@
+---
+// src/components/ui/Input.astro
+interface Props {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  placeholder?: string;
+  name?: string;
+  id?: string;
+  required?: boolean;
+  value?: string;
+  class?: string;
+  disabled?: boolean;
+}
+
+const {
+  type = 'text',
+  placeholder,
+  name,
+  id,
+  required = false,
+  value,
+  class: className,
+  disabled = false,
+  ...rest
+} = Astro.props;
+---
+
+<input
+  type={type}
+  placeholder={placeholder}
+  name={name}
+  id={id}
+  required={required}
+  value={value}
+  disabled={disabled}
+  class:list={[
+    'w-full px-4 py-3 bg-surface-card border border-hairline rounded-lg text-ink placeholder:text-muted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-body',
+    className,
+  ]}
+  {...rest}
+/>

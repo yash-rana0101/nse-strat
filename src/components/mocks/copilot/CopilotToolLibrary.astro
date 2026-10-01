@@ -1,0 +1,47 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { toolLibrary, graphTools } from '@/content/landing/copilotTools';
+---
+
+<details class="tool-library">
+  <summary>
+    <span class="library-more"
+      >+{toolLibrary.length - graphTools.length} more tools <Icon
+        name="chevron-down"
+        size={15}
+      /></span
+    >
+    <span class="library-total">{toolLibrary.length} in the toolkit</span>
+  </summary>
+  <p class="library-note">
+    Three tools are shown above. Explore the full registry: 16 analysis tools
+    and 2 controls. This demo replays the 11 calls from the product example.
+  </p>
+  <ul class="library-list" aria-label="All 18 Co-Pilot tools">
+    {
+      toolLibrary.map((tool, index) => (
+        <li>
+          <>
+            <span class="library-number">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <>
+                <strong>{tool.label}</strong>
+                <code>{tool.name}</code>
+                <small>
+                  {index < graphTools.length ? 'Shown in diagram' : tool.scope}
+                </small>
+              </>
+            </div>
+          </>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="library-note">
+    Bindings depend on the workspace and mode. VERIFY uses read-only tools;
+    options analytics is limited to F&O / index workspaces. No control tool is
+    executed in this demo.
+  </p>
+</details>

@@ -1,0 +1,149 @@
+---
+/**
+ * Dedicated Pricing Page.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import PricingSection from '@/components/sections/Pricing.astro';
+
+const faqs = [
+  {
+    q: 'How do credits work on Strat AI?',
+    a: 'Each plan provides a set number of Strat AI compute credits. Credits are consumed when running multi-step FIND scans, pre-trade VERIFY risk audits, Multi-Agent DEBATE consensus loops, or market anomaly commentary runs.',
+  },
+  {
+    q: 'What happens if I run out of credits?',
+    a: 'With Pro and Maxx plans, credit top-ups are enabled. You can purchase top-up credits directly within your workspace without upgrading your main subscription tier.',
+  },
+  {
+    q: 'What makes Strat AI different from typical indicator platforms?',
+    a: 'Strat AI provides an active pre-trade risk co-pilot. It stress-tests setups before entry against a 1.5× ATR stop floor (VERIFY mode) and rejects failures with a machine-readable reason tag, projects forward price paths from four selectable models, decodes F&O options chains, and is permitted to reach a HOLD rather than manufacture a directional call.',
+  },
+  {
+    q: 'What is your refund policy?',
+    a: 'We offer a full 7-day refund policy under our standard cooling-off terms, provided you have not consumed more than 2 compute credits or run extensive historical database queries.',
+  },
+];
+
+const pricingOffersSchema = {
+  '@type': 'Product',
+  name: 'Strat AI Subscription Plans',
+  description:
+    'Credit-based subscription packages for running quantitative model calculations and analytical queries on Strat AI.',
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'INR',
+    lowPrice: '3000',
+    highPrice: '10000',
+    offerCount: '3',
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Basic Plan',
+        price: '3000',
+        priceCurrency: 'INR',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: '3000',
+          priceCurrency: 'INR',
+          referenceQuantity: {
+            '@type': 'QuantitativeValue',
+            value: '1',
+            unitCode: 'MON',
+          },
+        },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Pro Plan',
+        price: '6000',
+        priceCurrency: 'INR',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: '6000',
+          priceCurrency: 'INR',
+          referenceQuantity: {
+            '@type': 'QuantitativeValue',
+            value: '1',
+            unitCode: 'MON',
+          },
+        },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Maxx Plan',
+        price: '10000',
+        priceCurrency: 'INR',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: '10000',
+          priceCurrency: 'INR',
+          referenceQuantity: {
+            '@type': 'QuantitativeValue',
+            value: '1',
+            unitCode: 'MON',
+          },
+        },
+      },
+    ],
+  },
+};
+---
+
+<PageLayout
+  title="Pricing & Plans — Strat Ai"
+  description="Explore flexible, credit-based subscription plans tailored for professional options, futures, and intraday traders on the Strat Ai terminal."
+  badge="Pricing"
+  badgeVariant="emerald"
+  breadcrumbs={[{ label: 'Pricing', href: '/pricing' }]}
+  ogType="product"
+  jsonLd={pricingOffersSchema}
+  markdownHref="/pricing.md"
+>
+  <!-- Main Pricing Section -->
+  <PricingSection />
+
+  <!-- Pricing Details / FAQ Section -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-t border-hairline/80 transition-colors duration-300"
+  >
+    <Container>
+      <div class="max-w-[800px] mx-auto text-center mb-12">
+        <Badge variant="default" class="mb-4">FAQs</Badge>
+        <h2
+          class="type-display-lg leading-[1.1] tracking-tight text-ink font-bold"
+        >
+          Pricing & Plan Questions
+        </h2>
+      </div>
+
+      <div
+        class="max-w-[800px] mx-auto flex flex-col divide-y divide-hairline border-y border-hairline"
+      >
+        {
+          faqs.map((faq) => (
+            <details class="group">
+              <summary class="flex items-center justify-between cursor-pointer py-5 px-2 list-none [&::-webkit-details-marker]:hidden">
+                <span class="type-title-sm text-ink pr-4">{faq.q}</span>
+                <span class="w-6 h-6 flex items-center justify-center shrink-0 text-muted group-open:rotate-45 transition-transform duration-300">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path
+                      d="M7 1v12M1 7h12"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+              </summary>
+              <div class="pb-5 px-2 pr-12">
+                <p class="type-body-md text-muted leading-relaxed">{faq.a}</p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+</PageLayout>

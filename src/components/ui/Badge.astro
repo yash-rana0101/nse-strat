@@ -1,0 +1,21 @@
+---
+interface Props {
+  variant?: 'default' | 'orange' | 'pink' | 'violet' | 'emerald' | 'accent';
+  class?: string;
+}
+const { variant = 'default', class: className } = Astro.props;
+const baseClass =
+  'inline-flex items-center gap-1.5 font-body text-[13px] font-medium leading-relaxed px-3 py-1 rounded-full whitespace-nowrap w-fit';
+const variantClasses = {
+  default: 'bg-surface-card text-muted',
+  orange: 'bg-badge-orange/15 text-badge-orange',
+  pink: 'bg-badge-pink/15 text-badge-pink',
+  violet: 'bg-badge-violet/15 text-badge-violet',
+  emerald: 'bg-badge-emerald/15 text-badge-emerald',
+  accent: 'bg-brand-accent/15 text-brand-accent',
+};
+---
+
+<span class:list={[baseClass, variantClasses[variant], className]}>
+  <slot />
+</span>

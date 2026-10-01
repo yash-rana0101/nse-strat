@@ -1,0 +1,67 @@
+.copilot-demo[data-running] .wire {
+  transition: stroke 0.2s;
+}
+.copilot-demo[data-phase='context'] .wire-context,
+.copilot-demo[data-phase='select'] .wire-agent,
+.copilot-demo[data-phase='tools'] .wire-tools,
+.copilot-demo[data-phase='data'] .wire-data,
+.copilot-demo[data-phase='data'] .wire-return,
+.copilot-demo[data-phase='reason'] .wire-reason {
+  stroke: var(--demo-highlight);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 7;
+  animation: signal-flow 0.7s linear infinite;
+}
+.copilot-demo[data-phase='data'] .wire-data {
+  animation-direction: reverse;
+}
+.copilot-demo[data-phase='context'] .node-model,
+.copilot-demo[data-phase='select'] .node-agent,
+.copilot-demo[data-phase='tools'] .node-tool,
+.copilot-demo[data-phase='data'] .node-backend,
+.copilot-demo[data-phase='reason'] .node-model,
+.copilot-demo[data-phase='answer'] .node-model {
+  z-index: 2;
+  border-color: var(--demo-highlight);
+  box-shadow:
+    0 8px 28px color-mix(in srgb, var(--demo-highlight) 22%, transparent),
+    inset 0 0 0 1px var(--demo-highlight);
+  background: color-mix(
+    in srgb,
+    var(--demo-highlight) 14%,
+    var(--color-surface-card)
+  );
+  animation: node-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.copilot-demo[data-phase='tools'] .tool-structure {
+  animation-delay: 0.12s;
+}
+.copilot-demo[data-phase='tools'] .tool-risk {
+  animation-delay: 0.24s;
+}
+@keyframes node-pop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  55% {
+    transform: translateY(-7px) scale(1.08);
+  }
+  100% {
+    transform: translateY(-4px) scale(1.04);
+  }
+}
+@keyframes signal-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+@keyframes demo-pulse {
+  to {
+    opacity: 0.5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .copilot-demo .graph-node {
+    transform: none !important;
+  }
+}

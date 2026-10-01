@@ -1,0 +1,65 @@
+---
+import StructuredData from './StructuredData.astro';
+
+interface Props {
+  siteUrl?: string;
+}
+
+const { siteUrl = 'https://www.stratai.live' } = Astro.props;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: 'Strat Ai',
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    '@id': `${siteUrl}/#logo`,
+    url: `${siteUrl}/strat.svg`,
+    caption: 'Strat Ai Logo',
+  },
+  alternateName: ['StratAI', 'Strat AI Terminal', 'stratai.live'],
+  legalName: 'Trading & Research Wing',
+  description:
+    'AI-powered quantitative trading intelligence platform for Indian stock & F&O markets.',
+  foundingDate: '2026',
+  // Country-level address only: no public registered street address is published.
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IN',
+  },
+  sameAs: [
+    'https://x.com/thestratai',
+    'https://github.com/thestratai',
+    'https://linkedin.com/company/thestratai',
+    'https://instagram.com/thestratai',
+    'https://www.tradingrw.com/',
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Trading & Research Wing',
+    url: 'https://www.tradingrw.com/',
+  },
+  knowsAbout: [
+    'Artificial Intelligence',
+    'Financial Markets',
+    'Trading Intelligence',
+    'Indian Stock Market',
+    'Quantitative Research',
+    'NSE India',
+    'Futures & Options',
+    'Technical Analysis',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'support@stratai.live',
+    contactType: 'customer service',
+    url: 'https://www.stratai.live/contact',
+    areaServed: 'IN',
+    availableLanguage: ['en'],
+  },
+};
+---
+
+<StructuredData data={orgSchema} />

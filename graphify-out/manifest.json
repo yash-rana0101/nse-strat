@@ -1,0 +1,362 @@
+{
+  "D:\\projects\\strat\\eslint.config.mjs": {
+    "mtime": 1779354429.36459,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\next.config.ts": {
+    "mtime": 1780075503.57225,
+    "ast_hash": "3bd63cfc59ec207d56c0e04d3942e5ed",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\package.json": {
+    "mtime": 1779636537.9309046,
+    "ast_hash": "8d7b7786a2021c8c1cf00aadc04c5d16",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\postcss.config.mjs": {
+    "mtime": 1779354429.398798,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\tsconfig.json": {
+    "mtime": 1779354429.8938365,
+    "ast_hash": "02fc19ad21338c2ab820a70136310db4",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\.vscode\\settings.json": {
+    "mtime": 1779635506.4631114,
+    "ast_hash": "73792b9af3fc811b105441cc773526b1",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\layout.tsx": {
+    "mtime": 1780077058.183646,
+    "ast_hash": "c3106196a1d23881ff59075203be8a2d",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\page.tsx": {
+    "mtime": 1779553427.6485991,
+    "ast_hash": "52d05c8e1b31752155bc895f108a7103",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\about\\page.tsx": {
+    "mtime": 1780075837.3372257,
+    "ast_hash": "3de208325ae0668aaddadb9d7fb99241",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\api-reference\\page.tsx": {
+    "mtime": 1779630398.4714878,
+    "ast_hash": "5e815d1e8798a41724e0d5e5fa77b95e",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\blog\\page.tsx": {
+    "mtime": 1779636537.8948948,
+    "ast_hash": "ac40bb75cd9267beef87ea083c42a239",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\blog\\components\\BlogGrid.tsx": {
+    "mtime": 1779552991.9111168,
+    "ast_hash": "8f7b2d389fbd99812883add35599476a",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\blog\\components\\BlogHero.tsx": {
+    "mtime": 1779552969.6188898,
+    "ast_hash": "dc4b51f3a6be870301cb8cd01574d6e5",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\blog\\components\\CategoryFilter.tsx": {
+    "mtime": 1779552983.700537,
+    "ast_hash": "a00880193b41056b08635ecbd7ef0825",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\blog\\components\\FeaturedPost.tsx": {
+    "mtime": 1779552977.3025672,
+    "ast_hash": "32a7e3da8e2ebc10655099b2fa6e55d1",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\careers\\page.tsx": {
+    "mtime": 1779636537.898895,
+    "ast_hash": "1f17eaefdb46881c54d76d17721771c5",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\changelog\\page.tsx": {
+    "mtime": 1779636537.9008937,
+    "ast_hash": "9eb14d2b63aceebb40ce6f0c6365b2e5",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\effects\\AnimateOnScroll.tsx": {
+    "mtime": 1779357162.5395691,
+    "ast_hash": "7778193e0ea3d1f16e81fe35b5f217e1",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\effects\\DarkVeil.tsx": {
+    "mtime": 1780078045.8441975,
+    "ast_hash": "da8b116811a021cc8cc0db3968fd3d84",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\layout\\Footer.tsx": {
+    "mtime": 1780076656.022721,
+    "ast_hash": "19a8d922c8134dfa3673d640abf542f9",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\layout\\Navbar.tsx": {
+    "mtime": 1780076656.0237193,
+    "ast_hash": "664257cfd988bd182cd556ce0646536e",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\layout\\StaggeredMenu.tsx": {
+    "mtime": 1780075850.6741867,
+    "ast_hash": "5629d9c7cb2157893ccc1b2b7b8fd6de",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\layout\\SubpageLayout.tsx": {
+    "mtime": 1779449008.3377283,
+    "ast_hash": "dc06fc1d98e86791303e45780c1a766c",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\cta\\FinalCTA.tsx": {
+    "mtime": 1780075832.6544986,
+    "ast_hash": "88079041c0ba3c716655d174a32568cf",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\faq\\FAQ.tsx": {
+    "mtime": 1779636537.9048965,
+    "ast_hash": "612822643abf6eebb4cef003f4f87038",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\features\\FeatureBento.tsx": {
+    "mtime": 1779629618.9161246,
+    "ast_hash": "d8c320a14f583f573ca2f718af7ff0f6",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\features\\MagicBento.tsx": {
+    "mtime": 1779381014.177392,
+    "ast_hash": "e68962df4dd6db036f635ef6a5ac1304",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\hero\\Hero.tsx": {
+    "mtime": 1779376841.4500272,
+    "ast_hash": "b032dc931d48140a016e796f5bfa945b",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\how-it-works\\HowItWorks.tsx": {
+    "mtime": 1780078627.9199061,
+    "ast_hash": "4902576a1839fac2fd23591cb8d36aeb",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\pricing\\Pricing.tsx": {
+    "mtime": 1779636537.9068944,
+    "ast_hash": "62621c6d897e564637a247e9e4773df0",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\problem\\ProblemSection.tsx": {
+    "mtime": 1779629598.6688285,
+    "ast_hash": "7bd7b4c8d1cd1591fce407785e4906b5",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\sections\\stats\\Stats.tsx": {
+    "mtime": 1780075827.8432114,
+    "ast_hash": "c18d26a35c27c7b484b70a6c548b43ed",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\contact\\page.tsx": {
+    "mtime": 1779636537.9088957,
+    "ast_hash": "314fe45098d599160748146416f6358d",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\disclaimer\\page.tsx": {
+    "mtime": 1779636537.9118936,
+    "ast_hash": "966736974f059115bbce5eff62cde596",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\docs\\page.tsx": {
+    "mtime": 1779630348.296422,
+    "ast_hash": "532357c81eb8d53ca6c53d9976c333fd",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\privacy\\page.tsx": {
+    "mtime": 1779636537.9138937,
+    "ast_hash": "1f0ed6426c6d9421b1b6d540da399ead",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\refund\\page.tsx": {
+    "mtime": 1779636537.9178967,
+    "ast_hash": "5aac7a4d0020bd3498c180037e4e5439",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\status\\page.tsx": {
+    "mtime": 1779636537.9198973,
+    "ast_hash": "89b7efad98adac056e48755fd54a4d30",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\terms\\page.tsx": {
+    "mtime": 1779636537.9229026,
+    "ast_hash": "d5ba154867961b984e3fc63470ff27f2",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\components\\text-hover-effect-demo.tsx": {
+    "mtime": 1779444643.5906434,
+    "ast_hash": "99d9d776655e405f5bfec97e2555b07f",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\components\\ui\\hero-section-nexus.tsx": {
+    "mtime": 1780075929.2938337,
+    "ast_hash": "67980f26bb22419839cc2b3b3550739a",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\components\\ui\\RotatingText.tsx": {
+    "mtime": 1779377884.9816425,
+    "ast_hash": "ab1936ac0ff2030b639518d97dadeba0",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\components\\ui\\ShinyText.tsx": {
+    "mtime": 1779377889.4866679,
+    "ast_hash": "f1063b5c3cb93ccc31e6680e62e8a99a",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\components\\ui\\text-hover-effect.tsx": {
+    "mtime": 1779444824.143973,
+    "ast_hash": "18509afaf5cee0791da10706baa70cca",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\AGENTS.md": {
+    "mtime": 1779354525.4121978,
+    "ast_hash": "9e09241799026ac05be315a2f0b50055",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\AGENT_CONTEXT.md": {
+    "mtime": 1779629222.181667,
+    "ast_hash": "bef2ca67efee92fa572c7f468cfc64a2",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\CLAUDE.md": {
+    "mtime": 1779354525.4135003,
+    "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\CODE_OF_CONDUCT.md": {
+    "mtime": 1779551017.4474628,
+    "ast_hash": "8e92d68873748d27998a90af3391a092",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\CONTRIBUTING.md": {
+    "mtime": 1779552502.298521,
+    "ast_hash": "9f4d9c901d1d3029ad2828d06eb1ca2a",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\LICENSE.txt": {
+    "mtime": 1779551011.6931145,
+    "ast_hash": "ff106fb6d999069241f23ee93adb9992",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\README.md": {
+    "mtime": 1779552512.1032429,
+    "ast_hash": "18aab53374a7b160ad2397f28e8c1a86",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\SECURITY.md": {
+    "mtime": 1779551028.7880661,
+    "ast_hash": "6f9bec5b09af30a2705a2f12fdc49c42",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\public\\strat.svg": {
+    "mtime": 1779616156.315701,
+    "ast_hash": "50438655f9e2071d8a7616d9afccb2fa",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\public\\hero\\hero.png": {
+    "mtime": 1779377425.8214757,
+    "ast_hash": "0436ac00f5dcd647e79f50a201d3d015",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\public\\desktop_mockup.png": {
+    "mtime": 1779789842.661854,
+    "ast_hash": "547257aef16cffe1a133ec4e507f9be5",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\download\\page.tsx": {
+    "mtime": 1780075844.5169742,
+    "ast_hash": "4c8e91f3151333b3b38c5a500e5997db",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\robots.ts": {
+    "mtime": 1780077037.392353,
+    "ast_hash": "976ad9033dfa87452da76a1ea913d5b5",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\sitemap.ts": {
+    "mtime": 1780077026.2481287,
+    "ast_hash": "6d06582cd52b4d8abe5d02ee58903e82",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\about\\layout.tsx": {
+    "mtime": 1780077071.8196127,
+    "ast_hash": "77b7d37063e50c5a49a1d9ad2e36cf25",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\api-reference\\layout.tsx": {
+    "mtime": 1780077080.8869264,
+    "ast_hash": "ba30be6243144c61c9f3ab3737274cf4",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\blog\\layout.tsx": {
+    "mtime": 1780077089.0060806,
+    "ast_hash": "90513932d6d86d4127a1138f7286e01d",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\careers\\layout.tsx": {
+    "mtime": 1780077097.3496294,
+    "ast_hash": "44841dfabed836d501937a1e4d6e6559",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\changelog\\layout.tsx": {
+    "mtime": 1780077106.590612,
+    "ast_hash": "df3f5a7cf6892584df8173d1df75d7a9",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\contact\\layout.tsx": {
+    "mtime": 1780077115.5413117,
+    "ast_hash": "46bdcb2bc4b596df43bc997095f9c354",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\disclaimer\\layout.tsx": {
+    "mtime": 1780077124.1178594,
+    "ast_hash": "3f738d34f65361492f72d165e1a4673f",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\docs\\layout.tsx": {
+    "mtime": 1780077136.936302,
+    "ast_hash": "765444c1189111862335c1981774d7ea",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\download\\layout.tsx": {
+    "mtime": 1780077149.1808927,
+    "ast_hash": "a409bd1a54dbd2e93a41249cdc80f7c7",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\privacy\\layout.tsx": {
+    "mtime": 1780077161.0022042,
+    "ast_hash": "8b0cf31c59db700834b8a357da8a09cb",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\refund\\layout.tsx": {
+    "mtime": 1780077169.2051234,
+    "ast_hash": "f3af78e7670496dfd56844f35a3daff1",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\status\\layout.tsx": {
+    "mtime": 1780077178.1821046,
+    "ast_hash": "2867523c3778651c652a76ced729cc49",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\terms\\layout.tsx": {
+    "mtime": 1780077185.4851778,
+    "ast_hash": "d12f44bf9b78c906c7b0bea897652bb7",
+    "semantic_hash": ""
+  },
+  "D:\\projects\\strat\\app\\components\\effects\\DarkVeilInner.tsx": {
+    "mtime": 1780078037.1261091,
+    "ast_hash": "9ebf57326a1f4f1dc9cc08d2abd2aa8a",
+    "semantic_hash": ""
+  }
+}

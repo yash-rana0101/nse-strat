@@ -1,0 +1,152 @@
+.copilot-demo .demo-terminal {
+  min-width: 0;
+  background: var(--color-surface-card);
+  border-left: 1px solid var(--color-hairline);
+  display: flex;
+  flex-direction: column;
+}
+.copilot-demo .terminal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 24px 24px 18px;
+  font: 12px var(--font-code);
+}
+.copilot-demo .terminal-title > span:first-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.copilot-demo .terminal-title svg {
+  color: var(--color-brand-accent);
+}
+.copilot-demo .terminal-status {
+  color: var(--color-brand-accent);
+  font-size: 10px;
+}
+.copilot-demo .terminal-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px;
+}
+.copilot-demo .demo-action {
+  flex: 1;
+  border-radius: 8px;
+  font-size: 14px;
+  height: 42px;
+  padding: 8px;
+  box-shadow: none;
+}
+.copilot-demo .terminal-context {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 14px 24px;
+  font: 11px var(--font-code);
+  color: var(--color-body);
+}
+.copilot-demo .terminal-context > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.copilot-demo .terminal-context b {
+  color: var(--color-muted-soft);
+}
+.copilot-demo .context-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--color-brand-accent);
+  border-radius: 50%;
+}
+.copilot-demo .terminal-body {
+  height: 450px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-surface-strong) transparent;
+  padding: 0 24px 16px;
+}
+.copilot-demo .terminal-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+  background: var(--color-surface-soft);
+  padding: 18px;
+}
+.copilot-demo[data-phase='idle'] .terminal-body {
+  flex: 1;
+  min-height: 385px;
+}
+.copilot-demo .ready-badge {
+  font: 10px var(--font-code);
+  letter-spacing: 0.1em;
+  color: var(--color-brand-accent);
+  background: color-mix(in srgb, var(--color-brand-accent) 8%, transparent);
+  border: 1px solid
+    color-mix(in srgb, var(--color-brand-accent) 25%, transparent);
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+.copilot-demo .terminal-empty > p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 240px;
+  margin-top: 6px;
+}
+.copilot-demo[data-running] .terminal-status {
+  animation: demo-pulse 0.8s ease-in-out infinite alternate;
+}
+.copilot-demo .terminal-footer {
+  padding: 18px 24px;
+  margin-top: auto;
+  border-top: 1px solid var(--color-hairline);
+}
+.copilot-demo .qa-heading {
+  display: flex;
+  justify-content: space-between;
+  font: 10px var(--font-code);
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+.copilot-demo .qa-heading > span:last-child {
+  color: var(--color-brand-accent);
+}
+.copilot-demo .qa-questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.copilot-demo .demo-question {
+  height: auto;
+  border: 1px solid var(--color-hairline);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 8px;
+}
+.copilot-demo .demo-question svg {
+  color: var(--color-brand-accent);
+}
+.copilot-demo .demo-question:hover:not(:disabled) {
+  border-color: var(--color-brand-accent);
+}
+.copilot-demo .qa-hint {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin-top: 10px;
+}
+.copilot-demo .demo-reset {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-muted);
+}

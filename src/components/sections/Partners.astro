@@ -1,0 +1,132 @@
+---
+/**
+ * Partners — charting partner attribution strip.
+ *
+ * Modern section crediting TradingView as the charting data provider.
+ * Uses the actual TradingView logo and matches the Strat AI dark theme
+ * with emerald accents. Link opens tradingview.com in a new tab per
+ * their free licensing terms.
+ */
+import Container from '@/components/ui/Container.astro';
+---
+
+<section
+  class="py-12 md:py-16 bg-canvas transition-colors duration-300"
+  aria-label="Partners"
+>
+  <Container>
+    <div class="flex flex-col items-center gap-8" data-reveal-group>
+      <!-- Section label -->
+      <div class="flex items-center gap-3 reveal-item">
+        <span class="h-px w-8 bg-hairline"></span>
+        <p
+          class="text-[11px] font-mono font-medium tracking-[0.2em] uppercase text-muted-soft"
+        >
+          Charting Partner
+        </p>
+        <span class="h-px w-8 bg-hairline"></span>
+      </div>
+
+      <!-- Partner card -->
+      <a
+        href="https://www.tradingview.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group reveal-item relative w-full max-w-[520px] overflow-hidden rounded-2xl border border-hairline hover:border-brand-accent/30 bg-surface-card/40 backdrop-blur-sm transition-all duration-500"
+        title="TradingView — Advanced charting platform"
+      >
+        <!-- Accent glow -->
+        <div
+          class="absolute -top-20 -right-20 w-[200px] h-[200px] bg-brand-accent/8 opacity-0 group-hover:opacity-100 blur-[80px] rounded-full transition-opacity duration-700 pointer-events-none"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="relative z-10 p-6 sm:p-8 flex items-center gap-5 sm:gap-6">
+          <!-- TradingView actual logo -->
+          <div
+            class="shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-surface-strong/60 border border-hairline/60 flex items-center justify-center group-hover:border-brand-accent/20 transition-all duration-500"
+          >
+            <img
+              src="/images/partners/tradingview-logo.png"
+              alt="TradingView"
+              width="40"
+              height="40"
+              class="w-9 h-9 sm:w-10 sm:h-10 object-contain"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Info -->
+          <div class="flex flex-col gap-1.5 min-w-0">
+            <div class="flex items-center gap-2.5">
+              <span
+                class="text-lg sm:text-xl font-bold text-ink tracking-tight group-hover:text-white transition-colors font-display"
+              >
+                TradingView
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-accent/10 text-[10px] font-semibold text-brand-accent uppercase tracking-wider"
+              >
+                Partner
+              </span>
+            </div>
+            <p class="text-sm text-muted leading-relaxed">
+              Advanced charting library powering real-time interactive charts
+              across the Strat AI terminal.
+            </p>
+          </div>
+
+          <!-- Arrow -->
+          <div
+            class="shrink-0 hidden sm:flex items-center justify-center w-8 h-8 rounded-full border border-hairline group-hover:border-brand-accent/30 group-hover:bg-brand-accent/10 transition-all duration-300"
+          >
+            <svg
+              class="w-3.5 h-3.5 text-muted-soft group-hover:text-brand-accent transition-colors duration-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M7 17L17 7"></path>
+              <path d="M7 7h10v10"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div
+          class="relative z-10 px-6 sm:px-8 py-3 border-t border-hairline/60 bg-surface-soft/30"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <span
+                class="flex items-center gap-1.5 text-[11px] text-muted-soft"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-badge-emerald"></span>
+                Real-time data
+              </span>
+              <span
+                class="flex items-center gap-1.5 text-[11px] text-muted-soft"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                Interactive charts
+              </span>
+              <span
+                class="flex items-center gap-1.5 text-[11px] text-muted-soft hidden sm:flex"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-badge-violet"></span>
+                Technical analysis
+              </span>
+            </div>
+            <span class="text-[10px] text-muted-soft font-mono">
+              tradingview.com
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </Container>
+</section>

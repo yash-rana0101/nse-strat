@@ -1,0 +1,116 @@
+---
+/**
+ * Docs — Documentation hub listing pages from backend database API.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { fetchDocs } from '@/services/content';
+
+const dbDocs = await fetchDocs();
+
+const allDocs = dbDocs
+  .filter((doc) => doc.slug !== 'api-reference' && doc.slug !== 'sdks-clients')
+  .map((doc) => ({
+    id: doc.slug,
+    data: {
+      title: doc.title,
+      description: doc.summary,
+      section: doc.category,
+      order: doc.order,
+      icon: doc.icon,
+    },
+  }))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const iconMap: Record<string, string> = {
+  'Quick Start Guide & Onboarding': 'compass',
+  'Understanding Conviction Scores': 'chart',
+  'Dashboard Overview & Terminal Guide': 'layers',
+  'Unified Consensus Model': 'brain',
+  'Predictive Ghost Lines & Trajectories': 'target',
+  'Pre-Trade Audit & Risk Floor Rules': 'shield-check',
+  'Alert Notifications': 'zap',
+};
+
+const sections = [
+  {
+    title: 'Getting Started',
+    badge: 'Start Here',
+    badgeVariant: 'emerald' as const,
+    items: allDocs.filter((d) => d.data.section === 'Getting Started'),
+  },
+  {
+    title: 'Core Concepts',
+    badge: 'Learn',
+    badgeVariant: 'violet' as const,
+    items: allDocs.filter((d) => d.data.section === 'Core Concepts'),
+  },
+  {
+    title: 'Risk & Strategy',
+    badge: 'Protect',
+    badgeVariant: 'orange' as const,
+    items: allDocs.filter(
+      (d) =>
+        d.data.section === 'Risk & Strategy' ||
+        d.data.section === 'Integration Resources'
+    ),
+  },
+];
+---
+
+<PageLayout
+  title="Documentation & Terminal Guides"
+  description="Explore detailed guides, core terminal concepts, risk management rules, and setup tutorials for the Strat Ai trading platform."
+  badge="Docs"
+  badgeVariant="emerald"
+  breadcrumbs={[{ label: 'Documentation' }]}
+>
+  {
+    sections.map(
+      (section) =>
+        section.items.length > 0 && (
+          <section class="py-16 md:py-20 bg-canvas transition-colors duration-300">
+            <Container>
+              <div class="max-w-[800px] mb-8">
+                <Badge variant={section.badgeVariant} class="mb-3">
+                  {section.badge}
+                </Badge>
+                <h2 class="type-display-sm tracking-tight text-ink">
+                  {section.title}
+                </h2>
+              </div>
+            </Container>
+            <Container size="wide" class="!px-0">
+              <div class="grid grid-cols-1 md:grid-cols-3 border-y border-hairline divide-y md:divide-y-0 md:divide-x divide-hairline bg-surface-soft/5">
+                {section.items.map((item) => (
+                  <a
+                    href={`/docs/${item.id}`}
+                    class="p-8 md:p-10 flex flex-col gap-4 no-underline hover:bg-surface-soft/10 transition-colors group"
+                  >
+                    <div class="w-10 h-10 rounded-lg bg-badge-emerald/10 flex items-center justify-center group-hover:bg-brand-accent/20 transition-colors">
+                      <Icon
+                        name={
+                          iconMap[item.data.title] ||
+                          item.data.icon ||
+                          'compass'
+                        }
+                        class="w-5 h-5 text-badge-emerald"
+                      />
+                    </div>
+                    <h3 class="type-title-md text-ink group-hover:text-brand-accent transition-colors">
+                      {item.data.title}
+                    </h3>
+                    <p class="type-body-sm text-muted">
+                      {item.data.description}
+                    </p>
+                  </a>
+                ))}
+              </div>
+            </Container>
+          </section>
+        )
+    )
+  }
+</PageLayout>

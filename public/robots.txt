@@ -1,0 +1,97 @@
+# robots.txt for https://www.stratai.live
+#
+# Content signals declare how this site's content may be used.
+#   search:   building a search index and returning links/short excerpts  -> allowed
+#   ai-input: real-time retrieval/grounding for generative answers        -> allowed
+#   ai-train: training or fine-tuning AI models                          -> not allowed
+# Restrictions expressed via Content-Signal are express reservations of rights
+# under Article 4 of EU Directive 2019/790.
+
+User-agent: *
+Content-Signal: search=yes,ai-input=yes,ai-train=no,use=reference
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Answer and search crawlers: allowed. These produce citations back to us.
+# ---------------------------------------------------------------------------
+
+User-agent: GPTBot
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: ora-agent
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Training-only crawlers: disallowed, consistent with ai-train=no above.
+# ---------------------------------------------------------------------------
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ByteSpider
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+# ---------------------------------------------------------------------------
+# Machine-readable entry points
+# ---------------------------------------------------------------------------
+# LLM navigation index:   https://www.stratai.live/llms.txt
+# Agent instructions:     https://www.stratai.live/agents.md
+# MCP server:             https://www.stratai.live/api/mcp
+# Resource catalog:       https://www.stratai.live/.well-known/ard.json
+
+Sitemap: https://www.stratai.live/sitemap-index.xml
+Agentmap: https://www.stratai.live/.well-known/ard.json

@@ -1,0 +1,312 @@
+---
+/**
+ * Contact Page — 2-column bento layout with form and company info.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+
+const contactSchema = {
+  '@type': 'ContactPage',
+  name: 'Contact Strat Ai Support & Research Wing',
+  description:
+    'Get in touch with Strat Ai customer support, strategic partnership desks, and quantitative research teams.',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Support',
+      email: 'hello@stratai.live',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'Research Collaboration',
+      email: 'research@stratai.live',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'Legal & Compliance',
+      email: 'legal@stratai.live',
+    },
+  ],
+};
+---
+
+<PageLayout
+  title="Contact Support & Partnerships Team"
+  description="Reach out to the Trading & Research Wing for terminal access, institutional partnerships, or general platform inquiries."
+  badge="Get in Touch"
+  badgeVariant="emerald"
+  breadcrumbs={[{ label: 'Contact', href: '/contact' }]}
+  jsonLd={contactSchema}
+>
+  <section class="py-16 md:py-20 bg-canvas transition-colors duration-300">
+    <Container size="wide" class="!px-0">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] border-y border-hairline divide-y lg:divide-y-0 lg:divide-x divide-hairline bg-surface-soft/5"
+      >
+        <div class="p-8 md:p-12 lg:p-14">
+          <h2 class="type-title-lg text-ink mb-6">Send us an inquiry</h2>
+          <!--
+            toolname / tooldescription expose this form to AI agents via the
+            WebMCP declarative API. They survive into server-rendered HTML, so a
+            crawler that never runs JavaScript can still see what the form does.
+          -->
+          <form
+            id="contact-form"
+            class="flex flex-col gap-5"
+            novalidate
+            toolname="submit_contact_inquiry"
+            tooldescription="Send an inquiry to the Strat AI team about early access, partnerships, research collaboration, media, or general questions. Requires an email address, a phone number, and an inquiry type."
+          >
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="contact-email"
+                class="type-body-sm text-ink font-medium"
+                >Email Address <span class="text-error">*</span></label
+              >
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                required
+                placeholder="you@company.com"
+                class="w-full px-4 py-3 rounded-lg bg-surface-card border border-hairline text-ink placeholder:text-muted-soft type-body-md focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors duration-200"
+              />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="contact-mobile"
+                class="type-body-sm text-ink font-medium"
+                >Mobile Number <span class="text-error">*</span></label
+              >
+              <input
+                type="tel"
+                id="contact-mobile"
+                name="mobile"
+                required
+                placeholder="e.g. +91 9876543210"
+                class="w-full px-4 py-3 rounded-lg bg-surface-card border border-hairline text-ink placeholder:text-muted-soft type-body-md focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors duration-200"
+              />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="contact-type"
+                class="type-body-sm text-ink font-medium"
+                >Inquiry Type <span class="text-error">*</span></label
+              >
+              <select
+                id="contact-type"
+                name="type"
+                required
+                class="w-full px-4 py-3 rounded-lg bg-surface-card border border-hairline text-ink type-body-md focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors duration-200 appearance-none cursor-pointer"
+              >
+                <option value="" disabled selected class="text-muted-soft"
+                  >Select a topic</option
+                >
+                <option value="early-access">Early Access Request</option>
+                <option value="partnership">Partnership Inquiry</option>
+                <option value="research">Research Collaboration</option>
+                <option value="media">Media & Press</option>
+                <option value="general">General Inquiry</option>
+              </select>
+            </div>
+            <div class="mt-2">
+              <Button
+                variant="primary"
+                size="lg"
+                type="submit"
+                class="!rounded-full px-8 w-full sm:w-auto">Send Inquiry</Button
+              >
+            </div>
+            <div
+              id="contact-success"
+              class="hidden p-4 rounded-lg bg-success/10 border border-success/20"
+            >
+              <p class="type-body-sm text-success font-medium">
+                Thank you! Your inquiry has been submitted successfully.
+              </p>
+            </div>
+            <div
+              id="contact-error"
+              class="hidden p-4 rounded-lg bg-error/10 border border-error/20"
+            >
+              <p
+                class="type-body-sm text-error font-medium"
+                id="contact-error-text"
+              >
+                An error occurred. Please try again.
+              </p>
+            </div>
+          </form>
+        </div>
+        <div class="flex flex-col gap-8 p-8 md:p-12 lg:p-14 bg-surface-soft/10">
+          <div>
+            <h3 class="type-title-md text-ink mb-4">
+              Merchant & Operating Entity
+            </h3>
+            <div class="flex flex-col gap-4">
+              <div>
+                <p
+                  class="type-body-xs text-muted-soft font-mono uppercase tracking-wider"
+                >
+                  Legal Entity Name
+                </p>
+                <p class="type-body-sm text-ink font-semibold">
+                  Trading & Research Wing
+                </p>
+              </div>
+              <div>
+                <p
+                  class="type-body-xs text-muted-soft font-mono uppercase tracking-wider"
+                >
+                  Website Domain
+                </p>
+                <a
+                  href="/"
+                  class="type-body-sm text-brand-accent font-medium hover:underline"
+                  >stratai.live</a
+                >
+              </div>
+              <div class="pt-2 border-t border-hairline/40 flex flex-col gap-3">
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-8 h-8 rounded-lg bg-badge-emerald/10 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <Icon name="mail" class="w-4 h-4 text-badge-emerald" />
+                  </div>
+                  <div>
+                    <p class="type-body-xs text-muted-soft">Customer Support</p>
+                    <a
+                      href="mailto:support@stratai.live"
+                      class="type-body-sm text-ink hover:text-brand-accent no-underline font-medium transition-colors"
+                      >support@stratai.live</a
+                    >
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-8 h-8 rounded-lg bg-badge-orange/10 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <Icon name="mail" class="w-4 h-4 text-badge-orange" />
+                  </div>
+                  <div>
+                    <p class="type-body-xs text-muted-soft">
+                      Billing & Refunds
+                    </p>
+                    <a
+                      href="mailto:billing@stratai.live"
+                      class="type-body-sm text-ink hover:text-brand-accent no-underline font-medium transition-colors"
+                      >billing@stratai.live</a
+                    >
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-8 h-8 rounded-lg bg-badge-violet/10 flex items-center justify-center shrink-0 mt-0.5"
+                  >
+                    <Icon name="mail" class="w-4 h-4 text-badge-violet" />
+                  </div>
+                  <div>
+                    <p class="type-body-xs text-muted-soft">
+                      Legal & Compliance
+                    </p>
+                    <a
+                      href="mailto:legal@stratai.live"
+                      class="type-body-sm text-ink hover:text-brand-accent no-underline font-medium transition-colors"
+                      >legal@stratai.live</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-hairline/50">
+            <h3 class="type-title-md text-ink mb-3">PayU Gateway Refund SLA</h3>
+            <p class="type-body-xs text-muted leading-relaxed">
+              Approved refunds are credited back to the original mode of payment
+              (Credit Card, Debit Card, Net Banking, or UPI) within <strong
+                >5 to 7 business days</strong
+              > as detailed in our <a
+                href="/refund"
+                class="text-brand-accent underline">Refund Policy</a
+              >.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-hairline/50">
+            <h3 class="type-title-md text-ink mb-3">Response Time</h3>
+            <p class="type-body-sm text-muted leading-relaxed">
+              We typically respond to customer support and billing inquiries
+              within 24–48 business hours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<script>
+  import { submitContactInquiry } from '@/services/support';
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const success = document.getElementById('contact-success');
+  const errorContainer = document.getElementById('contact-error');
+  const errorText = document.getElementById('contact-error-text');
+  const submitButton = form?.querySelector(
+    'button[type="submit"]'
+  ) as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Reset feedback states
+    success?.classList.add('hidden');
+    errorContainer?.classList.add('hidden');
+
+    const email = (
+      form.querySelector('#contact-email') as HTMLInputElement
+    )?.value.trim();
+    const mobile = (
+      form.querySelector('#contact-mobile') as HTMLInputElement
+    )?.value.trim();
+    const type = (form.querySelector('#contact-type') as HTMLSelectElement)
+      ?.value;
+
+    if (!email || !mobile || !type) {
+      if (errorContainer && errorText) {
+        errorText.textContent = 'Please fill out all fields.';
+        errorContainer.classList.remove('hidden');
+      }
+      return;
+    }
+
+    try {
+      // Set submitting UI state
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
+
+      await submitContactInquiry({ email, mobile, type });
+
+      if (success) {
+        success.classList.remove('hidden');
+      }
+      form.reset();
+    } catch (err: any) {
+      console.error('[ContactForm] Submission error:', err);
+      if (errorContainer && errorText) {
+        errorText.textContent =
+          err.message || 'Failed to submit inquiry. Please try again.';
+        errorContainer.classList.remove('hidden');
+      }
+    } finally {
+      // Re-enable button
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Inquiry';
+      }
+    }
+  });
+</script>

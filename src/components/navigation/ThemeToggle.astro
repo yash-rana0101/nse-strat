@@ -1,0 +1,82 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<button
+  class:list={[
+    'theme-toggle relative flex items-center justify-center border border-hairline rounded-full bg-transparent text-ink cursor-pointer w-9 h-9 shrink-0 overflow-hidden',
+    className,
+  ]}
+  aria-label="Toggle dark/light mode"
+  type="button"
+>
+  <span
+    class="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] [[data-theme=light]_&]:opacity-0 [[data-theme=light]_&]:rotate-45"
+  >
+    <Icon name="sun" size={18} />
+  </span>
+  <span
+    class="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] opacity-0 -rotate-45 [[data-theme=light]_&]:opacity-100 [[data-theme=light]_&]:rotate-0"
+  >
+    <Icon name="moon" size={18} />
+  </span>
+</button>
+
+<script>
+  function initTheme() {
+    const toggles = document.querySelectorAll('.theme-toggle');
+    if (toggles.length === 0) return;
+    const getTheme = (): string =>
+      localStorage.getItem('strat-theme') || 'dark';
+    const setTheme = (theme: string): void => {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('strat-theme', theme);
+      window.dispatchEvent(
+        new CustomEvent('strat-theme-changed', { detail: { theme } })
+      );
+    };
+    setTheme(getTheme());
+    toggles.forEach((toggle) => {
+      toggle.addEventListener('click', (event) => {
+        const nextTheme = getTheme() === 'dark' ? 'light' : 'dark';
+        const doc = document as any;
+
+        if (!doc.startViewTransition) {
+          setTheme(nextTheme);
+          return;
+        }
+
+        const rect = toggle.getBoundingClientRect();
+        const mouseEvent = event as MouseEvent;
+        const x = mouseEvent.clientX || rect.left + rect.width / 2;
+        const y = mouseEvent.clientY || rect.top + rect.height / 2;
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        document.documentElement.style.setProperty('--theme-x', `${x}px`);
+        document.documentElement.style.setProperty('--theme-y', `${y}px`);
+        document.documentElement.style.setProperty(
+          '--theme-r',
+          `${endRadius}px`
+        );
+        document.documentElement.setAttribute('data-theme-changing', 'true');
+
+        const transition = doc.startViewTransition(() => {
+          setTheme(nextTheme);
+        });
+
+        transition.finished.finally(() => {
+          document.documentElement.removeAttribute('data-theme-changing');
+        });
+      });
+    });
+  }
+  initTheme();
+  document.addEventListener('astro:after-swap', initTheme);
+</script>

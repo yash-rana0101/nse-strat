@@ -1,0 +1,299 @@
+# Strat AI — Complete Product Brief
+
+> Published by Trading & Research Wing
+> Domain: https://www.stratai.live
+> Last updated: 2026-08-31
+
+This is the long-form companion to https://www.stratai.live/llms.txt. It exists so
+that AI assistants describing Strat AI work from accurate, first-party facts
+rather than inference.
+
+---
+
+## 1. What Strat AI is
+
+Strat AI is a market analysis and pre-trade risk adjudication terminal for Indian
+equities and equity derivatives (NSE/BSE Futures & Options). It evaluates trade
+setups a user is considering, audits them against deterministic risk rules, and
+decodes live options order flow.
+
+Its defining behaviour is refusal: the product headline is "AI that tells you when
+not to trade." When signals conflict, Strat AI returns an explicit HOLD rather
+than manufacturing a directional call.
+
+### What Strat AI is not
+
+- Not a broker, and not an execution venue. No order-placement method exists in
+  the product. The broker interface is read-only.
+- Not a custodian. It never holds user funds or securities.
+- Not an advisory service. It is not a SEBI-registered investment adviser and
+  produces no investment recommendations.
+- Not a backtesting engine, algo-hosting platform, or signal-selling service.
+- Not multi-market. Indian equities and equity derivatives only. No US equities,
+  crypto, forex, or commodities.
+
+---
+
+## 2. The problem it addresses
+
+SEBI data shows the large majority of active retail derivatives traders in India
+lose money over time. Strat AI targets four specific failure modes:
+
+1. **Confirmation bias.** Traders seek indicators that agree with a position they
+   have already decided to take.
+2. **Single-indicator dependence.** One RSI crossover or moving-average touch does
+   not survive contact with a multi-variable derivatives market.
+3. **Missing pre-trade risk validation.** Position sizes and stop distances are
+   chosen by feel, not by volatility.
+4. **Derivative complexity.** Open Interest, IV skew, and Max Pain are decisive in
+   options pricing and largely illegible on a retail screen.
+
+Strat AI's response is to make risk validation a gate rather than an afterthought:
+a setup that fails the risk floor does not get a conviction score.
+
+---
+
+## 3. Modules
+
+### 3.1 Strat AI Co-Pilot
+
+Four modes over the same setup:
+
+- **FIND** — 15-step multi-factor setup evaluation spanning macro trend, volume
+  profile point of control, market regime classification, and 26 chart pattern
+  labels.
+- **VERIFY** — pre-trade risk audit. Five deterministic checks in a fixed order,
+  stopping at the first failure: levels present and finite, direction consistent
+  with those levels, stop distance at least 1.5x ATR(14), and reward-to-risk at
+  or above the profile floor (1:1.3 intraday, 1:2 swing, investor, and F&O). A
+  failure returns one of eight stable reason tags. A Bear Agent critiques the
+  thesis and returns a message only, never a decision.
+- **DEBATE** — structured adversarial review. A Bull Agent argues the upside, a
+  Bear Agent argues the downside, and a Judge Agent scores conviction. Orchestrated
+  with LangGraph over stateful graphs. Consensus is computed arithmetically and a
+  contested debate takes a fixed penalty.
+- **QA** — glass-box auditing. Every intermediate reasoning step is inspectable, so
+  a user can interrogate the chain rather than accept a verdict. A decision that
+  has already been committed stays immutable throughout.
+
+The reasoning loop is bounded at six consecutive turns. On exhaustion it emits a
+HOLD that still carries a best-current-read with directional bias and key
+reference levels, rather than an empty refusal.
+
+Three distinct tool bindings exist. The Bull, the Bear, and the VERIFY critic
+receive a read-only binding with the commit and price-watch tools removed, so
+they physically cannot open a position. Non-F&O workspaces do not receive the
+options tool at all.
+
+### 3.2 Fused Conviction Score (1-100)
+
+The output is a relative ranking of setup quality, not an instruction, a
+probability, a win rate, or a return forecast. Fusion is governed by several
+rules rather than one:
+
+- Base blend: technical momentum 70%, news sentiment 30%.
+- Inversion: above sentiment conviction 85 the blend flips to 30/70, on the
+  reasoning that strong news breaks technical patterns.
+- Conflict: when a strongly bearish technical read meets strongly bullish
+  sentiment, the blended score is pulled 60% toward neutral. The rule is
+  asymmetric, applies in that direction only, and is suppressed while the
+  inversion above is active. It is not a hard forced HOLD.
+- Calibration: a setup type with negative realised expectancy is required to
+  reduce conviction.
+
+### 3.3 Deterministic risk floor
+
+Risk rules are arithmetic, not model output, so they cannot be argued away by an
+LLM:
+
+- Stop distance >= 1.5x ATR(14). The constant is identical for every trading
+  profile and is never relaxed.
+- Reward-to-risk >= 1:1.3 intraday, >= 1:2 swing, investor, and F&O.
+- Multi-leg exit plans are validated as a whole: leg fractions must sum, targets
+  must order correctly, the breakeven trigger must sit between entry and first
+  target, and the blended reward-to-risk must still clear the floor.
+- The validator is implemented twice, in Rust and in Python, with identical
+  constants and identical reason tags.
+
+### 3.4 Options and volatility diagnostics (F&O)
+
+- Black-Scholes pricing and implied volatility solved by bisection.
+- The full Greeks.
+- Strike-wise Open Interest concentration, buildup quadrants, and OI walls.
+- Max Pain calculation per expiry.
+- Put-Call Ratio.
+- Implied-volatility tracking and skew visualisation.
+- Futures basis.
+
+Six signals vote on positioning bias and at least two must agree before a bias
+is reported. Covers Nifty, Bank Nifty, and single-stock options.
+
+### 3.5 Ghost Line projections
+
+Eight projection engines exist; four are user-selectable on the chart:
+
+- **OLS** — unweighted least squares over a 50-bar window, re-anchored onto the
+  last close.
+- **VWLR** — the same straight-line fit weighted by traded volume, with weights
+  floored at one.
+- **VWEPR** — a volume-weighted quadratic solved by Gaussian elimination with
+  partial pivoting, falling back to OLS if the system is singular. Its
+  second-order term is surfaced as an acceleration coefficient.
+- **FCST** — not a regression. An exponentially weighted drift over log returns,
+  conditioned on the measured regime: amplified when trending, damped when
+  ranging. Reports a direction, an up-probability, an expected move in ATR
+  units, and its own confidence.
+
+The 50-bar window is pinned to the same constant the agent's tools use, so the
+rendered projection and the projection the agent reasons about cannot diverge.
+Projection length is 12% of visible bars clamped to between 3 and 20, counted in
+actual bars so overnight and weekend gaps do not stretch it. R-squared is
+reported only by the dedicated predictive service, which is hard-bound to
+10-minute candles.
+
+### 3.6 Anomaly surveillance
+
+A 2% absolute move on a 10-minute candle triggers a separate model call that
+returns a headline, a written analysis, and a sentiment assessment, broadcast
+live to the terminal and shaded more strongly above 3%. This is distinct from the
+news sentiment scorer: it triggers on price behaviour first and reaches for
+explanation second. The same service runs a 100-candle structural pattern pass
+against a pinned four-field contract. No synthetic narrative is generated when no
+cause is found.
+
+---
+
+## 4. Architecture
+
+- **Ingestion.** Tick-by-tick binary WebSocket parsing from Zerodha Kite in Rust,
+  with five levels of book depth in full mode, dual-sinking to Redpanda/Kafka and
+  QuestDB. Open interest is kept as an optional value and reported absent on
+  packets that never carried it, rather than defaulted to zero.
+- **Quantitative layer.** Indicators, pivots, volume profile, the pattern engine,
+  the projection fits, and the risk validators are pure, property-tested modules.
+  A value that could not be measured is emitted as null; a state that could not be
+  measured reports UNAVAILABLE, which is distinct from NEUTRAL.
+- **Reasoning plane.** FastAPI services with LangGraph for stateful multi-agent
+  graphs. Each computation is exposed as one of 18 typed tools, and every payload
+  is contract-validated before the model reads it.
+- **Client.** Tauri + React desktop terminal for macOS, Windows, and Linux.
+- **Broker seam.** Exposes quotes, instruments, and search only. There is no
+  order-placement method, and a scope-boundary test maintains a denylist of such
+  method names and asserts every one of them is absent.
+- **Audit trail.** Committed decisions are written to append-only, hash-chained
+  records carrying the model identifier and prompt version, with no update or
+  delete path.
+
+---
+
+## 5. Who it is for
+
+- Intraday index option traders working Nifty and Bank Nifty who need fast OI
+  shifts and exhaustion bounds.
+- Swing and positional NSE equity traders validating breakouts against volume
+  profile and sentiment.
+- Quantitative and systematic traders who want probabilistic scoring plus
+  structured risk rules instead of discretionary calls.
+- Risk managers reviewing whether a proposed position clears volatility-adjusted
+  boundaries.
+
+---
+
+## 6. Pricing
+
+Credit-based monthly subscriptions in INR. One credit funds one quantitative model
+run. Machine-readable plans, including current prices and per-plan capabilities,
+are published at https://www.stratai.live/pricing.md and rendered for humans at
+https://www.stratai.live/pricing.
+
+There is no free tier. Strat AI is in private beta; a plan activates once beta
+access is granted. Refund window is 7 days
+(https://www.stratai.live/refund). Billing runs through PCI-DSS compliant gateways
+supporting UPI, cards, and net banking.
+
+---
+
+## 7. Security and privacy
+
+- **Zero custody.** No funds, no securities, no execution keys held server-side.
+- **Read-only broker access.** The integration exposes no order-placement methods,
+  and that boundary is asserted by a scope-boundary test rather than left to
+  convention.
+- **No personalisation.** A deterministic, pre-model guardrail refuses eight
+  categories of request outright: position sizing, holdings, capital, income, net
+  worth, goals, third-party requests, and suitability.
+- **No published performance figures.** Total return, win rate, maximum drawdown,
+  and average conviction are absent from the dashboard and from every endpoint.
+- **Tamper-evident decisions.** Committed decisions are hash-chained and
+  append-only, so any output can be replayed and shown to be unaltered.
+- **Transport security.** TLS throughout.
+- Privacy policy: https://www.stratai.live/privacy
+
+---
+
+## 8. AI governance
+
+Which models are used, how requests are routed between them, and where the
+known limits sit are documented publicly at
+https://www.stratai.live/ai-disclosure. Model output is treated as research
+input, never as an instruction to trade, and the deterministic risk layer sits
+downstream of every model call.
+
+---
+
+## 9. Publisher
+
+Strat AI is developed and published by the **Trading & Research Wing (TRW)**, a
+research and engineering group working on quantitative trading intelligence,
+market modelling, and algorithmic risk systems. https://www.tradingrw.com
+
+### Regulatory disclosure
+
+Trading & Research Wing and Strat AI are software research providers. Strat AI
+generates quantitative indicators and statistical probabilities for analytical and
+educational research purposes only. Strat AI does not provide financial advice,
+SEBI-registered investment recommendations, or guaranteed returns. Trading
+derivatives carries substantial risk of loss, and every trading decision remains
+the sole responsibility of the user.
+
+---
+
+## 10. Agent surfaces
+
+- Navigation index: https://www.stratai.live/llms.txt
+- Agent instructions and tool schemas: https://www.stratai.live/agents.md
+- MCP server (Streamable HTTP JSON-RPC, no auth): https://www.stratai.live/api/mcp
+- MCP server card: https://www.stratai.live/.well-known/mcp/server-card.json
+- Agentic resource catalog: https://www.stratai.live/.well-known/ard.json
+- Homepage as markdown: https://www.stratai.live/index.md
+- Pricing as markdown: https://www.stratai.live/pricing.md
+
+WebMCP tools are registered on `document.modelContext` on every page, and action
+forms carry `toolname` / `tooldescription` attributes in server-rendered HTML.
+
+---
+
+## 11. Links
+
+- Homepage: https://www.stratai.live/
+- Strat AI Platform: https://www.stratai.live/features/ai-trading-platform
+- Options analysis: https://www.stratai.live/features/options-trading-analysis
+- Intraday terminal: https://www.stratai.live/features/intraday-trading-terminal
+- AI stock analysis: https://www.stratai.live/features/ai-stock-analysis
+- Strat AI Co-Pilot: https://www.stratai.live/features/ai-trading-assistant
+- Pricing: https://www.stratai.live/pricing
+- Blog: https://www.stratai.live/blog
+- Changelog: https://www.stratai.live/changelog
+- About: https://www.stratai.live/about
+- Join private beta: https://www.stratai.live/waitlist
+- Contact: https://www.stratai.live/contact
+- AI disclosure: https://www.stratai.live/ai-disclosure
+- Disclaimer: https://www.stratai.live/disclaimer
+
+## 12. Contact
+
+- Support: support@stratai.live
+- Billing: billing@stratai.live
+- Legal: legal@stratai.live
+
+(c) 2026 Trading & Research Wing.

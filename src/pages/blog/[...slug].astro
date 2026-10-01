@@ -1,0 +1,217 @@
+---
+/**
+ * Blog Post Page — Dynamic route for individual blog posts fetched from backend database API.
+ */
+
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Prose from '@/components/ui/Prose.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { fetchBlogs, fetchBlogBySlug } from '@/services/content';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const blogs = await fetchBlogs();
+  return blogs.map((blog) => ({
+    params: { slug: blog.slug },
+    props: { blog },
+  }));
+}
+
+const { slug } = Astro.params;
+const initialBlog = Astro.props.blog;
+
+const blog = initialBlog || (slug ? await fetchBlogBySlug(slug) : null);
+
+if (!blog) {
+  return Astro.redirect('/404');
+}
+
+const htmlContent = await marked.parse(blog.content || '');
+
+const formattedDate = new Date(blog.publishedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const wordCount = blog.content ? blog.content.split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+const categoryVariants: Record<
+  string,
+  'orange' | 'pink' | 'violet' | 'emerald' | 'accent' | 'default'
+> = {
+  'AI & Machine Learning': 'violet',
+  'Market Research': 'orange',
+  'Product Updates': 'pink',
+  'Trading Insights': 'emerald',
+  Engineering: 'accent',
+};
+
+const badgeVariant = categoryVariants[blog.category] || 'default';
+
+const siteUrl =
+  Astro.site?.toString().replace(/\/$/, '') || 'https://www.stratai.live';
+const articleHeroImage = `${siteUrl}/hero/hero-dark.png`;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: blog.title,
+  description: blog.excerpt,
+  datePublished: new Date(blog.publishedAt).toISOString(),
+  dateModified: new Date(blog.updatedAt || blog.publishedAt).toISOString(),
+  image: {
+    '@type': 'ImageObject',
+    url: articleHeroImage,
+    width: 1920,
+    height: 988,
+  },
+  author: {
+    '@type': 'Person',
+    name: blog.author,
+    url: 'https://www.tradingrw.com/',
+    sameAs: [
+      'https://x.com/thestratai',
+      'https://github.com/thestratai',
+      'https://linkedin.com/company/thestratai',
+      'https://www.tradingrw.com/',
+    ],
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Trading & Research Wing',
+      url: 'https://www.tradingrw.com/',
+    },
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Trading & Research Wing',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/strat.svg`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${siteUrl}/blog/${blog.slug}`,
+  },
+};
+
+const isTRWAuthor =
+  blog.author.toLowerCase().includes('trading') ||
+  blog.author.toLowerCase().includes('trw');
+---
+
+<PageLayout
+  title={blog.title}
+  description={blog.excerpt}
+  breadcrumbs={[{ label: 'Blog', href: '/blog' }, { label: blog.title }]}
+  showHero={false}
+  ogType="article"
+  jsonLd={articleSchema}
+  markdownHref={`/blog/${blog.slug}.md`}
+>
+  <!-- Article Header -->
+  <section class="pt-20 lg:pt-24 pb-0 bg-canvas transition-colors duration-300">
+    <Container size="wide" class="!px-0">
+      <div
+        class="border-y border-hairline bg-surface-soft/5 p-8 md:p-12 lg:p-16"
+      >
+        <div class="max-w-[800px]">
+          <div class="flex items-center gap-3 mb-6">
+            <Badge variant={badgeVariant}>{blog.category}</Badge>
+            <span class="type-body-sm text-muted-soft"
+              >{readingTime} min read</span
+            >
+          </div>
+
+          <h1
+            class="type-display-lg tracking-tight leading-[1.1] text-ink mb-4"
+          >
+            {blog.title}
+          </h1>
+
+          <p class="type-body-md text-muted leading-relaxed mb-6">
+            {blog.excerpt}
+          </p>
+
+          <div class="flex items-center gap-4 pt-4 border-t border-hairline">
+            <div
+              class="w-10 h-10 rounded-full bg-surface-card flex items-center justify-center overflow-hidden border border-hairline p-1"
+            >
+              {
+                isTRWAuthor ? (
+                  <img
+                    src="/trw-white.png"
+                    alt="TRW Logo"
+                    class="w-full h-full object-contain"
+                    loading="lazy"
+                    width={40}
+                    height={40}
+                  />
+                ) : (
+                  <span class="type-body-sm text-ink font-semibold">
+                    {blog.author
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')}
+                  </span>
+                )
+              }
+            </div>
+            <div>
+              {
+                isTRWAuthor ? (
+                  <a
+                    href="https://www.tradingrw.com/"
+                    class="type-body-sm text-ink font-medium hover:text-brand-accent hover:underline block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {blog.author}
+                  </a>
+                ) : (
+                  <p class="type-body-sm text-ink font-medium">{blog.author}</p>
+                )
+              }
+              <p class="type-body-sm text-muted-soft">
+                <time datetime={new Date(blog.publishedAt).toISOString()}
+                  >{formattedDate}</time
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Article Body -->
+  <section class="py-12 md:py-16 bg-canvas transition-colors duration-300">
+    <Container>
+      <div class="max-w-[800px]">
+        <Prose>
+          <div set:html={htmlContent} />
+        </Prose>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Tags -->
+  {
+    Array.isArray(blog.tags) && blog.tags.length > 0 && (
+      <section class="pb-16 bg-canvas transition-colors duration-300">
+        <Container>
+          <div class="flex flex-wrap gap-2 pt-6 border-t border-hairline">
+            <span class="type-body-sm text-muted-soft mr-2">Tags:</span>
+            {blog.tags.map((tag) => (
+              <span class="px-3 py-1 rounded-full bg-surface-card text-muted type-body-sm border border-hairline">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </Container>
+      </section>
+    )
+  }
+</PageLayout>

@@ -1,0 +1,310 @@
+{
+  "communities": {
+    "0": [
+      "app_components_animateonscroll_tsx",
+      "app_components_faq_tsx",
+      "app_components_featurebento_tsx",
+      "app_components_finalcta_tsx",
+      "app_components_footer_tsx",
+      "app_components_hero_tsx",
+      "app_components_howitworks_tsx",
+      "app_components_navbar_tsx",
+      "app_components_pricing_tsx",
+      "app_components_problemsection_tsx",
+      "app_components_stats_tsx",
+      "app_components_ticker_tsx",
+      "app_page_home",
+      "app_page_tsx",
+      "components_animateonscroll_fadedown",
+      "components_animateonscroll_fadeleft",
+      "components_animateonscroll_faderight",
+      "components_animateonscroll_fadeup",
+      "components_animateonscroll_parallaxsection",
+      "components_animateonscroll_scalein",
+      "components_animateonscroll_staggercontainer",
+      "components_animateonscroll_staggeritem",
+      "components_faq_faq",
+      "components_faq_faqs",
+      "components_finalcta_finalcta",
+      "components_footer_footer",
+      "components_hero_hero",
+      "components_hero_terminalchart",
+      "components_navbar_navbar",
+      "components_pricing_pricing",
+      "components_problemsection_problemsection",
+      "components_stats_stats",
+      "components_stats_usecountup",
+      "components_ticker_ticker"
+    ],
+    "1": [
+      "agent_context_md",
+      "aitrader_landing_agent_context_agent_context_md_alpha_suite",
+      "aitrader_landing_agent_context_before_writing_any_code",
+      "aitrader_landing_agent_context_codeblock_1",
+      "aitrader_landing_agent_context_codeblock_2",
+      "aitrader_landing_agent_context_codeblock_21",
+      "aitrader_landing_agent_context_codeblock_22",
+      "aitrader_landing_agent_context_codeblock_23",
+      "aitrader_landing_agent_context_codeblock_24",
+      "aitrader_landing_agent_context_codeblock_25",
+      "aitrader_landing_agent_context_codeblock_26",
+      "aitrader_landing_agent_context_codeblock_27",
+      "aitrader_landing_agent_context_codeblock_28",
+      "aitrader_landing_agent_context_output_format_expectations",
+      "aitrader_landing_agent_context_section_10_kafka_topics_authoritative",
+      "aitrader_landing_agent_context_section_11_key_architectural_constraints",
+      "aitrader_landing_agent_context_section_12_design_system_summary_quick_reference",
+      "aitrader_landing_agent_context_section_13_auth_system_complete_do_not_rebuild",
+      "aitrader_landing_agent_context_section_14_agent_instructions",
+      "aitrader_landing_agent_context_section_15_copy_voice_guidelines",
+      "aitrader_landing_agent_context_section_16_infrastructure_docker_compose",
+      "aitrader_landing_agent_context_section_1_what_is_alpha_suite",
+      "aitrader_landing_agent_context_section_2_complete_technology_stack",
+      "aitrader_landing_agent_context_section_3_repository_structure",
+      "aitrader_landing_agent_context_section_6_ui_features_map",
+      "aitrader_landing_agent_context_section_9_port_map_authoritative",
+      "aitrader_landing_agent_context_when_building_the_landing_page",
+      "aitrader_landing_agent_context_when_writing_rust_agents_tauri",
+      "aitrader_landing_agent_context_when_writing_typescript_frontend_hooks_components"
+    ],
+    "2": [
+      "aitrader_landing_package_dependencies",
+      "aitrader_landing_package_dependencies_framer_motion",
+      "aitrader_landing_package_dependencies_next",
+      "aitrader_landing_package_dependencies_react",
+      "aitrader_landing_package_dependencies_react_dom",
+      "aitrader_landing_package_devdependencies",
+      "aitrader_landing_package_devdependencies_eslint",
+      "aitrader_landing_package_devdependencies_tailwindcss",
+      "aitrader_landing_package_devdependencies_tailwindcss_postcss",
+      "aitrader_landing_package_devdependencies_types_node",
+      "aitrader_landing_package_devdependencies_types_react",
+      "aitrader_landing_package_devdependencies_typescript",
+      "aitrader_landing_package_name",
+      "aitrader_landing_package_private",
+      "aitrader_landing_package_scripts",
+      "aitrader_landing_package_scripts_build",
+      "aitrader_landing_package_scripts_dev",
+      "aitrader_landing_package_scripts_lint",
+      "aitrader_landing_package_scripts_start",
+      "aitrader_landing_package_version",
+      "eslint_config_mjs",
+      "package_json"
+    ],
+    "3": [
+      "aitrader_landing_tsconfig_compileroptions",
+      "aitrader_landing_tsconfig_compileroptions_allowjs",
+      "aitrader_landing_tsconfig_compileroptions_esmoduleinterop",
+      "aitrader_landing_tsconfig_compileroptions_incremental",
+      "aitrader_landing_tsconfig_compileroptions_isolatedmodules",
+      "aitrader_landing_tsconfig_compileroptions_jsx",
+      "aitrader_landing_tsconfig_compileroptions_lib",
+      "aitrader_landing_tsconfig_compileroptions_module",
+      "aitrader_landing_tsconfig_compileroptions_moduleresolution",
+      "aitrader_landing_tsconfig_compileroptions_noemit",
+      "aitrader_landing_tsconfig_compileroptions_paths",
+      "aitrader_landing_tsconfig_compileroptions_plugins",
+      "aitrader_landing_tsconfig_compileroptions_resolvejsonmodule",
+      "aitrader_landing_tsconfig_compileroptions_skiplibcheck",
+      "aitrader_landing_tsconfig_compileroptions_strict",
+      "aitrader_landing_tsconfig_compileroptions_target",
+      "aitrader_landing_tsconfig_exclude",
+      "aitrader_landing_tsconfig_include",
+      "aitrader_landing_tsconfig_paths",
+      "tsconfig_json"
+    ],
+    "4": [
+      "aitrader_landing_agent_context_4_1_real_time_tick_path",
+      "aitrader_landing_agent_context_4_2_ohlc_chart_path",
+      "aitrader_landing_agent_context_4_3_ai_signal_path",
+      "aitrader_landing_agent_context_4_4_ghost_line_path",
+      "aitrader_landing_agent_context_4_5_quant_rag_insight_path",
+      "aitrader_landing_agent_context_4_6_deep_quant_ai_path_on_demand",
+      "aitrader_landing_agent_context_4_7_quant_radar_path_background",
+      "aitrader_landing_agent_context_4_8_symbol_switch_path",
+      "aitrader_landing_agent_context_codeblock_10",
+      "aitrader_landing_agent_context_codeblock_3",
+      "aitrader_landing_agent_context_codeblock_4",
+      "aitrader_landing_agent_context_codeblock_6",
+      "aitrader_landing_agent_context_codeblock_8",
+      "aitrader_landing_agent_context_codeblock_9",
+      "aitrader_landing_agent_context_section_4_data_flows_canonical"
+    ],
+    "5": [
+      "design_system_strat_master_md",
+      "strat_master_additional_forbidden_patterns",
+      "strat_master_anti_patterns_do_not_use",
+      "strat_master_codeblock_1",
+      "strat_master_color_palette",
+      "strat_master_design_system_master_file",
+      "strat_master_global_rules",
+      "strat_master_page_pattern",
+      "strat_master_pre_delivery_checklist",
+      "strat_master_shadow_depths",
+      "strat_master_spacing_variables",
+      "strat_master_style_guidelines",
+      "strat_master_typography"
+    ],
+    "6": [
+      "aitrader_landing_agent_context_5_1_indicator_inventory",
+      "aitrader_landing_agent_context_5_2_techsignal_score_logic_technical_agent",
+      "aitrader_landing_agent_context_5_3_consensusreport_fields",
+      "aitrader_landing_agent_context_5_4_candlestick_patterns_patternengine",
+      "aitrader_landing_agent_context_5_5_institutional_strategies_strategyengine",
+      "aitrader_landing_agent_context_5_6_predictive_agent_ols_ghost_line",
+      "aitrader_landing_agent_context_codeblock_11",
+      "aitrader_landing_agent_context_codeblock_12",
+      "aitrader_landing_agent_context_codeblock_13",
+      "aitrader_landing_agent_context_codeblock_14",
+      "aitrader_landing_agent_context_codeblock_15",
+      "aitrader_landing_agent_context_section_5_intelligence_layer_16_indicators_5_patterns_5_strategies"
+    ],
+    "7": [
+      "strat_master_buttons",
+      "strat_master_cards",
+      "strat_master_codeblock_2",
+      "strat_master_codeblock_3",
+      "strat_master_codeblock_4",
+      "strat_master_codeblock_5",
+      "strat_master_component_specs",
+      "strat_master_inputs",
+      "strat_master_modals"
+    ],
+    "8": [
+      "aitrader_landing_agent_context_8_1_usetradestore_ts_zustand_central_state",
+      "aitrader_landing_agent_context_8_2_usechartuistore_ts_zustand_drawing_state",
+      "aitrader_landing_agent_context_8_3_cache_key_convention",
+      "aitrader_landing_agent_context_codeblock_18",
+      "aitrader_landing_agent_context_codeblock_19",
+      "aitrader_landing_agent_context_codeblock_20",
+      "aitrader_landing_agent_context_section_8_state_management_reference"
+    ],
+    "9": [
+      "aitrader_landing_agent_context_7_1_landing_page_priority_high",
+      "aitrader_landing_agent_context_7_2_remaining_indicators_priority_medium",
+      "aitrader_landing_agent_context_7_3_order_book_priority_low",
+      "aitrader_landing_agent_context_7_4_deployment_pipeline_priority_low",
+      "aitrader_landing_agent_context_codeblock_16",
+      "aitrader_landing_agent_context_codeblock_17",
+      "aitrader_landing_agent_context_section_7_what_still_needs_to_be_built"
+    ],
+    "10": [
+      "app_layout_inter",
+      "app_layout_jetbrainsmono",
+      "app_layout_metadata",
+      "app_layout_outfit",
+      "app_layout_rootlayout",
+      "app_layout_tsx"
+    ],
+    "11": [
+      "aitrader_landing_readme_codeblock_1",
+      "aitrader_landing_readme_deploy_on_vercel",
+      "aitrader_landing_readme_getting_started",
+      "aitrader_landing_readme_learn_more",
+      "readme_md"
+    ],
+    "12": [
+      "agents_md",
+      "aitrader_landing_agents_this_is_not_the_next_js_you_know"
+    ],
+    "13": [
+      "aitrader_landing_postcss_config_config",
+      "postcss_config_mjs"
+    ],
+    "14": [
+      "agents_rules_graphify_md",
+      "rules_graphify_graphify"
+    ],
+    "15": [
+      "agents_workflows_graphify_md",
+      "workflows_graphify_workflow_graphify"
+    ],
+    "16": [
+      "next_config_ts"
+    ],
+    "17": [
+      "vscode_settings_json"
+    ],
+    "18": [
+      "claude_md"
+    ]
+  },
+  "cohesion": {
+    "0": 0.0784313725490196,
+    "1": 0.06896551724137931,
+    "2": 0.09090909090909091,
+    "3": 0.1,
+    "4": 0.1523809523809524,
+    "5": 0.15384615384615385,
+    "6": 0.16666666666666666,
+    "7": 0.2222222222222222,
+    "8": 0.2857142857142857,
+    "9": 0.2857142857142857,
+    "10": 0.3333333333333333,
+    "11": 0.4,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0
+  },
+  "gods": [
+    {
+      "id": "aitrader_landing_agent_context_agent_context_md_alpha_suite",
+      "label": "AGENT_CONTEXT.md \u2014 Alpha Suite",
+      "degree": 17
+    },
+    {
+      "id": "aitrader_landing_tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 16
+    },
+    {
+      "id": "aitrader_landing_agent_context_section_4_data_flows_canonical",
+      "label": "SECTION 4 \u2014 DATA FLOWS (CANONICAL)",
+      "degree": 9
+    },
+    {
+      "id": "aitrader_landing_agent_context_section_5_intelligence_layer_16_indicators_5_patterns_5_strategies",
+      "label": "SECTION 5 \u2014 INTELLIGENCE LAYER (16 INDICATORS + 5 PATTERNS + 5 STRATEGIES)",
+      "degree": 7
+    },
+    {
+      "id": "aitrader_landing_agent_context_section_14_agent_instructions",
+      "label": "SECTION 14 \u2014 AGENT INSTRUCTIONS",
+      "degree": 6
+    },
+    {
+      "id": "strat_master_design_system_master_file",
+      "label": "Design System Master File",
+      "degree": 6
+    },
+    {
+      "id": "aitrader_landing_package_scripts",
+      "label": "scripts",
+      "degree": 5
+    },
+    {
+      "id": "aitrader_landing_agent_context_section_7_what_still_needs_to_be_built",
+      "label": "SECTION 7 \u2014 WHAT STILL NEEDS TO BE BUILT",
+      "degree": 5
+    },
+    {
+      "id": "strat_master_global_rules",
+      "label": "Global Rules",
+      "degree": 5
+    },
+    {
+      "id": "strat_master_component_specs",
+      "label": "Component Specs",
+      "degree": 5
+    }
+  ],
+  "surprises": [],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

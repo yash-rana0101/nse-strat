@@ -1,0 +1,84 @@
+---
+/**
+ * Workflows — which surface answers which question, across one session.
+ *
+ * Replaces the old UseCases section. Copy lives in
+ * `src/content/landing/workflows.ts` and is written strictly as terminal
+ * mechanics: no outcome language and no suitability implications.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { workflows } from '@/content/landing';
+
+const { intro, steps, note } = workflows;
+---
+
+<section
+  class="section-y bg-canvas transition-colors duration-300"
+  id={intro.id}
+  aria-labelledby="workflows-heading"
+>
+  <Container>
+    <div
+      class="max-w-[800px] mx-auto text-center mb-12 md:mb-16"
+      data-reveal-group
+    >
+      <div data-reveal-item>
+        <Badge variant="emerald" class="mb-4">{intro.badge}</Badge>
+      </div>
+      <h2
+        id="workflows-heading"
+        class="type-display-lg leading-[1.1] tracking-tight text-ink"
+        data-reveal-item
+      >
+        {intro.heading}
+      </h2>
+      {
+        intro.body && (
+          <p class="type-body-md text-muted mt-4" data-reveal-item>
+            {intro.body}
+          </p>
+        )
+      }
+    </div>
+  </Container>
+
+  <Container size="wide" class="!px-0">
+    <div
+      class="border-y border-hairline overflow-hidden bg-surface-soft/5 flex flex-col divide-y divide-hairline"
+      data-reveal-group
+    >
+      {
+        steps.map((step, index) => (
+          <div class="reveal-item grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-start gap-4 md:gap-8 p-6 sm:p-8 md:px-12 hover:bg-surface-soft/10 transition-colors">
+            <div class="flex items-center gap-3 md:w-[160px] shrink-0">
+              <span class="font-mono text-xs font-bold text-muted-soft">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-badge-emerald">
+                {step.phase}
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-1.5 min-w-0">
+              <h3 class="type-title-md text-ink font-semibold">{step.title}</h3>
+              <p class="type-body-sm text-muted leading-relaxed">{step.body}</p>
+            </div>
+
+            <span class="font-mono text-[10px] tracking-wider px-2.5 py-1.5 rounded border border-hairline/60 bg-surface-card text-muted-soft md:max-w-[220px] md:text-right justify-self-start md:justify-self-end">
+              {step.artefact}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+
+  <Container>
+    <p
+      class="text-xs text-muted-soft text-center mt-8 max-w-[700px] mx-auto leading-relaxed"
+    >
+      {note}
+    </p>
+  </Container>
+</section>

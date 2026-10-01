@@ -1,0 +1,87 @@
+---
+/**
+ * PageLayout — Inner-page layout with standardized hero banner.
+ * Used by all sub-pages (legal, about, contact).
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Breadcrumb from '@/components/ui/Breadcrumb.astro';
+import Badge from '@/components/ui/Badge.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+interface Props {
+  title: string;
+  description?: string;
+  badge?: string;
+  badgeVariant?:
+    'default' | 'orange' | 'pink' | 'violet' | 'emerald' | 'accent';
+  breadcrumbs?: BreadcrumbItem[];
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  showHero?: boolean;
+  markdownHref?: string;
+}
+const {
+  title,
+  description,
+  badge,
+  badgeVariant = 'emerald',
+  breadcrumbs = [],
+  ogImage,
+  ogType,
+  jsonLd,
+  showHero = true,
+  markdownHref,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={`${title} — Strat Ai`}
+  description={description}
+  ogImage={ogImage}
+  ogType={ogType}
+  jsonLd={jsonLd}
+  markdownHref={markdownHref}
+>
+  {
+    showHero && (
+      <section class="relative pt-24 lg:pt-24 pb-0 overflow-hidden bg-canvas transition-colors duration-300">
+        <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            class="absolute inset-0 opacity-[0.03] dark:opacity-[0.12] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_20%,transparent_80%)]"
+            style="background-image: linear-gradient(var(--color-hairline) 1px, transparent 1px), linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px); background-size: 48px 48px;"
+          />
+        </div>
+        <Container size="wide" class="!px-0">
+          <div class="border-y border-hairline bg-surface-soft/5 relative z-10">
+            <div class="p-8 md:p-12 lg:p-16 max-w-[800px]">
+              {breadcrumbs.length > 0 && (
+                <div class="mb-6">
+                  <Breadcrumb items={breadcrumbs} />
+                </div>
+              )}
+              {badge && (
+                <Badge variant={badgeVariant} class="mb-4">
+                  {badge}
+                </Badge>
+              )}
+              <h1 class="type-display-lg tracking-tight leading-[1.1] text-ink">
+                {title}
+              </h1>
+              {description && (
+                <p class="type-body-md text-muted text-lg leading-relaxed mt-4 max-w-[640px]">
+                  {description}
+                </p>
+              )}
+            </div>
+          </div>
+        </Container>
+      </section>
+    )
+  }
+  <slot />
+</BaseLayout>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import Badge from '@/components/ui/Badge.astro';
+import ErrorIllustration from '@/components/ui/ErrorIllustration.astro';
+---
+
+<BaseLayout
+  title="404 — Signal Interrupted | Strat Ai"
+  description="The requested page or market coordinate could not be found on Strat Ai. Return to the main terminal dashboard or explore active market hubs."
+  noindex={true}
+>
+  <section
+    class="min-h-[85vh] flex items-center justify-center relative overflow-hidden bg-canvas py-20 transition-colors duration-300"
+  >
+    <!-- Subtle Background Micro-Grid -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div
+        class="absolute inset-0 opacity-[0.03] dark:opacity-[0.12] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,black_20%,transparent_80%)]"
+        style="background-image: linear-gradient(var(--color-hairline) 1px, transparent 1px), linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px); background-size: 48px 48px;"
+      >
+      </div>
+      <!-- Radial Glow -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 rounded-full bg-error/10 blur-[120px] dark:opacity-40 opacity-20"
+      >
+      </div>
+    </div>
+
+    <Container class="relative z-10">
+      <div
+        class="max-w-145 mx-auto text-center flex flex-col items-center gap-6 reveal reveal-scale-up"
+      >
+        <!-- Error Illustration -->
+        <ErrorIllustration />
+
+        <Badge variant="orange">Error Code 404</Badge>
+
+        <h1 class="type-display-md tracking-tight leading-[1.1] text-ink">
+          Signal Interrupted
+        </h1>
+
+        <p class="type-body-md text-muted leading-relaxed max-w-112.5">
+          The coordinate you requested does not contain live feeds or quant
+          indicators. Let's redirect your terminal back to functioning hubs.
+        </p>
+
+        <!-- Dynamic Navigation Links -->
+        <div class="grid grid-cols-2 gap-3 w-full max-w-100 mt-4">
+          <a
+            href="/"
+            class="flex items-center gap-2.5 p-3 rounded-xl border border-hairline bg-surface-soft/40 hover:bg-surface-soft hover:border-brand-accent text-left group transition-all duration-200 no-underline"
+          >
+            <span
+              class="p-2 rounded-lg bg-surface-card border border-hairline text-ink group-hover:text-brand-accent"
+              ><Icon name="sparkles" size={16} /></span
+            >
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold text-ink">Home Terminal</span>
+              <span class="text-[10px] text-muted-soft"
+                >Conviction dashboard</span
+              >
+            </div>
+          </a>
+          <a
+            href="/blog"
+            class="flex items-center gap-2.5 p-3 rounded-xl border border-hairline bg-surface-soft/40 hover:bg-surface-soft hover:border-brand-accent text-left group transition-all duration-200 no-underline"
+          >
+            <span
+              class="p-2 rounded-lg bg-surface-card border border-hairline text-ink group-hover:text-brand-accent"
+              ><Icon name="menu" size={16} /></span
+            >
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold text-ink">Market Blog</span>
+              <span class="text-[10px] text-muted-soft">Quant strategies</span>
+            </div>
+          </a>
+          <a
+            href="/docs"
+            class="flex items-center gap-2.5 p-3 rounded-xl border border-hairline bg-surface-soft/40 hover:bg-surface-soft hover:border-brand-accent text-left group transition-all duration-200 no-underline"
+          >
+            <span
+              class="p-2 rounded-lg bg-surface-card border border-hairline text-ink group-hover:text-brand-accent"
+              ><Icon name="chevron-down" class="rotate-270" size={16} /></span
+            >
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold text-ink">Documentation</span>
+              <span class="text-[10px] text-muted-soft">Terminal guides</span>
+            </div>
+          </a>
+          <a
+            href="/pricing"
+            class="flex items-center gap-2.5 p-3 rounded-xl border border-hairline bg-surface-soft/40 hover:bg-surface-soft hover:border-brand-accent text-left group transition-all duration-200 no-underline"
+          >
+            <span
+              class="p-2 rounded-lg bg-surface-card border border-hairline text-ink group-hover:text-brand-accent"
+              ><Icon name="sparkles" size={16} /></span
+            >
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold text-ink">Pricing Plans</span>
+              <span class="text-[10px] text-muted-soft">Flexible packages</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="mt-4 flex flex-col sm:flex-row gap-3">
+          <Button
+            variant="primary"
+            href="/"
+            class="rounded-full! px-6! text-xs gap-2 font-semibold"
+          >
+            <Icon name="sparkles" size={12} />
+            Go to Home
+          </Button>
+          <Button
+            variant="secondary"
+            href="/contact"
+            class="rounded-full! px-6! text-xs gap-2 font-semibold"
+          >
+            Contact Support
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

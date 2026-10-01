@@ -1,0 +1,567 @@
+---
+/**
+ * About Page — Deep Quantitative Product Architecture, Mission, & Core Engineering.
+ * Grounded in strat_ai_definitive_product_context.md blueprint.
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import Icon from '@/components/ui/Icon.astro';
+---
+
+<PageLayout
+  title="About Strat AI — Definitive Product Context & Engineering Architecture"
+  description="Explore the quantitative engineering blueprint, multi-agent AI research loop, Rust binary tick pipeline, and capital preservation philosophy of Strat AI."
+  badge="Product Blueprint"
+  badgeVariant="emerald"
+  breadcrumbs={[{ label: 'About', href: '/about' }]}
+>
+  <!-- 1. Hero & Developer Attribution -->
+  <section
+    class="py-16 md:py-24 bg-canvas transition-colors duration-300 relative overflow-hidden"
+  >
+    <div class="absolute inset-0 pointer-events-none opacity-40">
+      <div
+        class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.15)_0%,transparent_70%)] blur-[120px]"
+      >
+      </div>
+    </div>
+
+    <Container class="relative z-10">
+      <div
+        class="max-w-[900px] mx-auto text-center flex flex-col items-center gap-5"
+      >
+        <Badge variant="emerald" class="px-4 py-1 text-xs"
+          >Developed by Trading & Research Wing</Badge
+        >
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold tracking-tight text-ink leading-[1.08]"
+        >
+          Pre-trade risk adjudication engineered with mathematical rigor
+        </h1>
+        <p
+          class="type-body-md text-body text-base md:text-lg max-w-[750px] mx-auto leading-relaxed font-normal"
+        >
+          Strat AI is a market analysis and pre-trade risk adjudication terminal
+          for the Indian stock market (NSE). Developed by the <a
+            href="https://www.tradingrw.com/"
+            class="text-brand-accent hover:underline font-semibold"
+            target="_blank"
+            rel="noopener noreferrer">Trading and Research Wing</a
+          >, it combines multi-agent research evaluation, deterministic risk
+          verification, and streaming glass-box reasoning.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. The Information War & Core Mission -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-y border-hairline transition-colors duration-300"
+  >
+    <Container size="wide">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <Card variant="feature" padding="lg" class="flex flex-col gap-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-badge-violet/15 text-badge-violet flex items-center justify-center font-bold"
+            >
+              <Icon name="shield-check" size={20} />
+            </div>
+            <Badge variant="violet">Market Asymmetry</Badge>
+          </div>
+          <h2
+            class="type-display-sm tracking-tight text-ink font-display font-bold"
+          >
+            Trading requires objective analysis over emotional reaction
+          </h2>
+          <p class="type-body-md text-muted leading-relaxed">
+            Market analysis is often cluttered by conflicting media headlines
+            and lagging indicators. Strat AI acts as an objective pre-trade
+            research co-pilot, evaluating setups against hard volatility
+            constraints, order flow imbalances, and options concentration before
+            capital is committed.
+          </p>
+        </Card>
+
+        <Card variant="feature" padding="lg" class="flex flex-col gap-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-badge-pink/15 text-badge-pink flex items-center justify-center font-bold"
+            >
+              <Icon name="sparkles" size={20} />
+            </div>
+            <Badge variant="pink">Core Philosophy</Badge>
+          </div>
+          <h2
+            class="type-display-sm tracking-tight text-ink font-display font-bold"
+          >
+            Pre-trade risk discipline & honest failure
+          </h2>
+          <p class="type-body-md text-muted leading-relaxed">
+            Our philosophy is built around capital protection through
+            deterministic rules: unbypassable 1.5× ATR stop floors, profile
+            reward-to-risk constraints, automatic stand-asides during data
+            conflicts, and transparent reporting when data is unavailable.
+          </p>
+        </Card>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Deep-Dive: The Three Core Pillar Features -->
+  <section class="py-20 md:py-28 bg-canvas transition-colors duration-300">
+    <Container>
+      <div class="max-w-[800px] mx-auto text-center mb-16">
+        <Badge variant="emerald" class="mb-4">Core Architecture</Badge>
+        <h2
+          class="type-display-lg leading-[1.1] tracking-tight text-ink font-display font-extrabold"
+        >
+          The 3 Pillars of Strat AI Intelligence
+        </h2>
+        <p class="type-body-md text-muted mt-4 text-base">
+          Built on a stateful multi-agent reasoning engine, linear regression
+          trajectory projection, and dual technical/sentiment signal fusion.
+        </p>
+      </div>
+    </Container>
+
+    <Container size="wide" class="space-y-16">
+      <!-- Pillar 1 -->
+      <Card
+        variant="feature"
+        padding="lg"
+        class="border border-brand-accent/30 p-8 md:p-12"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="flex items-center gap-2">
+              <span
+                class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-brand-accent/15 text-brand-accent"
+                >PILLAR 01</span
+              >
+              <Badge variant="emerald">Deep Quant Co-Pilot</Badge>
+            </div>
+            <h3
+              class="text-2xl md:text-3xl font-display font-bold text-ink leading-tight"
+            >
+              Stateful Multi-Agent Reasoning Engine
+            </h3>
+            <p class="type-body-md text-muted leading-relaxed">
+              A structured multi-agent research pipeline operating across 4
+              stateful decision modes.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div
+              class="p-5 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+            >
+              <h4
+                class="font-semibold text-ink text-base flex items-center gap-2"
+              >
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> FIND Mode
+                (15-Step Scan)
+              </h4>
+              <p class="text-xs text-muted leading-relaxed">
+                Evaluates macro trends (1H/4H/1D), VWAP, volume profile Point of
+                Control, VWEPR quadratic curvature, Order Flow Imbalance, and 19
+                chart patterns (&gt;0.6 confidence).
+              </p>
+            </div>
+
+            <div
+              class="p-5 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+            >
+              <h4
+                class="font-semibold text-ink text-base flex items-center gap-2"
+              >
+                <span class="w-2 h-2 rounded-full bg-rose-400"></span> VERIFY Mode
+                (Risk Audit)
+              </h4>
+              <p class="text-xs text-muted leading-relaxed">
+                Stress-tests trade setups against strict 1.5× ATR volatility
+                stop floors, minimum R:R constraints (1:1.3 intraday / 1:2
+                swing), and unleashes a Bear Agent critique.
+              </p>
+            </div>
+
+            <div
+              class="p-5 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+            >
+              <h4
+                class="font-semibold text-ink text-base flex items-center gap-2"
+              >
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span> DEBATE Mode
+                (Consensus)
+              </h4>
+              <p class="text-xs text-muted leading-relaxed">
+                Spawns competing Bull & Bear AI agents to debate market thesis.
+                A Judge Agent computes weighted conviction, applying a 25-point
+                penalty if the debate remains contested.
+              </p>
+            </div>
+
+            <div
+              class="p-5 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+            >
+              <h4
+                class="font-semibold text-ink text-base flex items-center gap-2"
+              >
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span> QA Mode (Glass-Box
+                Audit)
+              </h4>
+              <p class="text-xs text-muted leading-relaxed">
+                Interactive plain-language auditing where traders probe the AI's
+                exact reasoning. Committed trade decisions remain immutable
+                during Q&A to preserve auditability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Pillar 2 -->
+      <Card variant="feature" padding="lg" class="p-8 md:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="flex items-center gap-2">
+              <span
+                class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-400"
+                >PILLAR 02</span
+              >
+              <Badge variant="emerald">Trajectory Projections</Badge>
+            </div>
+            <h3
+              class="text-2xl md:text-3xl font-display font-bold text-ink leading-tight"
+            >
+              10-Minute Trajectory Projections (OLS Regression)
+            </h3>
+            <p class="type-body-md text-muted leading-relaxed">
+              Projects forward price trajectories onto 10-minute charts using
+              rolling ordinary least squares regression.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 flex flex-col gap-4">
+            <div
+              class="p-6 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-3"
+            >
+              <h4 class="font-semibold text-ink text-base">
+                Mathematical Rigor & Lock
+              </h4>
+              <ul class="list-none space-y-2.5 text-xs text-muted">
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-accent font-bold">✓</span>
+                  <span
+                    ><strong>14-Candle Rolling Window:</strong> Maintains Ordinary
+                    Least Squares (OLS) linear regression across the last 14 closes
+                    on 10-minute candles.</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-accent font-bold">✓</span>
+                  <span
+                    ><strong>R² Confidence Score:</strong> Displays the exact Coefficient
+                    of Determination (R²) so traders know how well recent price fits
+                    the regression line.</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-brand-accent font-bold">✓</span>
+                  <span
+                    ><strong>Timeframe Integrity Lock:</strong> Trajectory projections
+                    only render on 10-minute charts where calibrated, preventing misleading
+                    projections on wrong timeframes.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Pillar 3 -->
+      <Card variant="feature" padding="lg" class="p-8 md:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="flex items-center gap-2">
+              <span
+                class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-amber-500/15 text-amber-400"
+                >PILLAR 03</span
+              >
+              <Badge variant="orange">Signal Fusion</Badge>
+            </div>
+            <h3
+              class="text-2xl md:text-3xl font-display font-bold text-ink leading-tight"
+            >
+              Fused Conviction Score (1–100) & Capital Guardrail
+            </h3>
+            <p class="type-body-md text-muted leading-relaxed">
+              Synthesizes technical indicators, news sentiment, and breakout
+              anomaly streams into a single relative setup ranking.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 flex flex-col gap-4">
+            <div
+              class="p-6 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-3"
+            >
+              <h4 class="font-semibold text-ink text-base">
+                Conviction Fusion & The Conflict Rule
+              </h4>
+              <p class="text-xs text-muted leading-relaxed">
+                The Aggregator engine blends technical momentum at 70% weight
+                and news sentiment at 30%, but inverts that to 30/70 once
+                sentiment conviction exceeds 85, on the reasoning that strong
+                news breaks technical patterns.
+              </p>
+              <div
+                class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs leading-relaxed font-mono"
+              >
+                <strong>CONFLICT RULE:</strong> When a strongly bearish technical
+                read meets strongly bullish sentiment, the blended score is pulled
+                60% toward neutral rather than averaged. The rule is asymmetric, applies
+                in that direction only, and is suppressed while the 30/70 inversion
+                is active.
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </Container>
+  </section>
+
+  <!-- 4. Infrastructure & Engineering Stack -->
+  <section
+    class="py-20 bg-canvas border-y border-hairline transition-colors duration-300"
+  >
+    <Container>
+      <div class="max-w-[800px] mx-auto text-center mb-16">
+        <Badge variant="violet" class="mb-4">Quantitative Engine</Badge>
+        <h2
+          class="type-display-lg leading-[1.1] tracking-tight text-ink font-display font-extrabold"
+        >
+          Measurement Separated From Reasoning
+        </h2>
+        <p class="type-body-md text-muted mt-4 text-base">
+          Built with Rust, Kafka, QuestDB, and Tauri desktop native IPC. Every
+          number the model reads came out of a deterministic function first.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card variant="feature" padding="md" class="flex flex-col gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold"
+          >
+            <Icon name="cpu" size={20} />
+          </div>
+          <h3 class="type-title-md text-ink font-semibold">
+            Rust Binary Tick Parser
+          </h3>
+          <p class="type-body-sm text-muted leading-relaxed">
+            Connects to Zerodha Kite WebSocket streams, parsing raw binary tick
+            packets in Rust with zero garbage collection pauses.
+          </p>
+        </Card>
+
+        <Card variant="feature" padding="md" class="flex flex-col gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center font-bold"
+          >
+            <Icon name="layers" size={20} />
+          </div>
+          <h3 class="type-title-md text-ink font-semibold">
+            Dual-Sink Data Pipeline
+          </h3>
+          <p class="type-body-sm text-muted leading-relaxed">
+            Simultaneously publishes ticks to Kafka/Redpanda for live AI agent
+            processing and QuestDB for historical time-series storage.
+          </p>
+        </Card>
+
+        <Card variant="feature" padding="md" class="flex flex-col gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center font-bold"
+          >
+            <Icon name="chart" size={20} />
+          </div>
+          <h3 class="type-title-md text-ink font-semibold">
+            Order Flow & Footprint Rendering
+          </h3>
+          <p class="type-body-sm text-muted leading-relaxed">
+            Renders volume profile Point of Control (POC) and tick-level bid/ask
+            footprint imbalances directly on WebGL/Canvas. Below the minimum
+            usable tick count, order flow returns nothing rather than a neutral
+            zero.
+          </p>
+        </Card>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 5. Foundational Principles of Trust & Reliability -->
+  <section class="py-20 md:py-28 bg-canvas transition-colors duration-300">
+    <Container>
+      <div class="max-w-[800px] mx-auto text-center mb-16">
+        <Badge variant="pink" class="mb-4">Trust Blueprint</Badge>
+        <h2
+          class="type-display-lg leading-[1.1] tracking-tight text-ink font-display font-extrabold"
+        >
+          7 Foundational Principles of Reliability
+        </h2>
+        <p class="type-body-md text-muted mt-4 text-base">
+          Engineered to eliminate AI hallucinations and enforce deterministic
+          pre-trade risk rules.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          [
+            {
+              num: '01',
+              title: 'Honest Failure Over Fabrication',
+              desc: 'When an API or data source times out, the system marks it as "unavailable" rather than fabricating neutral values. Zero synthetic data.',
+            },
+            {
+              num: '02',
+              title: 'Unbypassable Hard Risk Rules',
+              desc: 'Stop losses must be ≥ 1.5× ATR and R:R must clear minimum thresholds (1:1.3 intraday / 1:2 swing). Enforced deterministically in both Rust and Python.',
+            },
+            {
+              num: '03',
+              title: 'Asymmetric Conflict Rule',
+              desc: 'When a strongly bearish technical read meets strongly bullish sentiment, the blended conviction is pulled 60% toward neutral rather than averaged. The reasoning loop is separately permitted to conclude HOLD.',
+            },
+            {
+              num: '04',
+              title: 'Tamper-Evident Recommendation Log',
+              desc: 'Records every recommendation with tool inputs, prompt hashes, and model IDs in an immutable, append-only store.',
+            },
+            {
+              num: '05',
+              title: 'Full Glass-Box Transparency',
+              desc: 'Streams every tool call, data point, and reasoning step live to the screen as it happens. Watch the system evaluate in real time.',
+            },
+            {
+              num: '06',
+              title: 'Adversarial Self-Critique',
+              desc: 'Bear Agent critique stress-tests every trade setup against VWAP resistance, option walls, and session chop before outputting research.',
+            },
+          ].map((item) => (
+            <Card variant="feature" padding="md" class="flex flex-col gap-3">
+              <span class="text-xs font-mono font-bold text-brand-accent">
+                {item.num}
+              </span>
+              <h3 class="type-title-md text-ink font-semibold">{item.title}</h3>
+              <p class="type-body-sm text-muted leading-relaxed">{item.desc}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- 6. One-Click Workspace Profiles -->
+  <section
+    class="py-16 md:py-20 bg-canvas border-y border-hairline transition-colors duration-300"
+  >
+    <Container>
+      <div class="max-w-[800px] mx-auto text-center mb-12">
+        <Badge variant="emerald" class="mb-4">Focused Workspaces</Badge>
+        <h2
+          class="type-display-md tracking-tight text-ink font-display font-bold"
+        >
+          Four Focused Workspace Profiles
+        </h2>
+        <p class="type-body-md text-muted mt-4 text-base">
+          Each profile carries its own reward-to-risk floor, sidebar, remembered
+          instrument, and agent tool binding, enforced in the store rather than
+          hidden in the interface.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          class="p-6 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+        >
+          <h3 class="type-title-md text-ink font-semibold">
+            1. Intraday Scalper
+          </h3>
+          <p class="type-body-sm text-muted">
+            1m/5m charts, live L2 bid/ask order book depth, and intraday
+            volatility heatmaps.
+          </p>
+        </div>
+        <div
+          class="p-6 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+        >
+          <h3 class="type-title-md text-ink font-semibold">2. Swing Trader</h3>
+          <p class="type-body-sm text-muted">
+            Multi-timeframe trend alignment (1H, 4H, 1D, 1W), Fear & Greed
+            gauge, and news sentiment scoring.
+          </p>
+        </div>
+        <div
+          class="p-6 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+        >
+          <h3 class="type-title-md text-ink font-semibold">3. Investor Mode</h3>
+          <p class="type-body-sm text-muted">
+            Macro indicators (Fed funds, CPI, Treasury, VIX), discipline
+            metrics, and sector trend analysis.
+          </p>
+        </div>
+        <div
+          class="p-6 rounded-2xl bg-surface-soft/60 border border-hairline flex flex-col gap-2"
+        >
+          <h3 class="type-title-md text-ink font-semibold">4. F&O Mode</h3>
+          <p class="type-body-sm text-muted">
+            Options chain analytics, Greeks, OI buildup and walls, with the
+            options tool bound to the agent and split view enabled.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 7. Call To Action -->
+  <section class="py-20 bg-canvas transition-colors duration-300">
+    <Container size="wide">
+      <Card
+        variant="feature"
+        padding="lg"
+        class="text-center p-12 md:p-16 border border-brand-accent/40"
+      >
+        <h2
+          class="type-display-md tracking-tight text-ink font-display font-extrabold mb-4"
+        >
+          Experience quantitative analysis with mathematical rigor
+        </h2>
+        <p
+          class="type-body-md text-muted max-w-[600px] mx-auto mb-8 leading-relaxed"
+        >
+          Join Indian traders using Strat AI to evaluate setups, audit risk
+          parameters, and stream glass-box research.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button
+            variant="primary"
+            size="lg"
+            href="/waitlist"
+            class="!rounded-full px-8">Join Private Beta</Button
+          >
+          <Button
+            variant="secondary"
+            size="lg"
+            href="/pricing"
+            class="!rounded-full px-8">Explore Pricing</Button
+          >
+        </div>
+      </Card>
+    </Container>
+  </section>
+</PageLayout>

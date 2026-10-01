@@ -1,0 +1,151 @@
+---
+/**
+ * TabSwitcher — pill tab bar with a sliding liquid-glass indicator.
+ *
+ * Extracted from HowItWorks.astro and generalised so more than one instance can
+ * live on a page. The `data-tab` attribute, the sliding indicator and the
+ * liquidGlass parameters are unchanged; instance scoping is done with a `group`
+ * key rather than the single global element id the original used.
+ *
+ * Panels are rendered by the caller and paired by attribute:
+ *   <div data-tab-panel={group} data-tab="ols">...</div>
+ *
+ * The first tab in the list is the one shown on load.
+ */
+interface Props {
+  /** Unique key tying this bar to its panels. */
+  group: string;
+  tabs: Array<{ id: string; label: string }>;
+  class?: string;
+}
+
+const { group, tabs, class: className } = Astro.props;
+---
+
+<div
+  data-tab-nav={group}
+  class:list={[
+    'relative flex items-center p-1 bg-surface-soft/60 backdrop-blur-md border border-hairline rounded-full w-fit max-w-full overflow-x-auto',
+    className,
+  ]}
+  role="tablist"
+>
+  <!-- Sliding liquid-glass active indicator pill -->
+  <div
+    data-tab-indicator={group}
+    class="absolute top-0 left-0 rounded-full bg-emerald-500/85 dark:bg-emerald-400/85 shadow-[0_4px_20px_rgba(16,185,129,0.35),inset_0_1.5px_1px_rgba(255,255,255,0.4)] pointer-events-none z-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    style="width: 0px; height: 0px; transform: translate3d(0, 0, 0);"
+  >
+  </div>
+
+  {
+    tabs.map((tab, index) => (
+      <button
+        type="button"
+        role="tab"
+        data-tab-group={group}
+        data-tab={tab.id}
+        aria-selected={index === 0 ? 'true' : 'false'}
+        class:list={[
+          'tab-btn relative z-10 px-4 py-1.5 text-xs font-semibold rounded-full cursor-pointer transition-colors duration-300 whitespace-nowrap',
+          index === 0
+            ? 'text-white dark:text-black'
+            : 'text-muted hover:text-ink',
+        ]}
+      >
+        {tab.label}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  import { liquidGlass } from '@/utils/liquid-glass';
+
+  const instances = new Map<string, ReturnType<typeof liquidGlass>>();
+
+  function initTabSwitchers() {
+    instances.forEach((inst) => inst.destroy());
+    instances.clear();
+
+    const navs = document.querySelectorAll<HTMLElement>('[data-tab-nav]');
+
+    navs.forEach((nav) => {
+      const group = nav.dataset.tabNav;
+      if (!group) return;
+
+      const indicator = nav.querySelector<HTMLElement>(
+        `[data-tab-indicator="${group}"]`
+      );
+      const buttons = Array.from(
+        nav.querySelectorAll<HTMLElement>(`[data-tab-group="${group}"]`)
+      );
+      const panels = Array.from(
+        document.querySelectorAll<HTMLElement>(`[data-tab-panel="${group}"]`)
+      );
+
+      if (!indicator || !buttons.length) return;
+
+      const glass = liquidGlass(indicator, {
+        scale: -45,
+        chroma: 5,
+        border: 0.06,
+        mapBlur: 6,
+        blur: 4,
+        saturate: 1.5,
+        fallbackBlur: 14,
+      });
+      instances.set(group, glass);
+
+      function positionIndicator(target: HTMLElement) {
+        if (!indicator) return;
+        indicator.style.transform = `translate3d(${target.offsetLeft}px, ${target.offsetTop}px, 0)`;
+        indicator.style.width = `${target.offsetWidth}px`;
+        indicator.style.height = `${target.offsetHeight}px`;
+        setTimeout(() => glass.refresh(), 150);
+      }
+
+      function activate(target: HTMLElement) {
+        const tabId = target.dataset.tab;
+
+        buttons.forEach((btn) => {
+          const isActive = btn === target;
+          btn.classList.toggle('text-white', isActive);
+          btn.classList.toggle('dark:text-black', isActive);
+          btn.classList.toggle('text-muted', !isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        positionIndicator(target);
+
+        panels.forEach((panel) => {
+          panel.classList.toggle('hidden', panel.dataset.tab !== tabId);
+        });
+      }
+
+      const initial =
+        buttons.find((btn) => btn.getAttribute('aria-selected') === 'true') ??
+        buttons[0];
+      if (initial) activate(initial);
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => activate(btn));
+      });
+
+      window.addEventListener(
+        'resize',
+        () => {
+          const active =
+            buttons.find(
+              (btn) => btn.getAttribute('aria-selected') === 'true'
+            ) ?? buttons[0];
+          if (active) positionIndicator(active);
+        },
+        { passive: true }
+      );
+    });
+  }
+
+  initTabSwitchers();
+  document.addEventListener('astro:after-swap', initTabSwitchers);
+</script>

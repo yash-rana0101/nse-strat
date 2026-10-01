@@ -1,0 +1,171 @@
+---
+/**
+ * Pricing — Dynamic pricing grid pulling from Heroku backend.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import { fetchPlans } from '@/services/pricing';
+
+const apiPlans = await fetchPlans();
+
+// Map dynamic plans to template model fields
+const plans = apiPlans.map((plan) => {
+  const isFeatured = plan.name.toLowerCase() === 'pro';
+  const ctaText = isFeatured ? 'SELECT PRO PLAN' : 'SELECT PLAN';
+  const planName = `${plan.name.toUpperCase()} PLAN`;
+  const formattedPrice = `₹${plan.priceINR.toLocaleString('en-IN')}`;
+  const creditsText = `${plan.creditsGiven} Strat Ai Credits`;
+
+  // Dynamically compile features checklist based on schema flags.
+  //
+  // Labels describe TERMINAL capability only. FEATURE_CATALOGUE section 16
+  // maps FIND, DEBATE and the conviction score to the RESEARCH SKU, which
+  // BRAND_GUIDELINES section 3 forbids selling before registration — so those
+  // modes are named on the page as existing capability but are not priced
+  // here. VERIFY runs on levels the trader supplies and is unregulated.
+  // The API contract and plan flags are unchanged; only display strings are.
+  const features = [
+    `${plan.creditsGiven} Strat AI Compute Credits`,
+    plan.canAccessDeepseekGLM && 'VERIFY pre-trade risk audit (1.5× ATR floor)',
+    plan.canAccessMultiModel && 'Adversarial Bear Agent critique',
+    plan.canAccessGhostline &&
+      'Ghost Line projections (OLS, VWLR, VWEPR, FCST)',
+    plan.canAccessFootprint && 'Footprint & order flow imbalance',
+    plan.canAccessTopup && 'Credit top-ups enabled',
+    (plan.canSeeInstantNewsSantiments ?? true) &&
+      'News sentiment & anomaly commentary',
+    (plan.canGetAdvanceChartAccess ?? true) &&
+      'F&O options chain analytics (max pain & OI walls)',
+  ].filter(Boolean) as string[];
+
+  return {
+    name: planName,
+    price: formattedPrice,
+    credits: creditsText,
+    description: plan.description,
+    features,
+    cta: ctaText,
+    href: '/waitlist',
+    featured: isFeatured,
+  };
+});
+---
+
+<section
+  class="py-16 md:py-24 bg-canvas transition-colors duration-300"
+  id="pricing"
+  aria-labelledby="pricing-heading"
+>
+  <Container>
+    <div
+      class="max-w-[800px] mx-auto text-center mb-12 md:mb-16"
+      data-reveal-group
+    >
+      <div data-reveal-item>
+        <Badge variant="emerald" class="mb-4">Pricing</Badge>
+      </div>
+      <h2
+        id="pricing-heading"
+        class="type-display-lg leading-[1.1] tracking-tight text-ink font-display"
+        data-reveal-item
+      >
+        Transparent, credit-based plans
+      </h2>
+      <p class="type-body-md text-muted mt-4" data-reveal-item>
+        Transparent plans designed for active Indian options, futures, and
+        equity traders. Zero hidden costs.
+      </p>
+    </div>
+  </Container>
+
+  <Container>
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1100px] mx-auto"
+      data-reveal-group
+    >
+      {
+        plans.map((plan) => (
+          <div
+            class:list={[
+              'reveal-item rounded-2xl p-8 flex flex-col gap-5 transition-all duration-300 relative',
+              plan.featured
+                ? 'bg-canvas text-ink border border-brand-accent shadow-[0_0_50px_rgba(16,185,129,0.12)]'
+                : 'bg-surface-soft border border-hairline',
+            ]}
+          >
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between min-h-[22px]">
+                <span class="text-xs font-semibold uppercase tracking-wider text-muted-soft">
+                  {plan.name}
+                </span>
+                {plan.featured && (
+                  <span class="border border-brand-accent/80 text-brand-accent px-2 py-0.5 text-[9px] font-bold tracking-wider rounded uppercase">
+                    POPULAR
+                  </span>
+                )}
+              </div>
+
+              <div class="flex items-baseline gap-1 mt-1">
+                <span class="text-4xl font-extrabold text-ink font-display">
+                  {plan.price}
+                </span>
+              </div>
+
+              <div class="text-xs font-bold text-brand-accent mt-0.5">
+                {plan.credits}
+              </div>
+            </div>
+
+            <hr class="border-hairline/80" />
+
+            <ul class="list-none flex flex-col gap-3 flex-1" role="list">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-2.5">
+                  <div class="w-4 h-4 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent flex items-center justify-center shrink-0 mt-0.5">
+                    <svg
+                      class="w-2.5 h-2.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span class="text-sm text-body">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p class="text-xs text-muted-soft leading-relaxed italic min-h-[36px]">
+              {plan.description}
+            </p>
+
+            <Button
+              variant={plan.featured ? 'primary' : 'secondary'}
+              href={plan.href}
+              class:list={[
+                '!rounded-full w-full justify-center text-xs font-bold py-2.5 mt-2',
+                plan.featured &&
+                  '!bg-brand-accent !text-canvas !border-transparent hover:opacity-90 active:scale-[0.98]',
+              ]}
+            >
+              {plan.cta}
+            </Button>
+          </div>
+        ))
+      }
+    </div>
+
+    <p
+      class="text-xs text-muted-soft text-center mt-10 max-w-[700px] mx-auto leading-relaxed"
+    >
+      Subscription credits are consumed for computing analytical queries,
+      trajectory projections, and multi-agent research runs. Strat AI does not
+      execute trades, manage funds, or offer personal financial advice.
+    </p>
+  </Container>
+</section>

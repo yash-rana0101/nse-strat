@@ -1,0 +1,112 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import CopilotTradePlan from './CopilotTradePlan.astro';
+import CopilotToolRows from './CopilotToolRows.astro';
+import { demoTools } from '@/content/landing/copilotTools';
+import { demoQuestions, sampleTrade } from '@/content/landing/copilotDemo';
+---
+
+<div class="demo-terminal">
+  <div class="terminal-title">
+    <span><Icon name="sparkles" size={16} /> STRAT AI CO-PILOT</span><span
+      class="terminal-status"
+      data-run-label>AGENT READY</span
+    >
+  </div>
+  <div class="terminal-actions">
+    <Button
+      id="copilot-find"
+      size="sm"
+      class="demo-action"
+      liquidGlass={false}
+      disabled><Icon name="zap" size={15} /> Find my trade</Button
+    >
+    <Button
+      id="copilot-verify"
+      size="sm"
+      variant="secondary"
+      class="demo-action"
+      liquidGlass={false}
+      disabled><Icon name="shield-check" size={15} /> Verify my trade</Button
+    >
+  </div>
+  <div class="terminal-context">
+    <span
+      ><span class="context-dot"></span>
+      {sampleTrade.symbol}
+      <b>·</b> 10m <b>·</b> Intraday</span
+    ><span>FIXED SAMPLE</span>
+  </div>
+  <div class="terminal-body" data-terminal-body>
+    <div class="terminal-empty" data-empty>
+      <span class="ready-badge">AGENT READY</span>
+      <p>Standing by for <strong>{sampleTrade.symbol}</strong></p>
+    </div>
+    <div
+      class="tool-feed"
+      data-tool-feed
+      hidden
+      aria-label="Sample tool-call activity"
+    >
+      <div class="trace-request" data-trace-request></div>
+      <div class="tool-progress">
+        <span>ANALYSIS PIPELINE</span><span
+          data-tool-progress
+          role="status"
+          aria-live="polite"
+          aria-atomic="true">0 / {demoTools.length} tools called</span
+        >
+      </div>
+      <CopilotToolRows />
+      <p class="trace-note">
+        Tool activity is simulated. No market-data or model API is called.
+      </p>
+    </div>
+    <div data-result hidden><CopilotTradePlan /></div>
+    <div class="demo-conversation" data-conversation hidden></div>
+  </div>
+  <div class="terminal-footer" data-footer hidden>
+    <div data-qa hidden>
+      <div class="qa-heading">
+        <span>CONTINUE THE CONVERSATION</span><span>QA</span>
+      </div>
+      <div class="qa-questions">
+        {
+          demoQuestions.map((question) => (
+            <Button
+              id={`copilot-q-${question.id}`}
+              variant="ghost"
+              size="sm"
+              class="demo-question"
+              liquidGlass={false}
+              disabled
+            >
+              {question.label}
+              <Icon name="arrow-right" size={12} />
+            </Button>
+          ))
+        }
+      </div>
+      <p class="qa-hint" data-qa-hint>
+        Pick a question to run the loop again. Answers are fixed for this demo.
+      </p>
+    </div>
+    <Button
+      id="copilot-reset"
+      variant="text-link"
+      size="sm"
+      class="demo-reset"
+      liquidGlass={false}
+      disabled>↺ Reset demo</Button
+    >
+  </div>
+  <div
+    class="demo-announcement sr-only"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    data-announcement
+  >
+  </div>
+</div>

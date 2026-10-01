@@ -1,0 +1,95 @@
+---
+/**
+ * Features — the platform grid.
+ *
+ * Renders `src/content/landing/platform.ts`: the measurement layer beneath the
+ * four headline deep dives. Anchor id stays `#features` because NAV_ITEMS and
+ * the footer both link to it.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { platform } from '@/content/landing';
+
+const { intro, features } = platform;
+
+const accentClasses = {
+  emerald: 'bg-badge-emerald/15 text-badge-emerald',
+  violet: 'bg-badge-violet/15 text-badge-violet',
+  orange: 'bg-badge-orange/15 text-badge-orange',
+  pink: 'bg-badge-pink/15 text-badge-pink',
+};
+---
+
+<section
+  class="section-y bg-canvas transition-colors duration-300"
+  id={intro.id}
+  aria-labelledby="features-heading"
+>
+  <Container>
+    <div
+      class="max-w-[800px] mx-auto text-center mb-12 md:mb-16"
+      data-reveal-group
+    >
+      <div data-reveal-item>
+        <Badge variant="emerald" class="mb-4">{intro.badge}</Badge>
+      </div>
+      <h2
+        id="features-heading"
+        class="type-display-lg leading-[1.1] tracking-tight text-ink"
+        data-reveal-item
+      >
+        {intro.heading}
+      </h2>
+      {
+        intro.body && (
+          <p class="type-body-md text-muted mt-4" data-reveal-item>
+            {intro.body}
+          </p>
+        )
+      }
+    </div>
+  </Container>
+
+  <Container size="wide" class="!px-0">
+    <div
+      class="border-y border-hairline overflow-hidden bg-surface-soft/5 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-hairline"
+      data-reveal-group
+    >
+      {
+        features.map((feature, index) => {
+          const Tag = feature.href ? 'a' : 'div';
+          return (
+            <Tag
+              href={feature.href}
+              class:list={[
+                'reveal-item p-6 sm:p-8 md:p-10 flex flex-col gap-4 no-underline group hover:bg-surface-soft/10 transition-colors',
+                index < features.length - 3 && 'md:border-b md:border-hairline',
+              ]}
+            >
+              <div
+                class:list={[
+                  'w-12 h-12 flex items-center justify-center rounded-panel shrink-0 group-hover:scale-105 transition-transform',
+                  accentClasses[feature.accent],
+                ]}
+              >
+                <Icon name={feature.icon} size={24} />
+              </div>
+              <h3
+                class:list={[
+                  'type-title-lg text-ink font-bold leading-snug transition-colors',
+                  feature.href && 'group-hover:text-brand-accent',
+                ]}
+              >
+                {feature.title}
+              </h3>
+              <p class="type-body-sm text-muted leading-relaxed">
+                {feature.body}
+              </p>
+            </Tag>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>

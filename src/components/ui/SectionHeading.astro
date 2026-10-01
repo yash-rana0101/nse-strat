@@ -1,0 +1,32 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+interface Props {
+  title: string;
+  subtitle?: string;
+  badge?: string;
+  align?: 'left' | 'center';
+  level?: 'h2' | 'h3';
+  size?: 'xl' | 'lg' | 'md' | 'sm';
+  class?: string;
+}
+const {
+  title,
+  subtitle,
+  badge,
+  align = 'center',
+  level = 'h2',
+  size = 'lg',
+  class: className,
+} = Astro.props;
+const HeadingTag = level;
+const alignClasses = {
+  center: 'items-center text-center',
+  left: 'items-start text-left',
+};
+---
+
+<div class:list={['flex flex-col gap-4 mb-12', alignClasses[align], className]}>
+  {badge && <Badge>{badge}</Badge>}
+  <HeadingTag class:list={[`type-display-${size}`]}>{title}</HeadingTag>
+  {subtitle && <p class="type-body-md max-w-[640px] text-muted">{subtitle}</p>}
+</div>

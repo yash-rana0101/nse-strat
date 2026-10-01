@@ -1,0 +1,37 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { demoTools } from '@/content/landing/copilotTools';
+
+interface Props {
+  completed?: boolean;
+}
+const { completed = false } = Astro.props;
+---
+
+{
+  demoTools.map((tool, i) => (
+    <div
+      class="tool-row"
+      data-tool-row={completed ? undefined : i}
+      data-state={completed ? 'done' : 'waiting'}
+    >
+      <span class="tool-icon">
+        <Icon name={tool.icon} size={18} />
+      </span>
+      <div class="tool-copy">
+        <>
+          <strong>{tool.label}</strong>
+          <code>{tool.name}</code>
+          <p>{tool.result}</p>
+        </>
+      </div>
+      <span
+        class="tool-state"
+        role="img"
+        aria-label={completed ? 'Complete' : 'Waiting'}
+      >
+        {completed ? '✓' : '○'}
+      </span>
+    </div>
+  ))
+}

@@ -1,0 +1,101 @@
+---
+/**
+ * ChatMock — the glass-box transcript.
+ *
+ * Shows a question going in, typed tool calls streaming back, one honest
+ * "unavailable" result, and a stand-aside decision. The unavailable row and the
+ * HOLD are the point of the panel, not filler.
+ */
+import TerminalFrame from '@/components/ui/TerminalFrame.astro';
+import { chatMock } from '@/content/landing';
+
+const toneByKind = {
+  tool: {
+    dot: 'bg-badge-emerald',
+    label: 'text-badge-emerald',
+    detail: 'text-body',
+  },
+  unavailable: {
+    dot: 'bg-warning',
+    label: 'text-warning',
+    detail: 'text-muted',
+  },
+  reasoning: {
+    dot: 'bg-badge-violet',
+    label: 'text-badge-violet',
+    detail: 'text-muted',
+  },
+  decision: {
+    dot: 'bg-ink',
+    label: 'text-ink',
+    detail: 'text-muted',
+  },
+} as const;
+---
+
+<TerminalFrame label={chatMock.frameLabel} status={chatMock.status}>
+  <!-- The question -->
+  <div class="flex flex-col gap-1.5">
+    <span
+      class="text-[10px] font-mono uppercase tracking-widest text-muted-soft"
+    >
+      {chatMock.promptLabel}
+    </span>
+    <p
+      class="text-sm text-ink bg-surface-card border border-hairline/50 rounded-panel px-3.5 py-2.5 leading-relaxed"
+    >
+      {chatMock.prompt}
+    </p>
+  </div>
+
+  <!-- Streaming events -->
+  <ol class="list-none flex flex-col gap-0" role="list">
+    {
+      chatMock.events.map((event) => {
+        const tone = toneByKind[event.kind];
+        const isDecision = event.kind === 'decision';
+        return (
+          <li
+            class:list={[
+              'flex items-start gap-3 py-2.5 border-b border-hairline/30 last:border-b-0',
+              isDecision && 'mt-1 pt-3.5 border-t border-hairline/60',
+            ]}
+          >
+            <span
+              class:list={[
+                'w-1.5 h-1.5 rounded-full shrink-0 mt-1.5',
+                tone.dot,
+              ]}
+            />
+            <div class="flex flex-col gap-0.5 min-w-0 flex-1">
+              <span
+                class:list={[
+                  'font-mono text-[11px] tracking-tight',
+                  tone.label,
+                  isDecision && 'text-xs font-bold tracking-widest',
+                ]}
+              >
+                {event.kind === 'tool' && '→ '}
+                {event.label}
+              </span>
+              <span
+                class:list={[
+                  'text-xs leading-relaxed break-words',
+                  tone.detail,
+                ]}
+              >
+                {event.detail}
+              </span>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+
+  <p
+    class="text-[10px] text-muted-soft leading-relaxed border-t border-hairline/40 pt-3"
+  >
+    {chatMock.footnote}
+  </p>
+</TerminalFrame>

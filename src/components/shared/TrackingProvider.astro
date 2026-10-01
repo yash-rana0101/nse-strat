@@ -1,0 +1,278 @@
+---
+const rawGtmId = import.meta.env.PUBLIC_GTM_ID;
+const rawGa4Id = import.meta.env.PUBLIC_GA4_ID;
+const rawClarityId = import.meta.env.PUBLIC_CLARITY_ID;
+const rawMetaId = import.meta.env.PUBLIC_META_PIXEL_ID;
+const rawLinkedinId = import.meta.env.PUBLIC_LINKEDIN_INSIGHT_ID;
+const rawXId = import.meta.env.PUBLIC_X_PIXEL_ID;
+const rawRedditId = import.meta.env.PUBLIC_REDDIT_PIXEL_ID;
+const rawGoogleAdsId = import.meta.env.PUBLIC_GOOGLE_ADS_ID;
+const rawAhrefsKey = import.meta.env.PUBLIC_AHREFS_KEY;
+
+function isPlaceholder(id?: string) {
+  if (!id) return true;
+  const clean = id.trim().toLowerCase();
+  return (
+    clean.includes('xxx') ||
+    clean.includes('yyy') ||
+    clean === 'xxxxx' ||
+    clean === 'xxxxxxx' ||
+    (clean.startsWith('gtm-') && clean.includes('xxx')) ||
+    (clean.startsWith('g-') && clean.includes('xxx')) ||
+    (clean.startsWith('aw-') && clean.includes('xxx'))
+  );
+}
+
+const gtmId = isPlaceholder(rawGtmId) ? '' : rawGtmId;
+const ga4Id = isPlaceholder(rawGa4Id) ? '' : rawGa4Id;
+const clarityId = isPlaceholder(rawClarityId) ? '' : rawClarityId;
+const metaId = isPlaceholder(rawMetaId) ? '' : rawMetaId;
+const linkedinId = isPlaceholder(rawLinkedinId) ? '' : rawLinkedinId;
+const xId = isPlaceholder(rawXId) ? '' : rawXId;
+const redditId = isPlaceholder(rawRedditId) ? '' : rawRedditId;
+const googleAdsId = isPlaceholder(rawGoogleAdsId) ? '' : rawGoogleAdsId;
+const ahrefsKey = isPlaceholder(rawAhrefsKey)
+  ? '+gE2CjV6XAWwwwAmpcr+Gw'
+  : rawAhrefsKey || '+gE2CjV6XAWwwwAmpcr+Gw';
+---
+
+{
+  ahrefsKey && (
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key={ahrefsKey}
+      async
+    />
+  )
+}
+
+{
+  ga4Id && (
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}
+    />
+  )
+}
+
+<!-- Global Tracking Data Layer Initializer -->
+<script
+  is:inline
+  define:vars={{
+    gtmId,
+    ga4Id,
+    clarityId,
+    metaId,
+    linkedinId,
+    xId,
+    redditId,
+    googleAdsId,
+  }}
+>
+  /* eslint-disable */
+  // Ensure dataLayer and gtag exist on window
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  window.gtag = gtag;
+
+  // 1. Configure Consent Mode v2 Defaults
+  const rawConsent = localStorage.getItem('strat_cookie_consent');
+  let consent = { analytics: false, marketing: false };
+  if (rawConsent) {
+    try {
+      consent = JSON.parse(rawConsent);
+    } catch (e) {}
+  }
+
+  gtag('consent', 'default', {
+    ad_storage: consent.marketing ? 'granted' : 'denied',
+    ad_user_data: consent.marketing ? 'granted' : 'denied',
+    ad_personalization: consent.marketing ? 'granted' : 'denied',
+    analytics_storage: consent.analytics ? 'granted' : 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+  });
+
+  gtag('js', new Date());
+  if (ga4Id) gtag('config', ga4Id);
+  if (googleAdsId) gtag('config', googleAdsId);
+
+  // 2. Load Google Tag Manager (Consent-aware natively)
+  if (gtmId) {
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', gtmId);
+  }
+
+  // 3. Helper to Load External Scripts Dynamically
+  function loadScript(src, id) {
+    if (id && document.getElementById(id)) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = src;
+    if (id) s.id = id;
+    document.head.appendChild(s);
+  }
+
+  // 4. Custom Loaders for Non-Consent-Aware Pixels
+  function loadMetaPixel() {
+    if (!metaId) return;
+    if (window.fbq) return;
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod
+          ? n.callMethod.apply(n, arguments)
+          : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(
+      window,
+      document,
+      'script',
+      'https://connect.facebook.net/en_US/fbevents.js'
+    );
+    fbq('init', metaId);
+    fbq('track', 'PageView');
+  }
+
+  function loadClarity() {
+    if (!clarityId) return;
+    if (window.clarity) return;
+    (function (c, l, a, r, i, t, y) {
+      c[a] =
+        c[a] ||
+        function () {
+          (c[a].q = c[a].q || []).push(arguments);
+        };
+      t = l.createElement(r);
+      t.async = 1;
+      t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0];
+      y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', clarityId);
+  }
+
+  function loadLinkedInInsight() {
+    if (!linkedinId) return;
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(linkedinId);
+    if (window.lintrk) return;
+    (function (l) {
+      if (!l) {
+        window.lintrk = function (a, b) {
+          window.lintrk.q.push([a, b]);
+        };
+        window.lintrk.q = [];
+      }
+      var s = document.getElementsByTagName('script')[0];
+      var b = document.createElement('script');
+      b.type = 'text/javascript';
+      b.async = true;
+      b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+      s.parentNode.insertBefore(b, s);
+    })(window.lintrk);
+  }
+
+  function loadRedditPixel() {
+    if (!redditId) return;
+    if (window.rdt) return;
+    !(function (f, b, e, v, n, t, s) {
+      if (f.rdt) return;
+      n = f.rdt = function () {
+        n.sendEvent
+          ? n.sendEvent.apply(n, arguments)
+          : n.callQueue.push(arguments);
+      };
+      n.callQueue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://www.redditstatic.com/ads/pixel.js');
+    rdt('init', redditId);
+    rdt('track', 'PageVisit');
+  }
+
+  function loadXPixel() {
+    if (!xId) return;
+    if (window.twq) return;
+    !(function (e, t, n, s, u, a) {
+      e.twq ||
+        ((s = e.twq =
+          function () {
+            s.exe ? s.exe.apply(s, arguments) : s.queue.push(arguments);
+          }),
+        (s.version = '1.1'),
+        (s.queue = []),
+        (u = t.createElement(n)),
+        (u.async = !0),
+        (u.src = 'https://static.ads-twitter.com/uwt.js'),
+        (a = t.getElementsByTagName(n)[0]),
+        a.parentNode.insertBefore(u, a));
+    })(window, document, 'script');
+    twq('config', xId);
+  }
+
+  // Load Clarity if analytics consent is active
+  if (consent.analytics) {
+    loadClarity();
+  }
+
+  // Load marketing pixels if marketing consent is active
+  if (consent.marketing) {
+    loadMetaPixel();
+    loadLinkedInInsight();
+    loadRedditPixel();
+    loadXPixel();
+  }
+
+  // 5. Listen for Consent Updates from CookieBanner
+  window.addEventListener('strat-consent-updated', function (e) {
+    const newConsent = e.detail;
+
+    // Update Google Consent Mode v2 states
+    gtag('consent', 'update', {
+      analytics_storage: newConsent.analytics ? 'granted' : 'denied',
+      ad_storage: newConsent.marketing ? 'granted' : 'denied',
+      ad_user_data: newConsent.marketing ? 'granted' : 'denied',
+      ad_personalization: newConsent.marketing ? 'granted' : 'denied',
+    });
+
+    // Dynamic loading of pixels post-acceptance
+    if (newConsent.analytics) {
+      loadClarity();
+    }
+    if (newConsent.marketing) {
+      loadMetaPixel();
+      loadLinkedInInsight();
+      loadRedditPixel();
+      loadXPixel();
+    }
+
+    // Push consent event to GTM
+    window.dataLayer.push({
+      event: 'consent_updated',
+      consent_preferences: newConsent,
+    });
+  });
+</script>

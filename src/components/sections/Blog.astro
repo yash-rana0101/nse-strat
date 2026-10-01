@@ -1,0 +1,95 @@
+---
+/**
+ * Blog Section — Displays a grid of the 3 latest blog posts on the homepage fetched from the database API.
+ */
+import Container from '@/components/ui/Container.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import BlogCard from '@/components/ui/BlogCard.astro';
+import { fetchBlogs } from '@/services/content';
+
+const dbPosts = await fetchBlogs();
+
+const latestPosts = dbPosts
+  .map((post) => ({
+    id: post.slug,
+    data: {
+      title: post.title,
+      description: post.excerpt,
+      date: new Date(post.publishedAt),
+      category: post.category,
+    },
+  }))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+{
+  latestPosts.length > 0 && (
+    <section
+      class="py-16 md:py-20 bg-canvas border-t border-hairline/80 transition-colors duration-300"
+      id="blog-preview"
+      aria-labelledby="blog-preview-heading"
+    >
+      <Container>
+        <div class="max-w-[800px] mx-auto text-center mb-12" data-reveal-group>
+          <div data-reveal-item>
+            <Badge variant="emerald" class="mb-4">
+              Insights
+            </Badge>
+          </div>
+          <h2
+            id="blog-preview-heading"
+            class="type-display-lg leading-[1.1] tracking-tight text-ink"
+            data-reveal-item
+          >
+            Latest market research & strategies
+          </h2>
+          <p class="type-body-md text-muted mt-4" data-reveal-item>
+            Stay informed with disciplined quantitative research and market
+            insights from our{' '}
+            <a
+              href="https://www.tradingrw.com/"
+              class="text-brand-accent hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Trading & Research Wing
+            </a>
+            .
+          </p>
+        </div>
+      </Container>
+
+      <Container size="wide" class="!px-0">
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 border-y border-hairline divide-y md:divide-y-0 md:divide-x divide-hairline bg-surface-soft/5"
+          data-reveal-group
+        >
+          {latestPosts.map((post) => (
+            <div class="reveal-item flex flex-col h-full">
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                category={post.data.category}
+                slug={post.id}
+              />
+            </div>
+          ))}
+        </div>
+      </Container>
+
+      <Container class="mt-12 text-center">
+        <Button
+          variant="secondary"
+          size="lg"
+          href="/blog"
+          class="!rounded-full px-8"
+        >
+          Read All Insights
+        </Button>
+      </Container>
+    </section>
+  )
+}

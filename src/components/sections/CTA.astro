@@ -1,0 +1,55 @@
+---
+/**
+ * CTA — closing conversion block. Copy lives in `src/content/landing/cta.ts`.
+ */
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { cta } from '@/content/landing';
+---
+
+<section
+  class="py-16 md:py-24 bg-canvas transition-colors duration-300"
+  id={cta.id}
+  aria-labelledby="cta-heading"
+>
+  <Container>
+    <div
+      class="relative text-center flex flex-col items-center gap-6 max-w-[650px] mx-auto"
+      data-reveal-group
+    >
+      <div data-reveal-item><Badge variant="emerald">{cta.badge}</Badge></div>
+      <h2
+        id="cta-heading"
+        class="type-display-md text-ink leading-tight font-bold"
+        data-reveal-item
+      >
+        {cta.heading}
+      </h2>
+      <p class="type-body-md text-muted max-w-[500px]" data-reveal-item>
+        {cta.body}
+      </p>
+      <div
+        class="flex flex-col sm:flex-row gap-4 mt-2 w-full sm:w-auto"
+        data-reveal-item
+      >
+        <Button
+          variant="primary"
+          size="lg"
+          href={cta.primary.href}
+          class="!rounded-full px-8 py-3.5 hover:scale-[1.02] transition-transform"
+        >
+          {cta.primary.label}
+        </Button>
+        <Button
+          variant="secondary"
+          size="lg"
+          href={cta.secondary.href}
+          class="!rounded-full px-8 py-3.5"
+        >
+          {cta.secondary.label}
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>
