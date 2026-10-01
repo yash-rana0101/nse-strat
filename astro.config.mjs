@@ -14,7 +14,10 @@ export default defineConfig({
     react(),
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/_download'),
+      // /pricing is hidden until launch (see SHOW_PRICING in
+      // src/constants/launch.ts). Remove that check when pricing returns.
+      filter: (page) =>
+        !page.includes('/_download') && !page.endsWith('/pricing'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button.astro';
 import Icon from '@/components/ui/Icon.astro';
 import { fetchFeatures, fetchFeatureByKey } from '@/services/content';
 import { marked } from 'marked';
+import { SHOW_PRICING } from '@/constants/launch';
 
 export async function getStaticPaths() {
   const features = await fetchFeatures();
@@ -106,12 +107,17 @@ const featureSchema = {
               class="!rounded-full px-6 py-2 text-xs font-semibold"
               >Join Waitlist</Button
             >
-            <Button
-              variant="secondary"
-              href="/pricing"
-              class="!rounded-full px-6 py-2 text-xs font-semibold"
-              >Explore Plans</Button
-            >
+            {
+              SHOW_PRICING && (
+                <Button
+                  variant="secondary"
+                  href="/pricing"
+                  class="!rounded-full px-6 py-2 text-xs font-semibold"
+                >
+                  Explore Plans
+                </Button>
+              )
+            }
           </div>
         </div>
 

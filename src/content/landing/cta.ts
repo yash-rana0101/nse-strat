@@ -9,11 +9,11 @@ import type { CtaContent } from '@/types/landing';
  */
 export const cta: CtaContent = {
   id: 'cta',
-  badge: 'Private beta',
+  badge: 'Launching soon',
   heading: 'Audit a setup before you fund it',
-  body: 'Strat AI is in private beta with a deliberately small group of traders working the Indian markets. If you care more about why than what, we want you in it.',
+  body: 'Strat AI will open once our regulatory and compliance approvals are complete. Join the waitlist and we will notify you as soon as we launch.',
   primary: {
-    label: 'Join the private beta',
+    label: 'Join the waitlist',
     href: '/waitlist',
   },
   secondary: {

@@ -31,13 +31,16 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID || '';
 
       <div class="flex flex-col gap-6" data-reveal-item>
         <div class="text-center md:text-left">
-          <Badge variant="emerald" class="mb-3 inline-flex">Private Beta</Badge>
+          <Badge variant="emerald" class="mb-3 inline-flex"
+            >Launching soon</Badge
+          >
           <h2 class="type-display-sm font-bold text-ink leading-tight">
-            Join the Private Beta
+            Join the Waitlist
           </h2>
           <p class="type-body-sm text-muted mt-2">
-            Register for private beta access to the Strat AI market analysis and
-            risk terminal.
+            Strat AI is not open yet while we complete the regulatory and
+            compliance approvals required before launch. Join the waitlist and
+            we will notify you soon.
           </p>
         </div>
 
@@ -139,7 +142,7 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID || '';
             class="w-full justify-center mt-2"
             id="submit-btn"
           >
-            <span id="submit-text">Register for Beta</span>
+            <span id="submit-text">Notify Me</span>
             <span
               id="submit-spinner"
               class="hidden w-5 h-5 border-2 border-on-primary border-t-transparent rounded-full animate-spin"
@@ -173,9 +176,11 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID || '';
         </div>
 
         <div>
-          <h2 class="type-display-sm font-bold text-ink">You're registered!</h2>
+          <h2 class="type-display-sm font-bold text-ink">
+            You will be the first to know
+          </h2>
           <p class="type-body-sm text-muted mt-2">
-            Welcome to Strat AI. We've registered <span
+            You're on the waitlist. We've saved <span
               id="success-user-name"
               class="font-semibold text-ink"></span> (<span
               id="success-user-email"></span>).
@@ -187,15 +192,14 @@ const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID || '';
         >
           <span
             class="text-xs font-bold text-muted-soft uppercase tracking-wider"
-            >Your Beta Spot</span
+            >Your Waitlist Spot</span
           >
           <span
             class="text-3xl font-display font-extrabold text-brand-accent"
             id="success-queue-spot">#1,842</span
           >
           <p class="text-xs text-muted">
-            We will send terminal access invitations to this email as beta
-            onboarding expands.
+            We will email you as soon as Strat AI launches.
           </p>
         </div>
 

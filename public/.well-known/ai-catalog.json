@@ -14,7 +14,7 @@
       "displayName": "Strat AI",
       "type": "application/mcp-server-card+json",
       "url": "https://www.stratai.live/.well-known/mcp/server-card.json",
-      "description": "Read-only MCP server for Strat AI, a market analysis and pre-trade risk adjudication terminal for Indian equities and Futures & Options (NSE/BSE). Exposes product scope, deterministic risk rules, live pricing, product areas and documentation search, plus MCP Apps ui:// views that render inline in conversation. No authentication required.",
+      "description": "Read-only MCP server for Strat AI, a market analysis and pre-trade risk adjudication terminal for Indian equities and Futures & Options (NSE/BSE). Exposes product scope, deterministic risk rules, product areas and documentation search, plus MCP Apps ui:// views that render inline in conversation. No authentication required.",
       "version": "1.0.0",
       "icon": "https://www.stratai.live/strat.svg",
       "capabilities": ["tools", "resources", "mcp-apps"],
@@ -29,7 +29,6 @@
       ],
       "representativeQueries": [
         "is my stop loss wide enough for this NSE trade",
-        "what does Strat AI cost per month",
         "tools for analysing Nifty and Bank Nifty option chains",
         "how do I check reward to risk before placing an intraday trade",
         "pre-trade risk audit for Indian F&O"
@@ -69,26 +68,12 @@
       "displayName": "Strat AI in-page tools (WebMCP)",
       "type": "application/webmcp+json",
       "url": "https://www.stratai.live/",
-      "description": "Tools registered on document.modelContext across stratai.live, callable by a browser-resident agent: get_product_overview, get_risk_rules, get_pricing_plans, list_features, search_documentation, join_private_beta and submit_contact_inquiry.",
+      "description": "Tools registered on document.modelContext across stratai.live, callable by a browser-resident agent: get_product_overview, get_risk_rules, list_features, search_documentation, join_private_beta and submit_contact_inquiry.",
       "capabilities": ["webmcp", "tools", "forms"],
       "tags": ["webmcp", "in-page-tools", "trading"],
       "representativeQueries": [
         "register me for the Strat AI private beta",
         "send an inquiry to the Strat AI team"
-      ]
-    },
-    {
-      "identifier": "urn:air:stratai.live:data:pricing",
-      "@id": "urn:air:stratai.live:data:pricing",
-      "displayName": "Strat AI pricing",
-      "type": "text/markdown",
-      "url": "https://www.stratai.live/pricing.md",
-      "description": "Machine-readable Strat AI subscription plans: INR price, included credits, and per-plan capabilities for each tier, generated from the same source as the pricing page.",
-      "capabilities": ["pricing"],
-      "tags": ["pricing", "subscription", "inr"],
-      "representativeQueries": [
-        "how much does Strat AI cost",
-        "compare Strat AI plans and credits"
       ]
     }
   ]

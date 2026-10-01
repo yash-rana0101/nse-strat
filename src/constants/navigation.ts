@@ -1,4 +1,9 @@
 import type { NavigationItem, NavigationGroup } from '@/types/navigation';
+import { SHOW_PRICING } from '@/constants/launch';
+
+/** Drops /pricing links while pricing is hidden before launch. */
+const withoutPricing = <T extends { href: string }>(items: T[]): T[] =>
+  SHOW_PRICING ? items : items.filter((item) => item.href !== '/pricing');
 
 export const NAV_ITEMS: NavigationItem[] = [
   {
@@ -33,9 +38,9 @@ export const NAV_ITEMS: NavigationItem[] = [
     ],
   },
   {
-    label: 'Pricing',
-    href: '/pricing',
-    dropdownItems: [
+    label: SHOW_PRICING ? 'Pricing' : 'Legal',
+    href: SHOW_PRICING ? '/pricing' : '/terms',
+    dropdownItems: withoutPricing([
       {
         label: 'Plans & Credits',
         desc: 'Flexible credit-based plans',
@@ -61,7 +66,7 @@ export const NAV_ITEMS: NavigationItem[] = [
         desc: 'Legal and financial disclosures',
         href: '/disclaimer',
       },
-    ],
+    ]),
   },
   {
     label: 'Resources',
@@ -115,7 +120,7 @@ export const NAV_ITEMS: NavigationItem[] = [
 export const FOOTER_GROUPS: NavigationGroup[] = [
   {
     title: 'Platform',
-    items: [
+    items: withoutPricing([
       { label: 'Strat AI Platform', href: '/features/ai-trading-platform' },
       { label: 'Options Analysis', href: '/features/options-trading-analysis' },
       {
@@ -125,8 +130,8 @@ export const FOOTER_GROUPS: NavigationGroup[] = [
       { label: 'AI Stock Analysis', href: '/features/ai-stock-analysis' },
       { label: 'Strat AI Co-Pilot', href: '/features/ai-trading-assistant' },
       { label: 'Pricing Plans', href: '/pricing' },
-      { label: 'Join Private Beta', href: '/waitlist' },
-    ],
+      { label: 'Join Waitlist', href: '/waitlist' },
+    ]),
   },
   {
     title: 'Resources',

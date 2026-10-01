@@ -6,6 +6,7 @@
  * server, the server card and the ARD catalog) so an agent never receives two
  * different descriptions of Strat AI.
  */
+import { SHOW_PRICING } from '@/constants/launch';
 
 export const SITE_URL = 'https://www.stratai.live';
 
@@ -94,7 +95,9 @@ export const AGENT_ENTRY_POINTS: Array<{ label: string; path: string }> = [
   { label: 'Long-form product brief', path: '/llms-full.txt' },
   { label: 'Agent instructions and tool schemas', path: '/agents.md' },
   { label: 'Homepage as markdown', path: '/index.md' },
-  { label: 'Machine-readable pricing', path: '/pricing.md' },
+  ...(SHOW_PRICING
+    ? [{ label: 'Machine-readable pricing', path: '/pricing.md' }]
+    : []),
   { label: 'MCP server (Streamable HTTP JSON-RPC)', path: '/api/mcp' },
   { label: 'MCP server card', path: '/.well-known/mcp/server-card.json' },
   { label: 'Agentic resource catalog', path: '/.well-known/ard.json' },

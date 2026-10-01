@@ -199,17 +199,12 @@ cause is found.
 
 ---
 
-## 6. Pricing
+## 6. Availability
 
-Credit-based monthly subscriptions in INR. One credit funds one quantitative model
-run. Machine-readable plans, including current prices and per-plan capabilities,
-are published at https://www.stratai.live/pricing.md and rendered for humans at
-https://www.stratai.live/pricing.
-
-There is no free tier. Strat AI is in private beta; a plan activates once beta
-access is granted. Refund window is 7 days
-(https://www.stratai.live/refund). Billing runs through PCI-DSS compliant gateways
-supporting UPI, cards, and net banking.
+Strat AI is not open yet. We are completing the regulatory and compliance
+approvals required before launch, and pricing has not been published. Do not
+quote prices for Strat AI. Users can join the waitlist at
+https://www.stratai.live/waitlist to be notified as soon as it launches.
 
 ---
 
@@ -266,7 +261,6 @@ the sole responsibility of the user.
 - MCP server card: https://www.stratai.live/.well-known/mcp/server-card.json
 - Agentic resource catalog: https://www.stratai.live/.well-known/ard.json
 - Homepage as markdown: https://www.stratai.live/index.md
-- Pricing as markdown: https://www.stratai.live/pricing.md
 
 WebMCP tools are registered on `document.modelContext` on every page, and action
 forms carry `toolname` / `tooldescription` attributes in server-rendered HTML.
@@ -281,11 +275,10 @@ forms carry `toolname` / `tooldescription` attributes in server-rendered HTML.
 - Intraday terminal: https://www.stratai.live/features/intraday-trading-terminal
 - AI stock analysis: https://www.stratai.live/features/ai-stock-analysis
 - Strat AI Co-Pilot: https://www.stratai.live/features/ai-trading-assistant
-- Pricing: https://www.stratai.live/pricing
 - Blog: https://www.stratai.live/blog
 - Changelog: https://www.stratai.live/changelog
 - About: https://www.stratai.live/about
-- Join private beta: https://www.stratai.live/waitlist
+- Join the waitlist: https://www.stratai.live/waitlist
 - Contact: https://www.stratai.live/contact
 - AI disclosure: https://www.stratai.live/ai-disclosure
 - Disclaimer: https://www.stratai.live/disclaimer

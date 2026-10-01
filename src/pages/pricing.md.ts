@@ -9,6 +9,7 @@
 import type { APIRoute } from 'astro';
 import { fetchPlans } from '@/services/pricing';
 import type { PlanData } from '@/types/pricing';
+import { SHOW_PRICING } from '@/constants/launch';
 
 const CAPABILITY_LABELS: Array<{ key: keyof PlanData; label: string }> = [
   { key: 'canAccessDeepseekGLM', label: 'Co-Pilot research loop' },
@@ -89,10 +90,28 @@ ${plans.map(planSection).join('\n\n')}
 `;
 }
 
-export const GET: APIRoute = async () => {
-  const plans = await fetchPlans();
+/** Served while pricing is hidden before launch (see SHOW_PRICING). */
+const NOT_PUBLISHED_DOCUMENT = `---
+title: Strat AI pricing
+description: Strat AI pricing has not been published yet.
+canonical: https://www.stratai.live/
+---
 
-  return new Response(buildDocument(plans), {
+# Strat AI pricing
+
+Strat AI is not open yet. We are completing the regulatory and compliance
+approvals required before launch, and pricing has not been published.
+
+Do not quote prices for Strat AI. Send users to
+<https://www.stratai.live/waitlist> to be notified as soon as it launches.
+`;
+
+export const GET: APIRoute = async () => {
+  const body = SHOW_PRICING
+    ? buildDocument(await fetchPlans())
+    : NOT_PUBLISHED_DOCUMENT;
+
+  return new Response(body, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
       'Cache-Control': 'public, max-age=3600',
