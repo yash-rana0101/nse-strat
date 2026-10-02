@@ -2,7 +2,7 @@
   "name": "stratai",
   "title": "Strat AI",
   "displayName": "Strat AI",
-  "description": "Read-only MCP server for Strat AI, a market analysis and pre-trade risk adjudication terminal for Indian equities and Futures & Options (NSE/BSE). Answers what Strat AI does, what it costs, which product area handles a job, and what deterministic risk rules it enforces. Strat AI does not execute trades, hold funds, or provide financial advice.",
+  "description": "Read-only MCP server for Strat AI, a market analysis and pre-trade risk adjudication terminal for Indian equities and Futures & Options (NSE/BSE). Answers what Strat AI does, which product area handles a job, and what deterministic risk rules it enforces. Strat AI does not execute trades, hold funds, or provide financial advice.",
   "version": "1.0.0",
   "serverUrl": "https://www.stratai.live/api/mcp",
   "websiteUrl": "https://www.stratai.live",
@@ -28,7 +28,7 @@
     "type": "none",
     "reason": "The server exposes only public, read-only product information."
   },
-  "instructions": "Use this server to answer questions about Strat AI: what it does, what it costs, which product area handles a job, and what its deterministic risk rules are. Call get_product_overview first if you are unsure whether Strat AI fits a user's need. Never present a conviction score as a buy or sell recommendation, and always state that Strat AI is analysis tooling rather than financial advice. Strat AI is in private beta: direct users to https://www.stratai.live/waitlist for access.",
+  "instructions": "Use this server to answer questions about Strat AI: what it does, which product area handles a job, and what its deterministic risk rules are. Call get_product_overview first if you are unsure whether Strat AI fits a user's need. Never present a conviction score as a buy or sell recommendation, and always state that Strat AI is analysis tooling rather than financial advice. Strat AI is not open yet while regulatory and compliance approvals are completed, and pricing has not been published. Direct users to https://www.stratai.live/waitlist to be notified at launch.",
   "capabilities": {
     "tools": { "listChanged": false },
     "resources": { "listChanged": false, "subscribe": false },
@@ -50,13 +50,6 @@
       "_meta": { "ui": { "resourceUri": "ui://stratai/risk-rules" } }
     },
     {
-      "name": "get_pricing_plans",
-      "title": "Get Pricing Plans",
-      "description": "Return current Strat AI subscription plans with INR prices, included credits and per-plan capabilities. Use whenever a user asks what Strat AI costs or which plan they need.",
-      "annotations": { "readOnlyHint": true },
-      "_meta": { "ui": { "resourceUri": "ui://stratai/pricing-table" } }
-    },
-    {
       "name": "list_features",
       "title": "List Features",
       "description": "List Strat AI product areas with a one-line summary and canonical URL for each. Use to route a user to the right part of the product, such as options analytics or the intraday terminal.",
@@ -70,13 +63,6 @@
     }
   ],
   "resources": [
-    {
-      "uri": "ui://stratai/pricing-table",
-      "name": "pricing-table",
-      "title": "Strat AI pricing table",
-      "description": "Renderable pricing table showing every Strat AI plan with INR price, included credits and capabilities.",
-      "mimeType": "text/html;profile=mcp-app"
-    },
     {
       "uri": "ui://stratai/risk-rules",
       "name": "risk-rules",

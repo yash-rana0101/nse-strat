@@ -24,6 +24,7 @@ import FAQ from '@/components/sections/FAQ.astro';
 import CTA from '@/components/sections/CTA.astro';
 import Partners from '@/components/sections/Partners.astro';
 import { deepDives, faq } from '@/content/landing';
+import { SHOW_PRICING } from '@/constants/launch';
 
 /**
  * featureList is corrected against FEATURE_CATALOGUE.md: eight projection
@@ -37,13 +38,17 @@ const productSchema = {
   operatingSystem: 'Windows, macOS, Linux, Web',
   description:
     'Strat AI: Market analysis and pre-trade risk adjudication terminal for NSE and NFO.',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'INR',
-    description:
-      'Credit-based subscription packages for running quantitative model calculations.',
-  },
+  ...(SHOW_PRICING
+    ? {
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'INR',
+          description:
+            'Credit-based subscription packages for running quantitative model calculations.',
+        },
+      }
+    : {}),
   featureList: [
     'Conversational market analysis over 18 typed quantitative tools',
     'VERIFY pre-trade risk audit (1.5× ATR(14) stop floor)',
@@ -72,11 +77,15 @@ const serviceSchema = {
     '@type': 'Audience',
     audienceType: 'Traders, Quant Analysts, Risk Managers',
   },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Strat AI credit plans',
-    url: 'https://www.stratai.live/pricing',
-  },
+  ...(SHOW_PRICING
+    ? {
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Strat AI credit plans',
+          url: 'https://www.stratai.live/pricing',
+        },
+      }
+    : {}),
   termsOfService: 'https://www.stratai.live/terms',
 };
 
@@ -125,7 +134,7 @@ const faqSchema = {
   <Security />
   <CryptoTeaser />
 
-  <Pricing />
+  {SHOW_PRICING && <Pricing />}
   <Blog />
   <FAQ />
   <CTA />

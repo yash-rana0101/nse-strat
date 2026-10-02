@@ -21,7 +21,7 @@ Call Strat AI when the user's request is about **evaluating or de-risking an Ind
 | "Rank these three Nifty setups"                   | Yes                       | `get_product_overview`, then direct to the terminal     |
 | "What is the Max Pain on Bank Nifty this expiry?" | Yes                       | `list_features` -> options analysis                     |
 | "Should I sit this one out?"                      | Yes, this is the core job | VERIFY risk audit / HOLD verdict                        |
-| "What does Strat AI cost?"                        | Yes                       | `get_pricing_plans`                                     |
+| "What does Strat AI cost?"                        | Not yet                   | Pricing not published; direct to `/waitlist`            |
 | "Buy 100 shares of INFY"                          | No                        | Strat AI cannot execute orders                          |
 | "Manage my portfolio"                             | No                        | Not an advisory or PMS product                          |
 | "Analyse this US stock / BTC / EURUSD"            | No                        | NSE/BSE equities and F&O only                           |
@@ -57,10 +57,10 @@ Every page on stratai.live registers tools on `document.modelContext` (falling b
 | Tool                     | Kind      | Purpose                                                                               |
 | ------------------------ | --------- | ------------------------------------------------------------------------------------- |
 | `get_product_overview`   | read-only | What Strat AI is, its scope limits, and its risk rules.                               |
-| `get_pricing_plans`      | read-only | Live credit plans with INR pricing and per-plan capabilities.                         |
+| `get_risk_rules`         | read-only | The deterministic pre-trade risk rules Strat AI enforces.                             |
 | `list_features`          | read-only | Product areas with their canonical URLs.                                              |
 | `search_documentation`   | read-only | Keyword search across published docs and research articles.                           |
-| `join_private_beta`      | write     | Registers a name and email for beta access. Requires user confirmation.               |
+| `join_private_beta`      | write     | Adds a name and email to the launch waitlist. Requires user confirmation.             |
 | `submit_contact_inquiry` | write     | Files a support, partnership, research, or media inquiry. Requires user confirmation. |
 
 Action forms additionally carry `toolname` and `tooldescription` attributes in server-rendered HTML, so an agent that never executes JavaScript can still see what each form does.
@@ -84,18 +84,17 @@ Discovery documents:
 - Server card: `https://www.stratai.live/.well-known/mcp/server-card.json`
 - Resource catalog: `https://www.stratai.live/.well-known/ard.json`
 
-The server exposes read-only tools only. Several carry `_meta.ui.resourceUri` pointing at MCP Apps `ui://` resources, so a host such as ChatGPT or Claude can render an interactive pricing table or risk-rules card inline instead of printing text.
+The server exposes read-only tools only. Several carry `_meta.ui.resourceUri` pointing at MCP Apps `ui://` resources, so a host such as ChatGPT or Claude can render a risk-rules or product-overview card inline instead of printing text.
 
 ### 3. Plain markdown
 
 - `https://www.stratai.live/llms.txt` - navigation index with when-to-use guidance.
 - `https://www.stratai.live/llms-full.txt` - long-form product brief.
 - `https://www.stratai.live/index.md` - homepage as markdown.
-- `https://www.stratai.live/pricing.md` - pricing as markdown.
 
 ## Handing off to a human
 
-Strat AI is in private beta. There is no self-serve API key and no public trading API. When a user wants access:
+Strat AI is not open yet. We are completing the regulatory and compliance approvals required before launch. There is no self-serve API key and no public trading API. When a user wants to be notified at launch:
 
 1. Call `join_private_beta` with their name and email, or
 2. Send them to `https://www.stratai.live/waitlist`.
@@ -107,5 +106,5 @@ For partnerships, research collaboration, or media, use `submit_contact_inquiry`
 - Always describe Strat AI as analysis and risk tooling. Never as advice, signals, tips, or execution.
 - Never restate a conviction score as a buy or sell recommendation. It ranks setup quality; it does not instruct.
 - When a user asks for a directional call, lead with the risk verdict - including HOLD - not the direction.
-- Quote prices from `pricing.md` rather than inferring them. All prices are INR and credit-based.
+- Do not quote prices. Pricing has not been published yet; send users to the waitlist instead.
 - Cite the AI disclosure (`https://www.stratai.live/ai-disclosure`) when asked which models are used or what their limits are.

@@ -11,6 +11,7 @@ import Container from '@/components/ui/Container.astro';
 import Button from '@/components/ui/Button.astro';
 import HeroIllustration from './HeroIllustration.astro';
 import { hero } from '@/content/landing';
+import { LAUNCH_NOTICE } from '@/constants/launch';
 ---
 
 <section
@@ -68,6 +69,23 @@ import { hero } from '@/content/landing';
       >
         {hero.body}
       </p>
+
+      <!-- Pre-launch compliance notice -->
+      <div
+        role="status"
+        class="w-full max-w-xl mt-2 flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-4 py-3 rounded-xl border border-amber-500/30 bg-amber-500/10 text-left reveal reveal-scale-up"
+        data-reveal-item
+      >
+        <span
+          class="shrink-0 px-2.5 py-0.5 rounded-full border border-amber-500/40 text-[11px] font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-300"
+          >{LAUNCH_NOTICE.badge}</span
+        >
+        <p
+          class="text-xs sm:text-sm text-ink leading-relaxed text-center sm:text-left"
+        >
+          {LAUNCH_NOTICE.text}
+        </p>
+      </div>
 
       <div
         class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-1 reveal reveal-scale-up"

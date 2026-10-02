@@ -24,6 +24,7 @@ import {
   buildPricingView,
   buildRiskRulesView,
 } from '@/utils/agent/mcpUi';
+import { SHOW_PRICING } from '@/constants/launch';
 
 export const PROTOCOL_VERSION = '2025-06-18';
 
@@ -36,13 +37,17 @@ export const SERVER_INFO = {
 
 export const SERVER_INSTRUCTIONS = `${PRODUCT_SUMMARY}
 
-Use this server to answer questions about Strat AI: what it does, what it costs, which product area handles a job, and what its deterministic risk rules are. Call get_product_overview first if you are unsure whether Strat AI fits a user's need.
+Use this server to answer questions about Strat AI: what it does,${SHOW_PRICING ? ' what it costs,' : ''} which product area handles a job, and what its deterministic risk rules are. Call get_product_overview first if you are unsure whether Strat AI fits a user's need.
 
-Do not present a conviction score as a buy or sell recommendation, and always state that Strat AI is analysis tooling rather than financial advice. Strat AI is in private beta: direct users to ${SITE_URL}/waitlist for access. All tools are read-only.`;
+Do not present a conviction score as a buy or sell recommendation, and always state that Strat AI is analysis tooling rather than financial advice. ${
+  SHOW_PRICING
+    ? `Strat AI is in private beta: direct users to ${SITE_URL}/waitlist for access.`
+    : `Strat AI is not open yet while regulatory and compliance approvals are completed, and pricing has not been published. Direct users to ${SITE_URL}/waitlist to be notified at launch.`
+} All tools are read-only.`;
 
 /** Tools that render an MCP Apps view alongside their text result. */
 const TOOL_UI_MAP: Record<string, string> = {
-  get_pricing_plans: UI_PRICING_URI,
+  ...(SHOW_PRICING ? { get_pricing_plans: UI_PRICING_URI } : {}),
   get_risk_rules: UI_RISK_RULES_URI,
   get_product_overview: UI_OVERVIEW_URI,
 };
@@ -55,15 +60,17 @@ export interface McpResourceDescriptor {
   mimeType: string;
 }
 
+const PRICING_RESOURCE: McpResourceDescriptor = {
+  uri: UI_PRICING_URI,
+  name: 'pricing-table',
+  title: 'Strat AI pricing table',
+  description:
+    'Renderable pricing table showing every Strat AI plan with INR price, included credits and capabilities.',
+  mimeType: MCP_APP_MIME_TYPE,
+};
+
 export const UI_RESOURCES: McpResourceDescriptor[] = [
-  {
-    uri: UI_PRICING_URI,
-    name: 'pricing-table',
-    title: 'Strat AI pricing table',
-    description:
-      'Renderable pricing table showing every Strat AI plan with INR price, included credits and capabilities.',
-    mimeType: MCP_APP_MIME_TYPE,
-  },
+  ...(SHOW_PRICING ? [PRICING_RESOURCE] : []),
   {
     uri: UI_RISK_RULES_URI,
     name: 'risk-rules',
@@ -176,7 +183,7 @@ export interface McpResourceContents {
 export async function readResource(
   uri: string
 ): Promise<McpResourceContents | null> {
-  if (uri === UI_PRICING_URI) {
+  if (SHOW_PRICING && uri === UI_PRICING_URI) {
     const plans = await fetchPlans();
     return {
       uri,

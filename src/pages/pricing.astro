@@ -6,6 +6,12 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import Container from '@/components/ui/Container.astro';
 import Badge from '@/components/ui/Badge.astro';
 import PricingSection from '@/components/sections/Pricing.astro';
+import { SHOW_PRICING } from '@/constants/launch';
+
+// Pricing is hidden until launch; send visitors to the homepage instead.
+if (!SHOW_PRICING) {
+  return Astro.redirect('/');
+}
 
 const faqs = [
   {

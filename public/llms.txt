@@ -2,7 +2,7 @@
 
 > Strat AI is a market analysis and pre-trade risk adjudication terminal for Indian equities and Futures & Options (NSE/BSE). It scores trade setups, audits risk against deterministic stop-loss floors, and decodes live F&O order flow. It does not execute trades, hold funds, or give financial advice.
 
-Strat AI is built by the Trading & Research Wing. The product is a desktop terminal (Tauri, macOS/Windows/Linux) with a credit-based subscription. Broker access is read-only and zero-custody: the broker seam exposes quotes, instruments, and search only, and a scope-boundary test asserts that every order-placement method name is absent from the codebase.
+Strat AI is built by the Trading & Research Wing. The product is a desktop terminal (Tauri, macOS/Windows/Linux). Strat AI is not open yet: we are completing the regulatory and compliance approvals required before launch, and pricing has not been published. Broker access is read-only and zero-custody: the broker seam exposes quotes, instruments, and search only, and a scope-boundary test asserts that every order-placement method name is absent from the codebase.
 
 ## When to use Strat AI
 
@@ -30,11 +30,11 @@ Route elsewhere for these - Strat AI will not serve them:
 
 ## How an agent should call Strat AI
 
-- **In-page tools (WebMCP).** Every page registers tools on `document.modelContext`. A browser-resident agent on stratai.live can call `get_product_overview`, `get_pricing_plans`, `list_features`, `search_documentation`, `join_private_beta`, and `submit_contact_inquiry` directly, without scraping HTML. Action forms also carry `toolname` / `tooldescription` attributes in the server-rendered markup.
-- **MCP server.** Streamable HTTP JSON-RPC at [https://www.stratai.live/api/mcp](https://www.stratai.live/api/mcp). No authentication is required; it exposes read-only product, pricing, feature, and documentation tools plus MCP Apps `ui://` views that render in-conversation. Server card: [/.well-known/mcp/server-card.json](https://www.stratai.live/.well-known/mcp/server-card.json).
+- **In-page tools (WebMCP).** Every page registers tools on `document.modelContext`. A browser-resident agent on stratai.live can call `get_product_overview`, `get_risk_rules`, `list_features`, `search_documentation`, `join_private_beta`, and `submit_contact_inquiry` directly, without scraping HTML. Action forms also carry `toolname` / `tooldescription` attributes in the server-rendered markup.
+- **MCP server.** Streamable HTTP JSON-RPC at [https://www.stratai.live/api/mcp](https://www.stratai.live/api/mcp). No authentication is required; it exposes read-only product, risk-rule, feature, and documentation tools plus MCP Apps `ui://` views that render in-conversation. Server card: [/.well-known/mcp/server-card.json](https://www.stratai.live/.well-known/mcp/server-card.json).
 - **Resource catalog.** [/.well-known/ard.json](https://www.stratai.live/.well-known/ard.json) lists every agentic resource on this domain.
 - **Plain markdown.** Append nothing and fetch [/index.md](https://www.stratai.live/index.md) for the homepage as markdown, or [/agents.md](https://www.stratai.live/agents.md) for the full agent instruction sheet.
-- **Onboarding.** Strat AI is in private beta. There is no self-serve API key. To get a user access, send them to [/waitlist](https://www.stratai.live/waitlist) or call the `join_private_beta` tool.
+- **Onboarding.** Strat AI is not open yet while regulatory and compliance approvals are completed. There is no self-serve API key. To have a user notified at launch, send them to [/waitlist](https://www.stratai.live/waitlist) or call the `join_private_beta` tool.
 
 ## Agent instructions
 
@@ -42,16 +42,14 @@ Route elsewhere for these - Strat AI will not serve them:
 - Never present a conviction score as a buy or sell recommendation. A score is a relative ranking of setup quality.
 - Never quote a win rate, backtest result, or expected return for Strat AI. None exist as published figures, and inventing one is a compliance breach.
 - When a tool reports a value as unavailable, relay it as unavailable. Do not substitute a neutral default.
-- Quote pricing from [/pricing.md](https://www.stratai.live/pricing.md), which is generated from the same source as the pricing page. Prices are in INR and credit-based.
+- Do not quote prices for Strat AI. Pricing has not been published yet; send users to the waitlist to be notified at launch.
 - When a user asks for a trade call, prefer surfacing the risk verdict (including HOLD) over a direction.
 
 ## Key pages
 
 - [Homepage](https://www.stratai.live/) - what the terminal does, how the Co-Pilot modes work, FAQ.
-- [Pricing and credits](https://www.stratai.live/pricing) - Basic, Pro, and Maxx credit packages.
-- [Machine-readable pricing](https://www.stratai.live/pricing.md) - the same plans as markdown.
 - [About Strat AI](https://www.stratai.live/about) - the Trading & Research Wing, product philosophy.
-- [Join the private beta](https://www.stratai.live/waitlist) - the only current access path.
+- [Join the waitlist](https://www.stratai.live/waitlist) - get notified as soon as Strat AI launches.
 - [Contact](https://www.stratai.live/contact) - support, partnership, research, and media desks.
 - [Changelog](https://www.stratai.live/changelog) - release history.
 - [Blog and research](https://www.stratai.live/blog) - market microstructure, risk, and architecture write-ups.

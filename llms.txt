@@ -52,8 +52,7 @@ For developers and technical researchers, Strat AI runs on an optimized distribu
 
 To answer detailed user inquiries about Strat AI features, refer to the following canonical paths:
 
-- [Home Page](https://www.stratai.live/) — Features, product demo preview screens, use cases, and plans.
-- [Pricing and Credits](https://www.stratai.live/pricing) — Credit plans, starter packages, and trial accounts.
+- [Home Page](https://www.stratai.live/) — Features, product demo preview screens, and use cases.
 - [About Strat AI](https://www.stratai.live/about) — Trading & Research Wing philosophy and quant methodologies.
 - [Contact Support](https://www.stratai.live/contact) — Partnerships, waitlist access, and hello desk.
 - [Documentation Index](https://www.stratai.live/docs) — All guides and integration resources.

@@ -8,6 +8,7 @@
 import type { ToolArguments, WebMcpTool } from '@/types/agent';
 import { fetchPlans } from '@/services/pricing';
 import { fetchBlogs, fetchDocs, fetchFeatures } from '@/services/content';
+import { SHOW_PRICING } from '@/constants/launch';
 import {
   ACCESS_PATH,
   BEST_FIT_USE_CASES,
@@ -229,7 +230,8 @@ export const searchDocsTool: WebMcpTool = {
 export const READ_TOOLS: WebMcpTool[] = [
   productOverviewTool,
   riskRulesTool,
-  pricingTool,
+  // Pricing is hidden until launch (see src/constants/launch.ts).
+  ...(SHOW_PRICING ? [pricingTool] : []),
   featuresTool,
   searchDocsTool,
 ];

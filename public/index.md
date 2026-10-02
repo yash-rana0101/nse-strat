@@ -84,13 +84,14 @@ derivatives (NSE/BSE F&O).
 ## Platform
 
 Desktop terminal built with Tauri and React for macOS, Windows, and Linux.
-Reasoning plane is FastAPI with LangGraph. Currently in private beta.
+Reasoning plane is FastAPI with LangGraph.
 
-## Pricing
+## Launching soon
 
-Credit-based monthly subscriptions in INR. See
-[pricing.md](https://www.stratai.live/pricing.md) for machine-readable plans or
-the [pricing page](https://www.stratai.live/pricing).
+Strat AI is not open yet. We are completing the regulatory and compliance
+approvals required before launch, and pricing has not been published. Join the
+[waitlist](https://www.stratai.live/waitlist) and we will notify you as soon as
+we go live.
 
 ## Frequently asked
 
