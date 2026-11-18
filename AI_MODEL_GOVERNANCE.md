@@ -1,5 +1,18 @@
 # AI Model Governance Policy
 
+<!-- BEGIN:codebase-alignment -->
+## Codebase alignment (2026-11-18)
+
+Scope: Stock-specific marketing site; stock feature copy must be distinguished from release availability in the shared brand site. The code is an Astro 7 static website with React islands, Tailwind CSS, MDX and the Vercel adapter; it is not a Next.js terminal or Rust service monorepo.
+
+- This checkout is an Astro website. Terminal/backend paths in retained product research describe separate repositories.
+- Public capabilities and availability must follow `src/constants/agent.ts`; scripted demos, planned features and copied catalogues do not prove shipped backend behavior.
+
+Implementation references: [`package.json`](package.json), [`astro.config.mjs`](astro.config.mjs), [`src/content.config.ts`](src/content.config.ts), [`src/services/content.ts`](src/services/content.ts).
+
+Verification for this update was source/document inspection only. Previous test totals and deployment observations retain their original dates. No credentials, live host state or external policy claims were revalidated.
+<!-- END:codebase-alignment -->
+
 **Owner:** [COMPLIANCE OFFICER — unassigned]
 **Model Risk Owner:** [CTO — unassigned]
 **Version 1.0 · August 2026**
@@ -391,3 +404,7 @@ Tracked here rather than omitted, so the gaps are on the record.
 | 8   | **Releases do not record what was baked into them.** Two installers of the same version can carry different models and endpoints (§2.1). Until a release records its resolved values, "which model produced this output" is unanswerable for a given build                                                                                                     | Per-build auditability; §3 replayability for desktop-side outputs                                  |
 | 9   | **The public disclosure page names a provider the desktop build does not use.** `NEXT_PUBLIC_LLM_GATEWAY` defaults to an internal proxy, so for some builds the party receiving the request is not the one §4 of `AI_DISCLOSURE.md` names. Either the default changes or the wording does — it cannot be left to whichever is noticed first                    | Publishing `AI_DISCLOSURE.md` §4; also `BRAND_GUIDELINES.md` §4.5 item 20                          |
 | 10  | **Website copy is drafted but unapproved.** `docs/compliance/WEBSITE_COPY.md` carries per-claim substantiation, but under `BRAND_GUIDELINES.md` §5.1 lesson 3 the writer cannot be the approver, and no approver is appointed (the Compliance Officer role is itself unfilled)                                                                                 | Publishing the landing page; the P10 advertisement register has nothing to record an approval into |
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](README.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->

@@ -1,5 +1,18 @@
 # Security Policy (Strictly Private)
 
+<!-- BEGIN:codebase-alignment -->
+## Codebase alignment (2026-11-18)
+
+Scope: Stock-specific marketing site; stock feature copy must be distinguished from release availability in the shared brand site. The code is an Astro 7 static website with React islands, Tailwind CSS, MDX and the Vercel adapter; it is not a Next.js terminal or Rust service monorepo.
+
+- This checkout is an Astro website. Terminal/backend paths in retained product research describe separate repositories.
+- Public capabilities and availability must follow `src/constants/agent.ts`; scripted demos, planned features and copied catalogues do not prove shipped backend behavior.
+
+Implementation references: [`package.json`](package.json), [`astro.config.mjs`](astro.config.mjs), [`src/content.config.ts`](src/content.config.ts), [`src/services/content.ts`](src/services/content.ts).
+
+Verification for this update was source/document inspection only. Previous test totals and deployment observations retain their original dates. No credentials, live host state or external policy claims were revalidated.
+<!-- END:codebase-alignment -->
+
 This is a private repository containing proprietary intellectual property, algorithmic trade analysis tools, and institutional integrations. Securing our tools, servers, databases, and trade credentials is of paramount importance.
 
 ---
@@ -61,3 +74,7 @@ Our software operations operate under the following threat model constraints:
 - Run regular dependencies audits using `cargo audit` in the Rust projects and `npm audit` in the Node.js/Next.js repositories.
 - Keep your local Docker environment updated.
 - Enable Multi-Factor Authentication (MFA/TOTP) on your Zerodha Kite trading accounts and GitHub accounts.
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](README.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->

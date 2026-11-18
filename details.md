@@ -1,5 +1,21 @@
 # 🌌 Strat — Institutional AI-Powered Quantitative Trading Terminal
 
+**Retained background:** detailed counts, screenshots, paths and product claims below belong to the original analysis. For the current implementation use [the repository overview](README.md) and linked source. This update does not certify each historical assertion.
+
+
+<!-- BEGIN:codebase-alignment -->
+## Codebase alignment (2026-11-18)
+
+Scope: Stock-specific marketing site; stock feature copy must be distinguished from release availability in the shared brand site. The code is an Astro 7 static website with React islands, Tailwind CSS, MDX and the Vercel adapter; it is not a Next.js terminal or Rust service monorepo.
+
+- This checkout is an Astro website. Terminal/backend paths in retained product research describe separate repositories.
+- Public capabilities and availability must follow `src/constants/agent.ts`; scripted demos, planned features and copied catalogues do not prove shipped backend behavior.
+
+Implementation references: [`src/constants/agent.ts`](src/constants/agent.ts), [`src/content/landing/index.ts`](src/content/landing/index.ts), [`src/utils/agent/readTools.ts`](src/utils/agent/readTools.ts), [`src/services/content.ts`](src/services/content.ts).
+
+Verification for this update was source/document inspection only. Previous test totals and deployment observations retain their original dates. No credentials, live host state or external policy claims were revalidated.
+<!-- END:codebase-alignment -->
+
 Strat is a proprietary, institutional-grade, AI-driven quantitative trading platform purpose-built for NSE (National Stock Exchange of India) markets. It fuses sub-second Rust data ingestion, multi-agent LLM reasoning (LangGraph), property-tested mathematical analysis, real-time news sentiment, and a native desktop HUD into a single cohesive system. Every trading decision is grounded in live market microstructure, defended by a multi-agent debate framework, and streamed to the operator with full glass-box transparency.
 
 > [!NOTE]
@@ -757,3 +773,7 @@ npx playwright test
 
 > [!CAUTION]
 > **Configuration Sensitivity**: The Python-based Deep Quant Loop reads environment variables from the root `.env` at import time. Changes to `LLM_API_KEY`, `LLM_MODEL`, or `LLM_API_URL` require a service restart to take effect.
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](README.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->

@@ -1,5 +1,21 @@
 # Strat AI — Definitive Product Context Blueprint
 
+**Retained background:** detailed counts, screenshots, paths and product claims below belong to the original analysis. For the current implementation use [the repository overview](README.md) and linked source. This update does not certify each historical assertion.
+
+
+<!-- BEGIN:codebase-alignment -->
+## Codebase alignment (2026-11-18)
+
+Scope: Stock-specific marketing site; stock feature copy must be distinguished from release availability in the shared brand site. The code is an Astro 7 static website with React islands, Tailwind CSS, MDX and the Vercel adapter; it is not a Next.js terminal or Rust service monorepo.
+
+- This checkout is an Astro website. Terminal/backend paths in retained product research describe separate repositories.
+- Public capabilities and availability must follow `src/constants/agent.ts`; scripted demos, planned features and copied catalogues do not prove shipped backend behavior.
+
+Implementation references: [`src/constants/agent.ts`](src/constants/agent.ts), [`src/content/landing/index.ts`](src/content/landing/index.ts), [`src/utils/agent/readTools.ts`](src/utils/agent/readTools.ts), [`src/services/content.ts`](src/services/content.ts).
+
+Verification for this update was source/document inspection only. Previous test totals and deployment observations retain their original dates. No credentials, live host state or external policy claims were revalidated.
+<!-- END:codebase-alignment -->
+
 > **Purpose of this document**: This is a self-contained context file designed to be consumed by another AI model (or a human team) to fully understand what Strat AI is, what its core features do, how its advanced features support the core ones, and why the platform is reliable and trustworthy. No source code is included — only the structural logic, workflows, and design philosophy extracted from deep codebase analysis.
 
 ---
@@ -218,3 +234,7 @@ Before committing any trade, the system runs an aggressive internal self-verific
 ### 7. Bounded Execution With Guaranteed Termination
 
 The AI reasoning loop has a hard budget: if it takes too many consecutive reasoning turns without calling a tool or making a decision, the system forces a HOLD. Debates have bounded rounds and turn limits. Price watches have cycle caps. The system always terminates — it never spins endlessly.
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](README.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->

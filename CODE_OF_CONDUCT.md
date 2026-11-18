@@ -48,3 +48,11 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior, as well as intellectual property or security policy violations, may be reported by contacting the repository owner at **yash.rana0101** directly. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident.
+
+## Repository context
+
+Implementation and contribution entrypoints are [the repository overview](README.md) and [agent instructions](AGENTS.md). Maintain the relevant folder context and detailed documentation with code changes. This navigation update does not change the conduct policy above.
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](README.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->

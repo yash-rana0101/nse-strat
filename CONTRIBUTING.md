@@ -1,5 +1,20 @@
 # Contributing to Strat
 
+Command examples in this guide are references. Agents must ask before running lint, format, build, tests, typechecks, database operations or Git commands, as required by the workspace and repository `AGENTS.md`. Never use worktrees. Keep the owning folder context and relevant detailed Markdown updated with code changes.
+
+<!-- BEGIN:codebase-alignment -->
+## Codebase alignment (2026-11-18)
+
+Scope: Stock-specific marketing site; stock feature copy must be distinguished from release availability in the shared brand site. The code is an Astro 7 static website with React islands, Tailwind CSS, MDX and the Vercel adapter; it is not a Next.js terminal or Rust service monorepo.
+
+- This checkout is an Astro website. Terminal/backend paths in retained product research describe separate repositories.
+- Public capabilities and availability must follow `src/constants/agent.ts`; scripted demos, planned features and copied catalogues do not prove shipped backend behavior.
+
+Implementation references: [`package.json`](package.json), [`astro.config.mjs`](astro.config.mjs), [`src/content.config.ts`](src/content.config.ts), [`src/services/content.ts`](src/services/content.ts).
+
+Verification for this update was source/document inspection only. Previous test totals and deployment observations retain their original dates. No credentials, live host state or external policy claims were revalidated.
+<!-- END:codebase-alignment -->
+
 This is a **private, proprietary codebase**. Contributions are restricted to authorized internal developers and partners only. If you have been granted access, please read and follow these guidelines strictly to ensure code quality, performance, and security.
 
 ---
@@ -102,3 +117,7 @@ If you spot a bug or want to propose a new quantitative feature:
 1. Create a detailed issue on our private GitHub repository.
 2. Outline the steps to reproduce, actual vs expected behavior, and service logs.
 3. If it is a security vulnerability, do NOT create a public issue. Follow the instructions in [SECURITY.md](file:///d:/projects/aitrader-landing/SECURITY.md) immediately.
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](README.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->

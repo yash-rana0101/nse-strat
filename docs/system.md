@@ -1,3 +1,21 @@
+
+
+**Retained background:** detailed counts, screenshots, paths and product claims below belong to the original analysis. For the current implementation use [the repository overview](../README.md) and linked source. This update does not certify each historical assertion.
+
+
+<!-- BEGIN:codebase-alignment -->
+## Codebase alignment (2026-11-18)
+
+Scope: Stock-specific marketing site; stock feature copy must be distinguished from release availability in the shared brand site. The code is an Astro 7 static website with React islands, Tailwind CSS, MDX and the Vercel adapter; it is not a Next.js terminal or Rust service monorepo.
+
+- This checkout is an Astro website. Terminal/backend paths in retained product research describe separate repositories.
+- Public capabilities and availability must follow `src/constants/agent.ts`; scripted demos, planned features and copied catalogues do not prove shipped backend behavior.
+
+Implementation references: [`package.json`](../package.json), [`astro.config.mjs`](../astro.config.mjs), [`src/content.config.ts`](../src/content.config.ts), [`src/services/content.ts`](../src/services/content.ts).
+
+Verification for this update was source/document inspection only. Previous test totals and deployment observations retain their original dates. No credentials, live host state or external policy claims were revalidated.
+<!-- END:codebase-alignment -->
+
 trat Ai — Full Product & System Analysis
 
 1. What the product actually is (one paragraph)
@@ -161,3 +179,7 @@ React frontend (frontend/src/):
 - Core differentiators: (1) Glass-box AI reasoning — every trade shows its full chain of thought, tool calls, and risk audit; (2) Self-defending — multi-agent debate + hard risk validator + negative-edge calibration; (3) Institutional microstructure (order flow, VWEPR, oply in Bloomberg-grade tools; (4) Paper trading with 2% fixed risk built in.
 - Monetization: FREE → PRO subscription via PhonePe; broker-connected (Zerodha); virtual wallet for paper trading.
 - Trust story: property-tested math, honest-failure markers (no hallucinated data), immutable committed trades.
+
+<!-- BEGIN:context-navigation -->
+Folder map: [current folder context](CONTEXT.md). Keep this document and the relevant context aligned with code changes.
+<!-- END:context-navigation -->
